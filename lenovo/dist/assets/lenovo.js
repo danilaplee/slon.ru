@@ -370,7 +370,7 @@ define('lenovo/templates/home', ['exports'], function (exports) {
         var el6 = dom.createElement("text");
         dom.setAttribute(el6,"font-family","Roboto");
         dom.setAttribute(el6,"font-weight","100");
-        dom.setAttribute(el6,"letter-spacing","8");
+        dom.setAttribute(el6,"letter-spacing","3");
         dom.setAttribute(el6,"fill","#2c3e50");
         dom.setAttribute(el6,"font-size","48");
         var el7 = dom.createTextNode("\n				    ");
@@ -669,7 +669,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.be36c5fe"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.93c05688"});
 }
 
 /* jshint ignore:end */
