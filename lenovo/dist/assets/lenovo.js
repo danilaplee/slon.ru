@@ -341,7 +341,7 @@ define('lenovo/routes/home', ['exports', 'ember'], function (exports, Ember) {
 					}
 					for (var i = zone.length - 1; i >= 0; i--) {
 						var y = zone[i];
-						target[i].animate({ d: y }, 900, mina.easein());
+						target[i].animate({ d: y }, 700, mina.easein());
 					};
 				};
 			});
@@ -1302,7 +1302,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.6f370660"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.acf3fc4a"});
 }
 
 /* jshint ignore:end */

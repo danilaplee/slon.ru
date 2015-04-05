@@ -94,7 +94,7 @@ var home = Ember.Route.extend({
 	      		for (var i = zone.length - 1; i >= 0; i--) 
 	      		{
 	      			var y = zone[i]
-		      		target[i].animate({'d':y}, 900, mina.easein())
+		      		target[i].animate({'d':y}, 700, mina.easein())
 	      		};
 		    }
 
