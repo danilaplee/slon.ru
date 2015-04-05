@@ -78,6 +78,19 @@ var home = Ember.Route.extend({
 	      	{
 	      		var zone = z[pos]
 	      		var target = elastic.selectAll('path')
+	      		if(pos >= 3)
+	      		{
+	      			$('#elastic').css({
+	      				'bottom':'100px'
+	      			})
+	      		}
+	      		else
+	      		{
+	      			$('#elastic').css({
+	      				'bottom':'0'
+	      			})
+
+	      		}
 	      		for (var i = zone.length - 1; i >= 0; i--) 
 	      		{
 	      			var y = zone[i]
