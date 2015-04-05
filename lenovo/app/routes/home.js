@@ -81,7 +81,7 @@ var home = Ember.Route.extend({
 	      		if(pos >= 3)
 	      		{
 	      			$('#elastic').css({
-	      				'bottom':'100px'
+	      				'bottom':'80px'
 	      			})
 	      		}
 	      		else

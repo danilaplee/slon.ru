@@ -50,10 +50,10 @@ body, html
 
 #elastic
 {
-    -webkit-transition: all 0.3s ease-in;
-	-moz-transition: all 0.3s ease-in;
-	-o-transition: all 0.3s ease-in;
-	transition: all 0.3s ease-in
+    -webkit-transition: all 0.7s ease-in;
+	-moz-transition: all 0.7s ease-in;
+	-o-transition: all 0.7s ease-in;
+	transition: all 0.7s ease-in
 }
 .hidden
 {

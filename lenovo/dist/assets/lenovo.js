@@ -332,7 +332,7 @@ define('lenovo/routes/home', ['exports', 'ember'], function (exports, Ember) {
 					var target = elastic.selectAll("path");
 					if (pos >= 3) {
 						$("#elastic").css({
-							bottom: "100px"
+							bottom: "80px"
 						});
 					} else {
 						$("#elastic").css({
@@ -1302,7 +1302,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.dc06c43e"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.6f370660"});
 }
 
 /* jshint ignore:end */
