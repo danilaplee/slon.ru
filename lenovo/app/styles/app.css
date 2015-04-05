@@ -93,8 +93,12 @@ footer
 	border: 1px solid #000;
 	padding: 15px 10px;
 	cursor: pointer;
+  	-webkit-transition: all 0.3s ease-in;
+	-moz-transition: all 0.3s ease-in;
+	-o-transition: all 0.3s ease-in;
+	transition: all 0.3s ease-in
 }
-.answerBox p span
+.answerBox span
 {
     -webkit-transition: all 0.3s ease-in;
 	-moz-transition: all 0.3s ease-in;

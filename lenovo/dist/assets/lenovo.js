@@ -364,12 +364,11 @@ define('lenovo/routes/question', ['exports', 'ember'], function (exports, Ember)
 			home.set("model", model);
 			Ember['default'].run.schedule("afterRender", this, function () {
 				$("#floatCanvas").css({ visibility: "visible" });
-				var answerBoxes = $(".answerBox > p");
-				answerBoxes.lettering("words");
+				var answerBoxes = $(".answerBox");
+				answerBoxes.find("p").lettering("words");
 				for (var i = answerBoxes.length - 1; i >= 0; i--) {
 					var box = $(answerBoxes[i]);
-					console.log(box);
-					var words = box.find("span");
+					var words = $(box).find("span");
 					for (var b = words.length - 1; b >= 0; b--) {
 						var word = $(words[b]);
 						var r = Math.round(Math.random() * 10) * 5;
@@ -380,26 +379,50 @@ define('lenovo/routes/question', ['exports', 'ember'], function (exports, Ember)
 					};
 					box.mouseover(function () {
 						var words = $(this).find("span");
-						for (var b = words.length - 1; b >= 0; b--) {
-							var word = $(words[b]);
-							var r = Math.round(Math.random() * 10) * 5;
-							$(word[0]).css({
-								display: "inline",
-								transform: "rotate(0deg)"
+						if (words.length > 1) {
+							for (var b = words.length - 1; b >= 0; b--) {
+								var word = $(words[b]);
+								$(word[0]).css({
+									display: "inline",
+									transform: "rotate(0deg)"
+								});
+							};
+						} else {
+							console.log("images");
+							$(this).find("img").css({
+								position: "absolute",
+								width: "160%",
+								height: "auto",
+								left: "-100px",
+								top: "-100px",
+								"z-index": "1000"
 							});
-						};
+						}
 					});
 					box.mouseout(function () {
 
 						var words = $(this).find("span");
-						for (var b = words.length - 1; b >= 0; b--) {
-							var word = $(words[b]);
-							var r = Math.round(Math.random() * 10) * 5;
-							$(word[0]).css({
-								display: "inline-block",
-								transform: "rotate(" + r + "deg)"
+						// console.log(words.length);
+						if (words.length > 1) {
+							for (var b = words.length - 1; b >= 0; b--) {
+								var word = $(words[b]);
+								var r = Math.round(Math.random() * 10) * 5;
+								$(word[0]).css({
+									display: "inline-block",
+									transform: "rotate(" + r + "deg)"
+								});
+							};
+						} else {
+							// console.log('images');
+							$(this).find("img").css({
+								position: "relative",
+								width: "",
+								height: "",
+								left: "",
+								top: "",
+								"z-index": "1"
 							});
-						};
+						}
 					});
 				};
 			});
@@ -1221,7 +1244,7 @@ define('lenovo/tests/routes/question.jshint', function () {
 
   module('JSHint - routes');
   test('routes/question.js should pass jshint', function() { 
-    ok(false, 'routes/question.js should pass jshint.\nroutes/question.js: line 15, col 11, Missing semicolon.\nroutes/question.js: line 23, col 33, Missing semicolon.\nroutes/question.js: line 26, col 60, Missing semicolon.\nroutes/question.js: line 28, col 43, Missing semicolon.\nroutes/question.js: line 31, col 44, Missing semicolon.\nroutes/question.js: line 36, col 43, Missing semicolon.\nroutes/question.js: line 41, col 23, Missing semicolon.\nroutes/question.js: line 42, col 18, Unnecessary semicolon.\nroutes/question.js: line 48, col 47, Missing semicolon.\nroutes/question.js: line 53, col 27, Missing semicolon.\nroutes/question.js: line 54, col 22, Unnecessary semicolon.\nroutes/question.js: line 56, col 18, Don\'t make functions within a loop.\nroutes/question.js: line 56, col 19, Missing semicolon.\nroutes/question.js: line 63, col 47, Missing semicolon.\nroutes/question.js: line 68, col 27, Missing semicolon.\nroutes/question.js: line 69, col 22, Unnecessary semicolon.\nroutes/question.js: line 71, col 18, Don\'t make functions within a loop.\nroutes/question.js: line 71, col 19, Missing semicolon.\nroutes/question.js: line 72, col 14, Unnecessary semicolon.\nroutes/question.js: line 77, col 55, Missing semicolon.\nroutes/question.js: line 79, col 3, Missing semicolon.\nroutes/question.js: line 26, col 13, \'$\' is not defined.\nroutes/question.js: line 27, col 31, \'$\' is not defined.\nroutes/question.js: line 31, col 27, \'$\' is not defined.\nroutes/question.js: line 36, col 32, \'$\' is not defined.\nroutes/question.js: line 38, col 21, \'$\' is not defined.\nroutes/question.js: line 45, col 33, \'$\' is not defined.\nroutes/question.js: line 48, col 36, \'$\' is not defined.\nroutes/question.js: line 50, col 25, \'$\' is not defined.\nroutes/question.js: line 60, col 33, \'$\' is not defined.\nroutes/question.js: line 63, col 36, \'$\' is not defined.\nroutes/question.js: line 65, col 25, \'$\' is not defined.\nroutes/question.js: line 77, col 9, \'$\' is not defined.\nroutes/question.js: line 49, col 29, \'r\' is defined but never used.\n\n34 errors'); 
+    ok(false, 'routes/question.js should pass jshint.\nroutes/question.js: line 15, col 11, Missing semicolon.\nroutes/question.js: line 23, col 33, Missing semicolon.\nroutes/question.js: line 26, col 60, Missing semicolon.\nroutes/question.js: line 28, col 53, Missing semicolon.\nroutes/question.js: line 31, col 44, Missing semicolon.\nroutes/question.js: line 35, col 43, Missing semicolon.\nroutes/question.js: line 40, col 23, Missing semicolon.\nroutes/question.js: line 41, col 18, Unnecessary semicolon.\nroutes/question.js: line 49, col 51, Missing semicolon.\nroutes/question.js: line 53, col 31, Missing semicolon.\nroutes/question.js: line 54, col 26, Unnecessary semicolon.\nroutes/question.js: line 66, col 27, Missing semicolon.\nroutes/question.js: line 69, col 18, Don\'t make functions within a loop.\nroutes/question.js: line 69, col 19, Missing semicolon.\nroutes/question.js: line 79, col 51, Missing semicolon.\nroutes/question.js: line 84, col 31, Missing semicolon.\nroutes/question.js: line 85, col 26, Unnecessary semicolon.\nroutes/question.js: line 97, col 27, Missing semicolon.\nroutes/question.js: line 100, col 18, Don\'t make functions within a loop.\nroutes/question.js: line 100, col 19, Missing semicolon.\nroutes/question.js: line 101, col 14, Unnecessary semicolon.\nroutes/question.js: line 106, col 55, Missing semicolon.\nroutes/question.js: line 108, col 3, Missing semicolon.\nroutes/question.js: line 26, col 13, \'$\' is not defined.\nroutes/question.js: line 27, col 31, \'$\' is not defined.\nroutes/question.js: line 31, col 27, \'$\' is not defined.\nroutes/question.js: line 32, col 29, \'$\' is not defined.\nroutes/question.js: line 35, col 32, \'$\' is not defined.\nroutes/question.js: line 37, col 21, \'$\' is not defined.\nroutes/question.js: line 44, col 33, \'$\' is not defined.\nroutes/question.js: line 49, col 40, \'$\' is not defined.\nroutes/question.js: line 50, col 29, \'$\' is not defined.\nroutes/question.js: line 59, col 25, \'$\' is not defined.\nroutes/question.js: line 73, col 33, \'$\' is not defined.\nroutes/question.js: line 79, col 40, \'$\' is not defined.\nroutes/question.js: line 81, col 29, \'$\' is not defined.\nroutes/question.js: line 90, col 25, \'$\' is not defined.\nroutes/question.js: line 106, col 9, \'$\' is not defined.\n\n38 errors'); 
   });
 
 });
@@ -1270,7 +1293,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.71e4bb4c"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.f980ff0e"});
 }
 
 /* jshint ignore:end */
