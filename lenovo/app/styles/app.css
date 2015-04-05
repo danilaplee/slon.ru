@@ -3,9 +3,11 @@
 	font-family: Roboto;
 	box-sizing:border-box;
 }
-body
+body, html
 {
 	overflow: hidden;
+	width: 100%;
+	height: 100%;
 }
 .test
 {
@@ -26,9 +28,12 @@ body
 	padding: 10px;
 	display: inline-block;
 	letter-spacing: 1px;
-	margin-left: 0;
 	color: red;
 	font-size: 48px;
+}
+.test.number
+{
+	margin-left: 0 !important
 }
 .title div
 {
@@ -37,7 +42,7 @@ body
 }
 .hero-container section
 {
-	max-width: 520px;
+	width: 520px;
 	margin:10px auto;
 }
 
@@ -79,4 +84,28 @@ footer
 #floatCanvas 
 {
 	visibility: hidden;
+}
+@media screen and (max-width: 640px) {
+	.title
+	{
+		font-size: 36px;
+	}
+	.hero-container section
+	{
+		width: 300px;
+	}
+	.hero-container section p 
+	{
+		font-size: 12px;
+	}
+	.test
+	{
+		margin-left: 40px !important;
+		letter-spacing: 60px;
+		margin-top: 60px;
+	}
+	h3 
+	{
+		font-size: 18px;
+	}
 }
