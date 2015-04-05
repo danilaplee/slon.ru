@@ -17,11 +17,43 @@
     {{content-for 'head'}}
 
     <link rel="stylesheet" href="assets/vendor.css">
+    <link rel="stylesheet" href="libs/site-bundle.min.css">
     <link rel="stylesheet" href="assets/lenovo.css">
 
     {{content-for 'head-footer'}}
   </head>
   <body>
+    <nav class="navbar navbar-default main-menu" role="navigation">
+        <div class="container">
+            <div class="logo">
+                <a class="navbar-brand" href="/"></a>
+            </div>
+            <div class="show-menu">
+                <i class="icon-svg17"></i>
+            </div>
+            <div class="collapse-block">
+                <ul class="menu">
+                    <li><a href="/news">Новости</a></li>
+                    <li><a href="/authors">Авторы</a></li>
+                                        <li><a href="/subscribe">Подписка</a></li>
+                                </ul>
+                <div class="auth-block">
+                    <ul class="right-menu">
+                                                <li>
+                                <a href="/signin">
+                                                                    Вход
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/signup">
+                                                                    Регистрация
+                                </a>
+                            </li>
+                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
     {{content-for 'body'}}
 
     <script src="assets/vendor.js"></script>
@@ -30,7 +62,6 @@
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.6.1/jquery.lettering.min.js">
     </script>
     <script type="text/paperscript" src="pool.js" canvas="floatCanvas"></script>
-
     {{content-for 'body-footer'}}
   </body>
 </html>
