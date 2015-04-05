@@ -1,5 +1,5 @@
 <div class="col-xs-12">
-	<h2 class="test number"><span>1</span></h2>
+	<h2 class="test number"><span>{{model.id}}</span></h2>
 </div>
 <div class="col-xs-12 hero-container">
 	<section class="text-center">
@@ -8,12 +8,13 @@
 	</h3>
 	<div class="col-xs-12" style="margin-top:20px">
 		{{#each answer in model.answers}}
-		{{#if answer.image}}
-		{{else}}
 		<div {{action 'answerQuestion' answer.type }} class="col-xs-6 answerBox">
+		{{#if answer.img}}
+			<img {{bind-attr src=answer.img}} class="image-responsive">
+		{{else}}
 			<p>{{answer.text}}</p>
-		</div>
 		{{/if}}
+		</div>
 		{{/each}}
 	</div>
 	</section>

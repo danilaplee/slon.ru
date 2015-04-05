@@ -2,6 +2,13 @@
 
 /* jshint ignore:end */
 
+define('lenovo/adapters/application', ['exports', 'ember-data'], function (exports, DS) {
+
+	'use strict';
+
+	exports['default'] = DS['default'].FixtureAdapter.extend();
+
+});
 define('lenovo/app', ['exports', 'ember', 'ember/resolver', 'ember/load-initializers', 'lenovo/config/environment'], function (exports, Ember, Resolver, loadInitializers, config) {
 
   'use strict';
@@ -23,11 +30,15 @@ define('lenovo/controllers/question', ['exports', 'ember'], function (exports, E
 
 	'use strict';
 
-	var quest = Ember['default'].ObjectController.extend({
+	var quest = Ember['default'].Controller.extend({
 		actions: {
 			answerQuestion: function answerQuestion(type) {
 				var model = this.get("model");
-				console.log(type, model.id);
+				// console.log(type, model.id);
+				var nu = model.get("id");
+				console.log(nu++);
+				this.transitionToRoute("question", nu++);
+				// this.set('model', newModel);
 			}
 		}
 	});
@@ -77,6 +88,172 @@ define('lenovo/initializers/export-application-global', ['exports', 'ember', 'le
   };
 
 });
+define('lenovo/models/question', ['exports', 'ember-data'], function (exports, DS) {
+
+	'use strict';
+
+	var question = DS['default'].Model.extend({
+				text: DS['default'].attr("string"),
+				answers: DS['default'].attr()
+	});
+
+	question.reopenClass({
+				FIXTURES: [{
+							id: 1,
+							text: "На пути к вашему офису случился транспортный коллапс, а шеф требует быть вовремя. Как будете решать проблему?",
+							answers: [{
+										type: "A",
+										text: "Остаток рабочего дня посвятите модификации транспортных развязок в столице." }, {
+										type: "B",
+										text: "Угрозами и истериками расчистите себе путь до рабочего места."
+							}, {
+										type: "C",
+										text: "Угоните машину у правоохранительных органов и доберетесь в срок."
+							}, {
+										type: "D",
+										text: "Нацепите значок «Езжу как хочу» и поедете как хотите."
+							}]
+				}, {
+							id: 2,
+							text: "Коллеги зовут вас заниматься йогой каждый день в шесть часов утра. Ваша реакция:",
+							answers: [{
+										type: "A",
+										img: "http://cdn.bleacherreport.net/images_root/slides/photos/002/086/001/IMG_0377_original_display_image.jpg" }, {
+										type: "B",
+										img: "http://cdn.destructoid.com//ul/273959-tumblr_m52j762YZK1qlskj8o1_500.jpg"
+							}, {
+										type: "C",
+										img: "http://cdn29.elitedaily.com/wp-content/uploads/2014/04/wrestlemania-undertaker-fan-meme-elite-daily11.jpg"
+							}, {
+										type: "D",
+										img: "http://i.imgur.com/VSo2HQ0.jpg"
+							}]
+				}, {
+							id: 3,
+							text: "Что для вас командный дух?",
+							answers: [{
+										type: "A",
+										img: "http://healthimpactnews.com/wp-content/uploads/sites/2/2013/08/broccoli-2.jpg" }, {
+										type: "B",
+										img: "http://www.connectedrogers.ca/wp-content/uploads/2013/09/SOA-Season61.jpg"
+							}, {
+										type: "C",
+										img: "http://i.dailymail.co.uk/i/pix/2012/12/26/article-0-16A81E1D000005DC-528_634x384.jpg"
+							}, {
+										type: "D",
+										img: "http://i.kinja-img.com/gawker-media/image/upload/s--Eyk1VFjI--/18nyvddjcxfhdpng.png"
+							}]
+				}, {
+							id: 4,
+							text: "Что больше всего похоже на ваш типичный рабочий день?",
+							answers: [{
+										type: "A",
+										img: "https://ktismatics.files.wordpress.com/2010/01/serious-chalk.png" }, {
+										type: "B",
+										img: "http://media.catmoji.com/post/vpr4/oh-noes.jpg"
+							}, {
+										type: "C",
+										img: "http://i0.kym-cdn.com/photos/images/original/000/746/291/adf.jpg"
+							}, {
+										type: "D",
+										img: "http://tosh.cc.com/blog/files/2011/08/burning-house.jpg"
+							}]
+				}, {
+							id: 5,
+							text: "Как вы поступаете, если не успеваете выполнить обязательства в срок?",
+							answers: [{
+										type: "A",
+										text: "Пишете монографию о том, почему их и невозможно было сделать вовремя" }, {
+										type: "B",
+										text: "Валите все на других, бьетесь в припадке и исходитесь пеной."
+							}, {
+										type: "C",
+										text: "Запасаетесь пачкой энергетиков и резервируете места в реанимации."
+							}, {
+										type: "D",
+										text: "Садитесь в угол, тихо плачете и передаете управление Иисусу."
+							}]
+				}, {
+							id: 6,
+							text: "Когда вы уходите с работы?",
+							answers: [{
+										type: "A",
+										text: "Когда Луна входит в фазу Юпитера, а ретроградный Меркурий затмевает Уран." }, {
+										type: "B",
+										text: "Как только доведете последнего сотрудника до слез."
+							}, {
+										type: "C",
+										text: "С рассветом."
+							}, {
+										type: "D",
+										text: "А зачем уходить оттуда, где вас нет?"
+							}]
+				}, {
+							id: 7,
+							text: "Когда вы приходите на работу?",
+							answers: [{
+										type: "A",
+										text: "Когда проходит примерно два часа после завтрака овсянкой." }, {
+										type: "B",
+										text: "С запахом первой крови."
+							}, {
+										type: "C",
+										text: "Когда в спальнике становится душно."
+							}, {
+										type: "D",
+										text: "Когда вас просят поиметь совесть и зайти хоть на пару часов."
+							}]
+				}, {
+							id: 8,
+							text: "В микроволновке на кухне будто произошел томатный взрыв. Это…",
+							answers: [{
+										type: "A",
+										text: "Стечение обстоятельств. Всего лишь случайный вариант комплексной системы." }, {
+										type: "B",
+										text: "Точно не ваша вина."
+							}, {
+										type: "C",
+										text: "Придется помыть."
+							}, {
+										type: "D",
+										text: "Обед!"
+							}]
+				}, {
+							id: 9,
+							text: "Коллеги воспринимают вас...",
+							answers: [{
+										type: "A",
+										img: "https://psv4.vk.me/c537504/u1639645/docs/ec3af88238e7/OtHkTz1.gif?extra=EGkrTg_2pqMYEeA6GNrZgWj1FbX6nQIvFN9cplPI8B7xlsjW2BHA-8Iu5uUNQKAYh2j1-wHsUV3AAWmwHcLcgvVULVD_Lw" }, {
+										type: "B",
+										img: "https://psv4.vk.me/c6280/u140442865/docs/9fa55a9d9244/rosh.gif?extra=MrEfWTpCB5be5nnAHNLKdXFGWBmkndwE3Zs1isWTgkLCgSeZU5NvfEXCHJt7POJ_806v9ah6pr4ZRT5D-inwJAViIxd7SA"
+							}, {
+										type: "C",
+										img: "https://psv4.vk.me/c537200/u1639645/docs/d337e0acbccd/anigif_enhanced-buzz-22122-1355944229-1.gif?extra=fZ9cnpIYBkWHNQZ9kgWLupOzXsNyPT7VnMYkHolMfCmJ8bZSgSoAbYQLpTt7-wuWdH7Co2ZRMePCgATE06LA8HWZdCdcug"
+							}, {
+										type: "D",
+										img: "https://psv4.vk.me/c521502/u1639645/docs/e3188f2f9233/402725b14d86beb012ed294a44041ea0.gif?extra=_ticuq-3oFne9hd2LvlRpwbd3Z6ngiaCXC_ay39krG2QqIuEmU-otHX_wQ8xOr2eRsCqX0hdmJLjKWwzLXF5Pg0Gp6OXnw"
+							}]
+				}, {
+							id: 10,
+							text: "Командировка на Когалым в середине февраля для вас — это …",
+							answers: [{
+										type: "A",
+										img: "http://cdn.meme.am/images/300x/5551529.jpg" }, {
+										type: "B",
+										img: "https://danieldefo.ru/attachments/glavgeroy-3-jpg.6464"
+							}, {
+										type: "C",
+										img: "http://s3-static-ak.buzzfed.com/static/campaign_images/webdr02/2012/12/11/13/40-reasons-honey-boo-boo-became-a-national-treasu-1-20785-1355251953-2_big.jpg"
+							}, {
+										type: "D",
+										img: "http://image.thehothits.com/608x456/seal_as_a_seal_05_400x300.jpg"
+							}]
+				}]
+	});
+
+	exports['default'] = question;
+
+});
 define('lenovo/router', ['exports', 'ember', 'lenovo/config/environment'], function (exports, Ember, config) {
 
 	'use strict';
@@ -88,6 +265,7 @@ define('lenovo/router', ['exports', 'ember', 'lenovo/config/environment'], funct
 	exports['default'] = Router.map(function () {
 		this.route("home", { path: "/" });
 		this.route("question", { path: "/question/:id" });
+		this.route("result", { path: "/result" });
 	});
 
 });
@@ -169,24 +347,8 @@ define('lenovo/routes/question', ['exports', 'ember'], function (exports, Ember)
 	'use strict';
 
 	var home = Ember['default'].Route.extend({
-		model: function model() {
-			var data = {
-				id: 1,
-				text: "На пути к вашему офису случился транспортный коллапс, а шеф требует быть вовремя. Как будете решать проблему?",
-				answers: [{
-					type: "A",
-					text: "Остаток рабочего дня посвятите модификации транспортных развязок в столице." }, {
-					type: "B",
-					text: "Угрозами и истериками расчистите себе путь до рабочего места."
-				}, {
-					type: "C",
-					text: "Угоните машину у правоохранительных органов и доберетесь в срок."
-				}, {
-					type: "D",
-					text: "Нацепите значок «Езжу как хочу» и поедете как хотите."
-				}]
-			};
-			return data;
+		model: function model(params) {
+			return this.store.find("question", params.id);
 		},
 		renderTemplate: function renderTemplate() {
 			this.render("question", {
@@ -481,52 +643,10 @@ define('lenovo/templates/question', ['exports'], function (exports) {
           hasRendered: false,
           build: function build(dom) {
             var el0 = dom.createDocumentFragment();
-            return el0;
-          },
-          render: function render(context, env, contextualElement) {
-            var dom = env.dom;
-            dom.detectNamespace(contextualElement);
-            var fragment;
-            if (env.useFragmentCache && dom.canClone) {
-              if (this.cachedFragment === null) {
-                fragment = this.build(dom);
-                if (this.hasRendered) {
-                  this.cachedFragment = fragment;
-                } else {
-                  this.hasRendered = true;
-                }
-              }
-              if (this.cachedFragment) {
-                fragment = dom.cloneNode(this.cachedFragment, true);
-              }
-            } else {
-              fragment = this.build(dom);
-            }
-            return fragment;
-          }
-        };
-      }());
-      var child1 = (function() {
-        return {
-          isHTMLBars: true,
-          revision: "Ember@1.11.0",
-          blockParams: 0,
-          cachedFragment: null,
-          hasRendered: false,
-          build: function build(dom) {
-            var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("		");
+            var el1 = dom.createTextNode("			");
             dom.appendChild(el0, el1);
-            var el1 = dom.createElement("div");
-            dom.setAttribute(el1,"class","col-xs-6 answerBox");
-            var el2 = dom.createTextNode("\n			");
-            dom.appendChild(el1, el2);
-            var el2 = dom.createElement("p");
-            var el3 = dom.createComment("");
-            dom.appendChild(el2, el3);
-            dom.appendChild(el1, el2);
-            var el2 = dom.createTextNode("\n		");
-            dom.appendChild(el1, el2);
+            var el1 = dom.createElement("img");
+            dom.setAttribute(el1,"class","image-responsive");
             dom.appendChild(el0, el1);
             var el1 = dom.createTextNode("\n");
             dom.appendChild(el0, el1);
@@ -534,7 +654,7 @@ define('lenovo/templates/question', ['exports'], function (exports) {
           },
           render: function render(context, env, contextualElement) {
             var dom = env.dom;
-            var hooks = env.hooks, get = hooks.get, element = hooks.element, content = hooks.content;
+            var hooks = env.hooks, get = hooks.get, element = hooks.element;
             dom.detectNamespace(contextualElement);
             var fragment;
             if (env.useFragmentCache && dom.canClone) {
@@ -553,8 +673,51 @@ define('lenovo/templates/question', ['exports'], function (exports) {
               fragment = this.build(dom);
             }
             var element0 = dom.childAt(fragment, [1]);
-            var morph0 = dom.createMorphAt(dom.childAt(element0, [1]),0,0);
-            element(env, element0, context, "action", ["answerQuestion", get(env, context, "answer.type")], {});
+            element(env, element0, context, "bind-attr", [], {"src": get(env, context, "answer.img")});
+            return fragment;
+          }
+        };
+      }());
+      var child1 = (function() {
+        return {
+          isHTMLBars: true,
+          revision: "Ember@1.11.0",
+          blockParams: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          build: function build(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("			");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("p");
+            var el2 = dom.createComment("");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          render: function render(context, env, contextualElement) {
+            var dom = env.dom;
+            var hooks = env.hooks, content = hooks.content;
+            dom.detectNamespace(contextualElement);
+            var fragment;
+            if (env.useFragmentCache && dom.canClone) {
+              if (this.cachedFragment === null) {
+                fragment = this.build(dom);
+                if (this.hasRendered) {
+                  this.cachedFragment = fragment;
+                } else {
+                  this.hasRendered = true;
+                }
+              }
+              if (this.cachedFragment) {
+                fragment = dom.cloneNode(this.cachedFragment, true);
+              }
+            } else {
+              fragment = this.build(dom);
+            }
+            var morph0 = dom.createMorphAt(dom.childAt(fragment, [1]),0,0);
             content(env, morph0, context, "answer.text");
             return fragment;
           }
@@ -568,13 +731,24 @@ define('lenovo/templates/question', ['exports'], function (exports) {
         hasRendered: false,
         build: function build(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createComment("");
+          var el1 = dom.createTextNode("		");
+          dom.appendChild(el0, el1);
+          var el1 = dom.createElement("div");
+          dom.setAttribute(el1,"class","col-xs-6 answerBox");
+          var el2 = dom.createTextNode("\n");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createComment("");
+          dom.appendChild(el1, el2);
+          var el2 = dom.createTextNode("		");
+          dom.appendChild(el1, el2);
+          dom.appendChild(el0, el1);
+          var el1 = dom.createTextNode("\n");
           dom.appendChild(el0, el1);
           return el0;
         },
         render: function render(context, env, contextualElement) {
           var dom = env.dom;
-          var hooks = env.hooks, get = hooks.get, block = hooks.block;
+          var hooks = env.hooks, get = hooks.get, element = hooks.element, block = hooks.block;
           dom.detectNamespace(contextualElement);
           var fragment;
           if (env.useFragmentCache && dom.canClone) {
@@ -592,10 +766,10 @@ define('lenovo/templates/question', ['exports'], function (exports) {
           } else {
             fragment = this.build(dom);
           }
-          var morph0 = dom.createMorphAt(fragment,0,0,contextualElement);
-          dom.insertBoundary(fragment, null);
-          dom.insertBoundary(fragment, 0);
-          block(env, morph0, context, "if", [get(env, context, "answer.image")], {}, child0, child1);
+          var element1 = dom.childAt(fragment, [1]);
+          var morph0 = dom.createMorphAt(element1,1,1);
+          element(env, element1, context, "action", ["answerQuestion", get(env, context, "answer.type")], {});
+          block(env, morph0, context, "if", [get(env, context, "answer.img")], {}, child0, child1);
           return fragment;
         }
       };
@@ -615,7 +789,7 @@ define('lenovo/templates/question', ['exports'], function (exports) {
         var el2 = dom.createElement("h2");
         dom.setAttribute(el2,"class","test number");
         var el3 = dom.createElement("span");
-        var el4 = dom.createTextNode("1");
+        var el4 = dom.createComment("");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
@@ -681,11 +855,13 @@ define('lenovo/templates/question', ['exports'], function (exports) {
         } else {
           fragment = this.build(dom);
         }
-        var element1 = dom.childAt(fragment, [2, 1]);
-        var morph0 = dom.createMorphAt(dom.childAt(element1, [1]),1,1);
-        var morph1 = dom.createMorphAt(dom.childAt(element1, [3]),1,1);
-        content(env, morph0, context, "model.text");
-        block(env, morph1, context, "each", [get(env, context, "model.answers")], {"keyword": "answer"}, child0, null);
+        var element2 = dom.childAt(fragment, [2, 1]);
+        var morph0 = dom.createMorphAt(dom.childAt(fragment, [0, 1, 0]),0,0);
+        var morph1 = dom.createMorphAt(dom.childAt(element2, [1]),1,1);
+        var morph2 = dom.createMorphAt(dom.childAt(element2, [3]),1,1);
+        content(env, morph0, context, "model.id");
+        content(env, morph1, context, "model.text");
+        block(env, morph2, context, "each", [get(env, context, "model.answers")], {"keyword": "answer"}, child0, null);
         return fragment;
       }
     };
@@ -922,6 +1098,16 @@ define('lenovo/templates/result', ['exports'], function (exports) {
   }()));
 
 });
+define('lenovo/tests/adapters/application.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - adapters');
+  test('adapters/application.js should pass jshint', function() { 
+    ok(true, 'adapters/application.js should pass jshint.'); 
+  });
+
+});
 define('lenovo/tests/app.jshint', function () {
 
   'use strict';
@@ -938,7 +1124,7 @@ define('lenovo/tests/controllers/question.jshint', function () {
 
   module('JSHint - controllers');
   test('controllers/question.js should pass jshint', function() { 
-    ok(false, 'controllers/question.js should pass jshint.\ncontrollers/question.js: line 12, col 3, Missing semicolon.\n\n1 error'); 
+    ok(false, 'controllers/question.js should pass jshint.\ncontrollers/question.js: line 10, col 37, Missing semicolon.\ncontrollers/question.js: line 16, col 3, Missing semicolon.\ncontrollers/question.js: line 6, col 34, \'type\' is defined but never used.\n\n3 errors'); 
   });
 
 });
@@ -999,13 +1185,23 @@ define('lenovo/tests/helpers/start-app.jshint', function () {
   });
 
 });
+define('lenovo/tests/models/question.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - models');
+  test('models/question.js should pass jshint', function() { 
+    ok(false, 'models/question.js should pass jshint.\nmodels/question.js: line 234, col 24, Missing semicolon.\n\n1 error'); 
+  });
+
+});
 define('lenovo/tests/router.jshint', function () {
 
   'use strict';
 
   module('JSHint - .');
   test('router.js should pass jshint', function() { 
-    ok(false, 'router.js should pass jshint.\nrouter.js: line 10, col 35, Missing semicolon.\nrouter.js: line 11, col 51, Missing semicolon.\n\n2 errors'); 
+    ok(false, 'router.js should pass jshint.\nrouter.js: line 10, col 35, Missing semicolon.\nrouter.js: line 11, col 51, Missing semicolon.\nrouter.js: line 12, col 43, Missing semicolon.\n\n3 errors'); 
   });
 
 });
@@ -1025,7 +1221,7 @@ define('lenovo/tests/routes/question.jshint', function () {
 
   module('JSHint - routes');
   test('routes/question.js should pass jshint', function() { 
-    ok(false, 'routes/question.js should pass jshint.\nroutes/question.js: line 29, col 10, Missing semicolon.\nroutes/question.js: line 38, col 11, Missing semicolon.\nroutes/question.js: line 46, col 33, Missing semicolon.\nroutes/question.js: line 49, col 60, Missing semicolon.\nroutes/question.js: line 51, col 43, Missing semicolon.\nroutes/question.js: line 54, col 44, Missing semicolon.\nroutes/question.js: line 59, col 43, Missing semicolon.\nroutes/question.js: line 64, col 23, Missing semicolon.\nroutes/question.js: line 65, col 18, Unnecessary semicolon.\nroutes/question.js: line 71, col 47, Missing semicolon.\nroutes/question.js: line 76, col 27, Missing semicolon.\nroutes/question.js: line 77, col 22, Unnecessary semicolon.\nroutes/question.js: line 79, col 18, Don\'t make functions within a loop.\nroutes/question.js: line 79, col 19, Missing semicolon.\nroutes/question.js: line 86, col 47, Missing semicolon.\nroutes/question.js: line 91, col 27, Missing semicolon.\nroutes/question.js: line 92, col 22, Unnecessary semicolon.\nroutes/question.js: line 94, col 18, Don\'t make functions within a loop.\nroutes/question.js: line 94, col 19, Missing semicolon.\nroutes/question.js: line 95, col 14, Unnecessary semicolon.\nroutes/question.js: line 100, col 55, Missing semicolon.\nroutes/question.js: line 102, col 3, Missing semicolon.\nroutes/question.js: line 49, col 13, \'$\' is not defined.\nroutes/question.js: line 50, col 31, \'$\' is not defined.\nroutes/question.js: line 54, col 27, \'$\' is not defined.\nroutes/question.js: line 59, col 32, \'$\' is not defined.\nroutes/question.js: line 61, col 21, \'$\' is not defined.\nroutes/question.js: line 68, col 33, \'$\' is not defined.\nroutes/question.js: line 71, col 36, \'$\' is not defined.\nroutes/question.js: line 73, col 25, \'$\' is not defined.\nroutes/question.js: line 83, col 33, \'$\' is not defined.\nroutes/question.js: line 86, col 36, \'$\' is not defined.\nroutes/question.js: line 88, col 25, \'$\' is not defined.\nroutes/question.js: line 100, col 9, \'$\' is not defined.\nroutes/question.js: line 72, col 29, \'r\' is defined but never used.\n\n35 errors'); 
+    ok(false, 'routes/question.js should pass jshint.\nroutes/question.js: line 15, col 11, Missing semicolon.\nroutes/question.js: line 23, col 33, Missing semicolon.\nroutes/question.js: line 26, col 60, Missing semicolon.\nroutes/question.js: line 28, col 43, Missing semicolon.\nroutes/question.js: line 31, col 44, Missing semicolon.\nroutes/question.js: line 36, col 43, Missing semicolon.\nroutes/question.js: line 41, col 23, Missing semicolon.\nroutes/question.js: line 42, col 18, Unnecessary semicolon.\nroutes/question.js: line 48, col 47, Missing semicolon.\nroutes/question.js: line 53, col 27, Missing semicolon.\nroutes/question.js: line 54, col 22, Unnecessary semicolon.\nroutes/question.js: line 56, col 18, Don\'t make functions within a loop.\nroutes/question.js: line 56, col 19, Missing semicolon.\nroutes/question.js: line 63, col 47, Missing semicolon.\nroutes/question.js: line 68, col 27, Missing semicolon.\nroutes/question.js: line 69, col 22, Unnecessary semicolon.\nroutes/question.js: line 71, col 18, Don\'t make functions within a loop.\nroutes/question.js: line 71, col 19, Missing semicolon.\nroutes/question.js: line 72, col 14, Unnecessary semicolon.\nroutes/question.js: line 77, col 55, Missing semicolon.\nroutes/question.js: line 79, col 3, Missing semicolon.\nroutes/question.js: line 26, col 13, \'$\' is not defined.\nroutes/question.js: line 27, col 31, \'$\' is not defined.\nroutes/question.js: line 31, col 27, \'$\' is not defined.\nroutes/question.js: line 36, col 32, \'$\' is not defined.\nroutes/question.js: line 38, col 21, \'$\' is not defined.\nroutes/question.js: line 45, col 33, \'$\' is not defined.\nroutes/question.js: line 48, col 36, \'$\' is not defined.\nroutes/question.js: line 50, col 25, \'$\' is not defined.\nroutes/question.js: line 60, col 33, \'$\' is not defined.\nroutes/question.js: line 63, col 36, \'$\' is not defined.\nroutes/question.js: line 65, col 25, \'$\' is not defined.\nroutes/question.js: line 77, col 9, \'$\' is not defined.\nroutes/question.js: line 49, col 29, \'r\' is defined but never used.\n\n34 errors'); 
   });
 
 });
@@ -1074,7 +1270,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.a2b009c4"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.71e4bb4c"});
 }
 
 /* jshint ignore:end */

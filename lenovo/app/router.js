@@ -9,4 +9,5 @@ export default Router.map(function()
 {
 	this.route('home', {path:'/'})
 	this.route('question', {path:'/question/:id'})
+	this.route('result', {path:'/result'})
 });

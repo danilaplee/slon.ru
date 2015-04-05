@@ -2,32 +2,9 @@ import Ember from 'ember';
 
 
 var home = Ember.Route.extend({
-    model: function() 
+    model: function(params) 
     {
-    	var data = 
-    	{
-    		'id':1,
-    		'text':'На пути к вашему офису случился транспортный коллапс, а шеф требует быть вовремя. Как будете решать проблему?',
-    		'answers':[
-    		{
-    			'type':'A',
-    			'text':'Остаток рабочего дня посвятите модификации транспортных развязок в столице.',
-    		},
-    		{
-    			'type':'B',
-    			'text':'Угрозами и истериками расчистите себе путь до рабочего места.'
-    		},
-    		{
-    			'type':'C',
-    			'text':'Угоните машину у правоохранительных органов и доберетесь в срок.'
-    		},
-    		{
-    			'type':'D',
-    			'text':'Нацепите значок «Езжу как хочу» и поедете как хотите.'
-    		}
-    		]
-    	}
-      return data;
+      return this.store.find('question', params.id);
     },
   	renderTemplate: function() 
   	{
