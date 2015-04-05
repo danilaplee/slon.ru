@@ -96,20 +96,24 @@ define('lenovo/routes/home', ['exports', 'ember'], function (exports, Ember) {
 		setupController: function setupController(home, model) {
 			home.set("model", model);
 			Ember['default'].run.schedule("afterRender", this, function () {
-				// var elastic = document.getElementById('elastic');
-				var elastic = Snap.select("#MyPath");
+				var elastic = Snap.select("#elastic");
+				Snap.load("images/new_3.svg", function (data) {
+					elastic.append(data);
+					console.log(elastic, data);
+				});
 				var pre = Snap.select("#preloading");
 				var n = 0;
 				var storeZone = function storeZone(data) {
 					n++;
-					z[n] = pre.append(data).select("path");
+					z[n] = pre.append(data).selectAll("path");
+					console.log(z);
 					pre.clear();
 				};
 				var z = [];
-				z[1] = Snap.load("images/zone1.svg", storeZone);
-				z[2] = Snap.load("images/zone2.svg", storeZone);
-				z[3] = Snap.load("images/zone3.svg", storeZone);
-				z[4] = Snap.load("images/zone4.svg", storeZone);
+				z[1] = Snap.load("images/elastic/up-left.svg", storeZone);
+				z[2] = Snap.load("images/elastic/up-right.svg", storeZone);
+				z[3] = Snap.load("images/elastic/down-left.svg", storeZone);
+				z[4] = Snap.load("images/elastic/down-right.svg", storeZone);
 				$(window).mousemove(function (event) {
 					var y = event.pageY;
 					var x = event.pageX;
@@ -132,8 +136,13 @@ define('lenovo/routes/home', ['exports', 'ember'], function (exports, Ember) {
 					make(pos);
 				});
 				var make = function make(pos) {
-					var zone = z[pos].attr("d");
-					elastic.animate({ d: zone }, 2500, mina.backin());
+					var zone = z[pos];
+					var target = elastic.selectAll("path");
+					for (var i = zone.length - 1; i >= 0; i--) {
+						var y = zone[i];
+						target[i].animate({ d: y }, 900, mina.easein());
+					};
+					console.log(target);
 				};
 			});
 		}
@@ -333,59 +342,6 @@ define('lenovo/templates/home', ['exports'], function (exports) {
         var el4 = dom.createElement("div");
         dom.setAttribute(el4,"id","elastic");
         dom.setAttribute(el4,"style","height:100px;position:relative;");
-        var el5 = dom.createTextNode("\n				");
-        dom.appendChild(el4, el5);
-        dom.setNamespace("http://www.w3.org/2000/svg");
-        var el5 = dom.createElement("svg");
-        dom.setAttribute(el5,"version","1.1");
-        dom.setAttribute(el5,"viewBox","0 0 1000 500");
-        dom.setAttribute(el5,"xmlns","http://www.w3.org/2000/svg");
-        dom.setAttribute(el5,"xmlns:xlink","http://www.w3.org/1999/xlink");
-        var el6 = dom.createTextNode("\n				  ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("defs");
-        var el7 = dom.createTextNode("\n				       ");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createElement("path");
-        dom.setAttribute(el7,"id","MyPath");
-        dom.setAttribute(el7,"d","M7.5,75 C110,75 90,75 192.5,75 Z");
-        dom.setAttribute(el7,"stroke","#2c3e50");
-        dom.setAttribute(el7,"stroke-width","0");
-        dom.setAttribute(el7,"fill","none");
-        var el8 = dom.createTextNode("\n					    ");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n				  ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n\n				  ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("use");
-        dom.setAttributeNS(el6,"http://www.w3.org/1999/xlink","xlink:href","#MyPath");
-        dom.setAttribute(el6,"fill","none");
-        dom.setAttribute(el6,"stroke","none");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n\n				  ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("text");
-        dom.setAttribute(el6,"font-family","Roboto");
-        dom.setAttribute(el6,"font-weight","100");
-        dom.setAttribute(el6,"letter-spacing","0.5");
-        dom.setAttribute(el6,"fill","#2c3e50");
-        dom.setAttribute(el6,"font-size","48");
-        var el7 = dom.createTextNode("\n				    ");
-        dom.appendChild(el6, el7);
-        var el7 = dom.createElement("textPath");
-        dom.setAttributeNS(el7,"http://www.w3.org/1999/xlink","xlink:href","#MyPath");
-        var el8 = dom.createTextNode("\n				          ГИБКИЙ\n				    ");
-        dom.appendChild(el7, el8);
-        dom.appendChild(el6, el7);
-        var el7 = dom.createTextNode("\n				  ");
-        dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n				");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n			");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
@@ -394,7 +350,6 @@ define('lenovo/templates/home', ['exports'], function (exports) {
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n		");
         dom.appendChild(el2, el3);
-        dom.setNamespace(null);
         var el3 = dom.createElement("p");
         var el4 = dom.createTextNode("\"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?\"");
         dom.appendChild(el3, el4);
@@ -610,7 +565,7 @@ define('lenovo/tests/routes/home.jshint', function () {
 
   module('JSHint - routes');
   test('routes/home.js should pass jshint', function() { 
-    ok(false, 'routes/home.js should pass jshint.\nroutes/home.js: line 15, col 11, Missing semicolon.\nroutes/home.js: line 23, col 33, Missing semicolon.\nroutes/home.js: line 33, col 57, Missing semicolon.\nroutes/home.js: line 34, col 30, Missing semicolon.\nroutes/home.js: line 35, col 16, Missing semicolon.\nroutes/home.js: line 37, col 62, Missing semicolon.\nroutes/home.js: line 38, col 62, Missing semicolon.\nroutes/home.js: line 39, col 62, Missing semicolon.\nroutes/home.js: line 40, col 62, Missing semicolon.\nroutes/home.js: line 43, col 36, Missing semicolon.\nroutes/home.js: line 44, col 36, Missing semicolon.\nroutes/home.js: line 47, col 24, Missing semicolon.\nroutes/home.js: line 52, col 32, Missing semicolon.\nroutes/home.js: line 56, col 32, Missing semicolon.\nroutes/home.js: line 64, col 32, Missing semicolon.\nroutes/home.js: line 68, col 32, Missing semicolon.\nroutes/home.js: line 71, col 26, Missing semicolon.\nroutes/home.js: line 76, col 46, Missing semicolon.\nroutes/home.js: line 77, col 67, Missing semicolon.\nroutes/home.js: line 78, col 14, Missing semicolon.\nroutes/home.js: line 82, col 3, Missing semicolon.\nroutes/home.js: line 27, col 32, \'Snap\' is not defined.\nroutes/home.js: line 28, col 25, \'Snap\' is not defined.\nroutes/home.js: line 37, col 22, \'Snap\' is not defined.\nroutes/home.js: line 38, col 22, \'Snap\' is not defined.\nroutes/home.js: line 39, col 22, \'Snap\' is not defined.\nroutes/home.js: line 40, col 22, \'Snap\' is not defined.\nroutes/home.js: line 41, col 15, \'$\' is not defined.\nroutes/home.js: line 45, col 33, \'$\' is not defined.\nroutes/home.js: line 46, col 34, \'$\' is not defined.\nroutes/home.js: line 77, col 53, \'mina\' is not defined.\n\n31 errors'); 
+    ok(false, 'routes/home.js should pass jshint.\nroutes/home.js: line 15, col 11, Missing semicolon.\nroutes/home.js: line 23, col 33, Missing semicolon.\nroutes/home.js: line 29, col 39, Missing semicolon.\nroutes/home.js: line 31, col 17, Missing semicolon.\nroutes/home.js: line 37, col 60, Missing semicolon.\nroutes/home.js: line 39, col 30, Missing semicolon.\nroutes/home.js: line 40, col 16, Missing semicolon.\nroutes/home.js: line 42, col 72, Missing semicolon.\nroutes/home.js: line 43, col 73, Missing semicolon.\nroutes/home.js: line 44, col 74, Missing semicolon.\nroutes/home.js: line 45, col 75, Missing semicolon.\nroutes/home.js: line 48, col 36, Missing semicolon.\nroutes/home.js: line 49, col 36, Missing semicolon.\nroutes/home.js: line 52, col 24, Missing semicolon.\nroutes/home.js: line 57, col 32, Missing semicolon.\nroutes/home.js: line 61, col 32, Missing semicolon.\nroutes/home.js: line 69, col 32, Missing semicolon.\nroutes/home.js: line 73, col 32, Missing semicolon.\nroutes/home.js: line 76, col 26, Missing semicolon.\nroutes/home.js: line 81, col 36, Missing semicolon.\nroutes/home.js: line 82, col 57, Missing semicolon.\nroutes/home.js: line 85, col 38, Missing semicolon.\nroutes/home.js: line 86, col 69, Missing semicolon.\nroutes/home.js: line 87, col 20, Unnecessary semicolon.\nroutes/home.js: line 89, col 14, Missing semicolon.\nroutes/home.js: line 93, col 3, Missing semicolon.\nroutes/home.js: line 26, col 32, \'Snap\' is not defined.\nroutes/home.js: line 27, col 15, \'Snap\' is not defined.\nroutes/home.js: line 32, col 25, \'Snap\' is not defined.\nroutes/home.js: line 42, col 22, \'Snap\' is not defined.\nroutes/home.js: line 43, col 22, \'Snap\' is not defined.\nroutes/home.js: line 44, col 22, \'Snap\' is not defined.\nroutes/home.js: line 45, col 22, \'Snap\' is not defined.\nroutes/home.js: line 46, col 15, \'$\' is not defined.\nroutes/home.js: line 50, col 33, \'$\' is not defined.\nroutes/home.js: line 51, col 34, \'$\' is not defined.\nroutes/home.js: line 86, col 55, \'mina\' is not defined.\n\n37 errors'); 
   });
 
 });
@@ -669,7 +624,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.964c7f8c"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.971eb80e"});
 }
 
 /* jshint ignore:end */

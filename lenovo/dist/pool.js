@@ -3,7 +3,7 @@
     {
         friction: 0.8,
         timeStep: 0.01,
-        amount: 15,
+        amount: 10,
         mass: 2,
         count: 0
     };
