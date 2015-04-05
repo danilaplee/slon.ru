@@ -27,7 +27,6 @@ var home = Ember.Route.extend({
 	      	Snap.load('images/new_3.svg', function(data)
 	      	{
 	      		elastic.append(data)
-	      		console.log(elastic, data);
 	      	})
 	      	var pre = Snap.select('#preloading');
 	      	var n = 0;
@@ -35,7 +34,6 @@ var home = Ember.Route.extend({
 	      	{
 	      		n++;
 	      		z[n] = pre.append(data).selectAll('path')
-	      		console.log(z);
 	      		pre.clear()
 	      	}
 	      	var z = [];
@@ -85,7 +83,6 @@ var home = Ember.Route.extend({
 	      			var y = zone[i]
 		      		target[i].animate({'d':y}, 900, mina.easein())
 	      		};
-	      		console.log(target);
 		    }
 
 		});

@@ -37,7 +37,7 @@
 
     function createPath(strength) {
         var path = new Path({
-            fillColor: 'black'
+            fillColor: '#777'
         });
         springs = [];
         for (var i = 0; i <= values.amount; i++) {

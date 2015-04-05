@@ -19,6 +19,23 @@ define('lenovo/app', ['exports', 'ember', 'ember/resolver', 'ember/load-initiali
   exports['default'] = App;
 
 });
+define('lenovo/controllers/question', ['exports', 'ember'], function (exports, Ember) {
+
+	'use strict';
+
+	var quest = Ember['default'].ObjectController.extend({
+		actions: {
+			answerQuestion: function answerQuestion(type) {
+				var model = this.get("model");
+				// var id = model.get('id')
+				console.log(type, model.id);
+			}
+		}
+	});
+
+	exports['default'] = quest;
+
+});
 define('lenovo/initializers/app-version', ['exports', 'lenovo/config/environment', 'ember'], function (exports, config, Ember) {
 
   'use strict';
@@ -99,14 +116,12 @@ define('lenovo/routes/home', ['exports', 'ember'], function (exports, Ember) {
 				var elastic = Snap.select("#elastic");
 				Snap.load("images/new_3.svg", function (data) {
 					elastic.append(data);
-					console.log(elastic, data);
 				});
 				var pre = Snap.select("#preloading");
 				var n = 0;
 				var storeZone = function storeZone(data) {
 					n++;
 					z[n] = pre.append(data).selectAll("path");
-					console.log(z);
 					pre.clear();
 				};
 				var z = [];
@@ -142,7 +157,6 @@ define('lenovo/routes/home', ['exports', 'ember'], function (exports, Ember) {
 						var y = zone[i];
 						target[i].animate({ d: y }, 900, mina.easein());
 					};
-					console.log(target);
 				};
 			});
 		}
@@ -153,34 +167,88 @@ define('lenovo/routes/home', ['exports', 'ember'], function (exports, Ember) {
 });
 define('lenovo/routes/question', ['exports', 'ember'], function (exports, Ember) {
 
-  'use strict';
+	'use strict';
 
-  var home = Ember['default'].Route.extend({
-    model: function model() {
-      return [];
-    },
-    renderTemplate: function renderTemplate() {
-      this.render("question", {
-        into: "application",
-        outlet: "main",
-        controller: "question"
-      });
-    },
-    activate: function activate() {
-      this._super.apply(this, arguments);
-    },
-    setupController: function setupController(home, model) {
-      home.set("model", model);
-      Ember['default'].run.schedule("afterRender", this, function () {
-        $("#floatCanvas").css({ visibility: "visible" });
-      });
-    },
-    deactivate: function deactivate() {
-      $("#floatCanvas").css({ visibility: "hidden" });
-    }
-  });
+	var home = Ember['default'].Route.extend({
+		model: function model() {
+			var data = {
+				id: 1,
+				text: "На пути к вашему офису случился транспортный коллапс, а шеф требует быть вовремя. Как будете решать проблему?",
+				answers: [{
+					type: "A",
+					text: "Остаток рабочего дня посвятите модификации транспортных развязок в столице." }, {
+					type: "B",
+					text: "Угрозами и истериками расчистите себе путь до рабочего места."
+				}, {
+					type: "C",
+					text: "Угоните машину у правоохранительных органов и доберетесь в срок."
+				}, {
+					type: "D",
+					text: "Нацепите значок «Езжу как хочу» и поедете как хотите."
+				}]
+			};
+			return data;
+		},
+		renderTemplate: function renderTemplate() {
+			this.render("question", {
+				into: "application",
+				outlet: "main",
+				controller: "question"
+			});
+		},
+		activate: function activate() {
+			this._super.apply(this, arguments);
+		},
+		setupController: function setupController(home, model) {
+			home.set("model", model);
+			Ember['default'].run.schedule("afterRender", this, function () {
+				$("#floatCanvas").css({ visibility: "visible" });
+				var answerBoxes = $(".answerBox > p");
+				answerBoxes.lettering("words");
+				for (var i = answerBoxes.length - 1; i >= 0; i--) {
+					var box = $(answerBoxes[i]);
+					console.log(box);
+					var words = box.find("span");
+					for (var b = words.length - 1; b >= 0; b--) {
+						var word = $(words[b]);
+						var r = Math.round(Math.random() * 10) * 5;
+						$(word[0]).css({
+							display: "inline-block",
+							transform: "rotate(" + r + "deg)"
+						});
+					};
+					box.mouseover(function () {
+						var words = $(this).find("span");
+						for (var b = words.length - 1; b >= 0; b--) {
+							var word = $(words[b]);
+							var r = Math.round(Math.random() * 10) * 5;
+							$(word[0]).css({
+								display: "inline",
+								transform: "rotate(0deg)"
+							});
+						};
+					});
+					box.mouseout(function () {
 
-  exports['default'] = home;
+						var words = $(this).find("span");
+						for (var b = words.length - 1; b >= 0; b--) {
+							var word = $(words[b]);
+							var r = Math.round(Math.random() * 10) * 5;
+							$(word[0]).css({
+								display: "inline-block",
+								transform: "rotate(" + r + "deg)"
+							});
+						};
+					});
+				};
+			});
+		},
+		deactivate: function deactivate() {
+			$("#floatCanvas").css({ visibility: "hidden" });
+		}
+	});
+
+	exports['default'] = home;
 
 });
 define('lenovo/templates/application', ['exports'], function (exports) {
@@ -404,6 +472,135 @@ define('lenovo/templates/question', ['exports'], function (exports) {
   'use strict';
 
   exports['default'] = Ember.HTMLBars.template((function() {
+    var child0 = (function() {
+      var child0 = (function() {
+        return {
+          isHTMLBars: true,
+          revision: "Ember@1.11.0",
+          blockParams: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          build: function build(dom) {
+            var el0 = dom.createDocumentFragment();
+            return el0;
+          },
+          render: function render(context, env, contextualElement) {
+            var dom = env.dom;
+            dom.detectNamespace(contextualElement);
+            var fragment;
+            if (env.useFragmentCache && dom.canClone) {
+              if (this.cachedFragment === null) {
+                fragment = this.build(dom);
+                if (this.hasRendered) {
+                  this.cachedFragment = fragment;
+                } else {
+                  this.hasRendered = true;
+                }
+              }
+              if (this.cachedFragment) {
+                fragment = dom.cloneNode(this.cachedFragment, true);
+              }
+            } else {
+              fragment = this.build(dom);
+            }
+            return fragment;
+          }
+        };
+      }());
+      var child1 = (function() {
+        return {
+          isHTMLBars: true,
+          revision: "Ember@1.11.0",
+          blockParams: 0,
+          cachedFragment: null,
+          hasRendered: false,
+          build: function build(dom) {
+            var el0 = dom.createDocumentFragment();
+            var el1 = dom.createTextNode("		");
+            dom.appendChild(el0, el1);
+            var el1 = dom.createElement("div");
+            dom.setAttribute(el1,"class","col-xs-6 answerBox");
+            var el2 = dom.createTextNode("\n			");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createElement("p");
+            var el3 = dom.createComment("");
+            dom.appendChild(el2, el3);
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode("\n		");
+            dom.appendChild(el1, el2);
+            dom.appendChild(el0, el1);
+            var el1 = dom.createTextNode("\n");
+            dom.appendChild(el0, el1);
+            return el0;
+          },
+          render: function render(context, env, contextualElement) {
+            var dom = env.dom;
+            var hooks = env.hooks, get = hooks.get, element = hooks.element, content = hooks.content;
+            dom.detectNamespace(contextualElement);
+            var fragment;
+            if (env.useFragmentCache && dom.canClone) {
+              if (this.cachedFragment === null) {
+                fragment = this.build(dom);
+                if (this.hasRendered) {
+                  this.cachedFragment = fragment;
+                } else {
+                  this.hasRendered = true;
+                }
+              }
+              if (this.cachedFragment) {
+                fragment = dom.cloneNode(this.cachedFragment, true);
+              }
+            } else {
+              fragment = this.build(dom);
+            }
+            var element0 = dom.childAt(fragment, [1]);
+            var morph0 = dom.createMorphAt(dom.childAt(element0, [1]),0,0);
+            element(env, element0, context, "action", ["answerQuestion", get(env, context, "answer.type")], {});
+            content(env, morph0, context, "answer.text");
+            return fragment;
+          }
+        };
+      }());
+      return {
+        isHTMLBars: true,
+        revision: "Ember@1.11.0",
+        blockParams: 0,
+        cachedFragment: null,
+        hasRendered: false,
+        build: function build(dom) {
+          var el0 = dom.createDocumentFragment();
+          var el1 = dom.createComment("");
+          dom.appendChild(el0, el1);
+          return el0;
+        },
+        render: function render(context, env, contextualElement) {
+          var dom = env.dom;
+          var hooks = env.hooks, get = hooks.get, block = hooks.block;
+          dom.detectNamespace(contextualElement);
+          var fragment;
+          if (env.useFragmentCache && dom.canClone) {
+            if (this.cachedFragment === null) {
+              fragment = this.build(dom);
+              if (this.hasRendered) {
+                this.cachedFragment = fragment;
+              } else {
+                this.hasRendered = true;
+              }
+            }
+            if (this.cachedFragment) {
+              fragment = dom.cloneNode(this.cachedFragment, true);
+            }
+          } else {
+            fragment = this.build(dom);
+          }
+          var morph0 = dom.createMorphAt(fragment,0,0,contextualElement);
+          dom.insertBoundary(fragment, null);
+          dom.insertBoundary(fragment, 0);
+          block(env, morph0, context, "if", [get(env, context, "answer.image")], {}, child0, child1);
+          return fragment;
+        }
+      };
+    }());
     return {
       isHTMLBars: true,
       revision: "Ember@1.11.0",
@@ -438,15 +635,23 @@ define('lenovo/templates/question', ['exports'], function (exports) {
         dom.appendChild(el2, el3);
         var el3 = dom.createElement("h3");
         dom.setAttribute(el3,"style","text-transform:uppercase;font-weight:bold;line-height:40px;");
-        var el4 = dom.createTextNode("\n		Руководство компании\n		");
+        var el4 = dom.createTextNode("\n		");
         dom.appendChild(el3, el4);
-        var el4 = dom.createElement("br");
+        var el4 = dom.createComment("");
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode(" \n		вводит штрафы за опоздания.\n		");
+        var el4 = dom.createTextNode("\n	");
         dom.appendChild(el3, el4);
-        var el4 = dom.createElement("br");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n	");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3,"class","col-xs-12");
+        dom.setAttribute(el3,"style","margin-top:20px");
+        var el4 = dom.createTextNode("\n");
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n		Ваши идеи:\n	");
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("	");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n	");
@@ -459,6 +664,7 @@ define('lenovo/templates/question', ['exports'], function (exports) {
       },
       render: function render(context, env, contextualElement) {
         var dom = env.dom;
+        var hooks = env.hooks, content = hooks.content, get = hooks.get, block = hooks.block;
         dom.detectNamespace(contextualElement);
         var fragment;
         if (env.useFragmentCache && dom.canClone) {
@@ -476,6 +682,11 @@ define('lenovo/templates/question', ['exports'], function (exports) {
         } else {
           fragment = this.build(dom);
         }
+        var element1 = dom.childAt(fragment, [2, 1]);
+        var morph0 = dom.createMorphAt(dom.childAt(element1, [1]),1,1);
+        var morph1 = dom.createMorphAt(dom.childAt(element1, [3]),1,1);
+        content(env, morph0, context, "model.text");
+        block(env, morph1, context, "each", [get(env, context, "model.answers")], {"keyword": "answer"}, child0, null);
         return fragment;
       }
     };
@@ -489,6 +700,16 @@ define('lenovo/tests/app.jshint', function () {
   module('JSHint - .');
   test('app.js should pass jshint', function() { 
     ok(true, 'app.js should pass jshint.'); 
+  });
+
+});
+define('lenovo/tests/controllers/question.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - controllers');
+  test('controllers/question.js should pass jshint', function() { 
+    ok(false, 'controllers/question.js should pass jshint.\ncontrollers/question.js: line 13, col 3, Missing semicolon.\n\n1 error'); 
   });
 
 });
@@ -565,7 +786,7 @@ define('lenovo/tests/routes/home.jshint', function () {
 
   module('JSHint - routes');
   test('routes/home.js should pass jshint', function() { 
-    ok(false, 'routes/home.js should pass jshint.\nroutes/home.js: line 15, col 11, Missing semicolon.\nroutes/home.js: line 23, col 33, Missing semicolon.\nroutes/home.js: line 29, col 39, Missing semicolon.\nroutes/home.js: line 31, col 17, Missing semicolon.\nroutes/home.js: line 37, col 60, Missing semicolon.\nroutes/home.js: line 39, col 30, Missing semicolon.\nroutes/home.js: line 40, col 16, Missing semicolon.\nroutes/home.js: line 42, col 72, Missing semicolon.\nroutes/home.js: line 43, col 73, Missing semicolon.\nroutes/home.js: line 44, col 74, Missing semicolon.\nroutes/home.js: line 45, col 75, Missing semicolon.\nroutes/home.js: line 48, col 36, Missing semicolon.\nroutes/home.js: line 49, col 36, Missing semicolon.\nroutes/home.js: line 52, col 24, Missing semicolon.\nroutes/home.js: line 57, col 32, Missing semicolon.\nroutes/home.js: line 61, col 32, Missing semicolon.\nroutes/home.js: line 69, col 32, Missing semicolon.\nroutes/home.js: line 73, col 32, Missing semicolon.\nroutes/home.js: line 76, col 26, Missing semicolon.\nroutes/home.js: line 81, col 36, Missing semicolon.\nroutes/home.js: line 82, col 57, Missing semicolon.\nroutes/home.js: line 85, col 38, Missing semicolon.\nroutes/home.js: line 86, col 69, Missing semicolon.\nroutes/home.js: line 87, col 20, Unnecessary semicolon.\nroutes/home.js: line 89, col 14, Missing semicolon.\nroutes/home.js: line 93, col 3, Missing semicolon.\nroutes/home.js: line 26, col 32, \'Snap\' is not defined.\nroutes/home.js: line 27, col 15, \'Snap\' is not defined.\nroutes/home.js: line 32, col 25, \'Snap\' is not defined.\nroutes/home.js: line 42, col 22, \'Snap\' is not defined.\nroutes/home.js: line 43, col 22, \'Snap\' is not defined.\nroutes/home.js: line 44, col 22, \'Snap\' is not defined.\nroutes/home.js: line 45, col 22, \'Snap\' is not defined.\nroutes/home.js: line 46, col 15, \'$\' is not defined.\nroutes/home.js: line 50, col 33, \'$\' is not defined.\nroutes/home.js: line 51, col 34, \'$\' is not defined.\nroutes/home.js: line 86, col 55, \'mina\' is not defined.\n\n37 errors'); 
+    ok(false, 'routes/home.js should pass jshint.\nroutes/home.js: line 15, col 11, Missing semicolon.\nroutes/home.js: line 23, col 33, Missing semicolon.\nroutes/home.js: line 29, col 39, Missing semicolon.\nroutes/home.js: line 30, col 17, Missing semicolon.\nroutes/home.js: line 36, col 60, Missing semicolon.\nroutes/home.js: line 37, col 30, Missing semicolon.\nroutes/home.js: line 38, col 16, Missing semicolon.\nroutes/home.js: line 40, col 72, Missing semicolon.\nroutes/home.js: line 41, col 73, Missing semicolon.\nroutes/home.js: line 42, col 74, Missing semicolon.\nroutes/home.js: line 43, col 75, Missing semicolon.\nroutes/home.js: line 46, col 36, Missing semicolon.\nroutes/home.js: line 47, col 36, Missing semicolon.\nroutes/home.js: line 50, col 24, Missing semicolon.\nroutes/home.js: line 55, col 32, Missing semicolon.\nroutes/home.js: line 59, col 32, Missing semicolon.\nroutes/home.js: line 67, col 32, Missing semicolon.\nroutes/home.js: line 71, col 32, Missing semicolon.\nroutes/home.js: line 74, col 26, Missing semicolon.\nroutes/home.js: line 79, col 36, Missing semicolon.\nroutes/home.js: line 80, col 57, Missing semicolon.\nroutes/home.js: line 83, col 38, Missing semicolon.\nroutes/home.js: line 84, col 69, Missing semicolon.\nroutes/home.js: line 85, col 20, Unnecessary semicolon.\nroutes/home.js: line 86, col 14, Missing semicolon.\nroutes/home.js: line 90, col 3, Missing semicolon.\nroutes/home.js: line 26, col 32, \'Snap\' is not defined.\nroutes/home.js: line 27, col 15, \'Snap\' is not defined.\nroutes/home.js: line 31, col 25, \'Snap\' is not defined.\nroutes/home.js: line 40, col 22, \'Snap\' is not defined.\nroutes/home.js: line 41, col 22, \'Snap\' is not defined.\nroutes/home.js: line 42, col 22, \'Snap\' is not defined.\nroutes/home.js: line 43, col 22, \'Snap\' is not defined.\nroutes/home.js: line 44, col 15, \'$\' is not defined.\nroutes/home.js: line 48, col 33, \'$\' is not defined.\nroutes/home.js: line 49, col 34, \'$\' is not defined.\nroutes/home.js: line 84, col 55, \'mina\' is not defined.\n\n37 errors'); 
   });
 
 });
@@ -575,7 +796,7 @@ define('lenovo/tests/routes/question.jshint', function () {
 
   module('JSHint - routes');
   test('routes/question.js should pass jshint', function() { 
-    ok(false, 'routes/question.js should pass jshint.\nroutes/question.js: line 15, col 11, Missing semicolon.\nroutes/question.js: line 23, col 33, Missing semicolon.\nroutes/question.js: line 26, col 60, Missing semicolon.\nroutes/question.js: line 31, col 55, Missing semicolon.\nroutes/question.js: line 33, col 3, Missing semicolon.\nroutes/question.js: line 26, col 13, \'$\' is not defined.\nroutes/question.js: line 31, col 9, \'$\' is not defined.\n\n7 errors'); 
+    ok(false, 'routes/question.js should pass jshint.\nroutes/question.js: line 29, col 10, Missing semicolon.\nroutes/question.js: line 38, col 11, Missing semicolon.\nroutes/question.js: line 46, col 33, Missing semicolon.\nroutes/question.js: line 49, col 60, Missing semicolon.\nroutes/question.js: line 51, col 43, Missing semicolon.\nroutes/question.js: line 54, col 44, Missing semicolon.\nroutes/question.js: line 59, col 43, Missing semicolon.\nroutes/question.js: line 64, col 23, Missing semicolon.\nroutes/question.js: line 65, col 18, Unnecessary semicolon.\nroutes/question.js: line 71, col 47, Missing semicolon.\nroutes/question.js: line 76, col 27, Missing semicolon.\nroutes/question.js: line 77, col 22, Unnecessary semicolon.\nroutes/question.js: line 79, col 18, Don\'t make functions within a loop.\nroutes/question.js: line 79, col 19, Missing semicolon.\nroutes/question.js: line 86, col 47, Missing semicolon.\nroutes/question.js: line 91, col 27, Missing semicolon.\nroutes/question.js: line 92, col 22, Unnecessary semicolon.\nroutes/question.js: line 94, col 18, Don\'t make functions within a loop.\nroutes/question.js: line 94, col 19, Missing semicolon.\nroutes/question.js: line 95, col 14, Unnecessary semicolon.\nroutes/question.js: line 100, col 55, Missing semicolon.\nroutes/question.js: line 102, col 3, Missing semicolon.\nroutes/question.js: line 49, col 13, \'$\' is not defined.\nroutes/question.js: line 50, col 31, \'$\' is not defined.\nroutes/question.js: line 54, col 27, \'$\' is not defined.\nroutes/question.js: line 59, col 32, \'$\' is not defined.\nroutes/question.js: line 61, col 21, \'$\' is not defined.\nroutes/question.js: line 68, col 33, \'$\' is not defined.\nroutes/question.js: line 71, col 36, \'$\' is not defined.\nroutes/question.js: line 73, col 25, \'$\' is not defined.\nroutes/question.js: line 83, col 33, \'$\' is not defined.\nroutes/question.js: line 86, col 36, \'$\' is not defined.\nroutes/question.js: line 88, col 25, \'$\' is not defined.\nroutes/question.js: line 100, col 9, \'$\' is not defined.\nroutes/question.js: line 72, col 29, \'r\' is defined but never used.\n\n35 errors'); 
   });
 
 });
@@ -624,7 +845,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.55c69b29"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.e084f3c7"});
 }
 
 /* jshint ignore:end */
