@@ -291,7 +291,7 @@ define('lenovo/routes/home', ['exports', 'ember'], function (exports, Ember) {
 			home.set("model", model);
 			Ember['default'].run.schedule("afterRender", this, function () {
 				var elastic = Snap.select("#elastic");
-				var tail = $("#tailCanvas");
+				var tail = $("div.canvas.two");
 				tail.css({
 					display: "block"
 				});
@@ -388,7 +388,7 @@ define('lenovo/routes/question', ['exports', 'ember'], function (exports, Ember)
 		setupController: function setupController(home, model) {
 			home.set("model", model);
 			Ember['default'].run.schedule("afterRender", this, function () {
-				var tail = $("#tailCanvas");
+				var tail = $("div.canvas.two");
 				tail.css({
 					display: "none"
 				});
@@ -1335,7 +1335,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.b3695957"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.8b1f9932"});
 }
 
 /* jshint ignore:end */

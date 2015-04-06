@@ -24,7 +24,7 @@ var home = Ember.Route.extend({
 	    Ember.run.schedule('afterRender', this, function () 
 	    {
 	      	var	elastic = Snap.select('#elastic');
-	      	var tail = $('#tailCanvas');
+	      	var tail = $('div.canvas.two');
 	      	tail.css({
 	      		'display':'block'
 	      	})

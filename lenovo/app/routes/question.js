@@ -23,7 +23,7 @@ var home = Ember.Route.extend({
         home.set('model', model)
 	    Ember.run.schedule('afterRender', this, function () 
 	    {
-	      	var tail = $('#tailCanvas');
+	      	var tail = $('div.canvas.two');
 	      	tail
 	      	.css({
 	      		'display':'none'
