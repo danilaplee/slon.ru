@@ -23,6 +23,11 @@ var home = Ember.Route.extend({
         home.set('model', model)
 	    Ember.run.schedule('afterRender', this, function () 
 	    {
+	      	var tail = $('#tailCanvas');
+	      	tail
+	      	.css({
+	      		'display':'block'
+	      	})
 	    	$('#floatCanvas').css({'visibility':'visible'})
 	    	var answerBoxes = $('.answerBox');
 	    	answerBoxes.find('p').lettering('words')

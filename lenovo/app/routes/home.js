@@ -24,6 +24,10 @@ var home = Ember.Route.extend({
 	    Ember.run.schedule('afterRender', this, function () 
 	    {
 	      	var	elastic = Snap.select('#elastic');
+	      	var tail = $('#tailCanvas');
+	      	tail.css({
+	      		'display':'block'
+	      	})
 	      	Snap.load('images/new_3.svg', function(data)
 	      	{
 	      		elastic.append(data)

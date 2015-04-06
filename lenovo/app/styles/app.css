@@ -72,13 +72,14 @@ body, html
 {
 	display: none;
 }
-footer
+footer.start
 {
 	position: fixed;
 	height: 40px;
 	bottom: 20px;
 	width: 100%;
 	left:0;
+	z-index: 100000;
 }
 #elastic svg
 {
