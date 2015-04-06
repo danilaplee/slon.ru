@@ -586,6 +586,11 @@ define('lenovo/templates/home', ['exports'], function (exports) {
         var el2 = dom.createTextNode("\n	");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("div");
+        dom.setAttribute(el2,"class","bg");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n	");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
         dom.setAttribute(el2,"class","hidden");
         var el3 = dom.createTextNode("\n		");
         dom.appendChild(el2, el3);
@@ -618,13 +623,21 @@ define('lenovo/templates/home', ['exports'], function (exports) {
         var el5 = dom.createTextNode("\n			");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n			НА РАБОТЕ ?\n		");
+        var el4 = dom.createTextNode("\n			НА РАБОТЕ\n		");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n		");
         dom.appendChild(el2, el3);
-        var el3 = dom.createElement("p");
-        var el4 = dom.createTextNode("Говорят, что на дворе кризис, а значит рабочих мест не так много. Но раз вы читаете этот текст, то значит, что у вас есть время для профориентации, и вы можете позволить себе самоопределение на рабочем месте. Наш тест поможет вам узнать о себе чуть больше и подскажет, над чем вам нужно поработать, чтобы стать еще более успешным.");
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3,"class","col-xs-7");
+        dom.setAttribute(el3,"style","padding:0");
+        var el4 = dom.createTextNode("\n			");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("p");
+        var el5 = dom.createTextNode("\n				Говорят, что на дворе кризис, а значит рабочих мест не так много. Но раз вы читаете этот текст, то значит, что у вас есть время для профориентации, и вы можете позволить себе самоопределение на рабочем месте. Наш тест поможет вам узнать о себе чуть больше и подскажет, над чем вам нужно поработать, чтобы стать еще более успешным.\n			");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n		");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n	");
@@ -1314,7 +1327,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.a1b85a29"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.89dbcb2b"});
 }
 
 /* jshint ignore:end */
