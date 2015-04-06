@@ -223,15 +223,15 @@ define('lenovo/models/question', ['exports', 'ember-data'], function (exports, D
 							text: "Коллеги воспринимают вас...",
 							answers: [{
 										type: "A",
-										img: "https://psv4.vk.me/c537504/u1639645/docs/ec3af88238e7/OtHkTz1.gif?extra=EGkrTg_2pqMYEeA6GNrZgWj1FbX6nQIvFN9cplPI8B7xlsjW2BHA-8Iu5uUNQKAYh2j1-wHsUV3AAWmwHcLcgvVULVD_Lw" }, {
+										img: "http://img.pandawhale.com/67272-NEAT-gif-9Bfi.gif" }, {
 										type: "B",
-										img: "https://psv4.vk.me/c6280/u140442865/docs/9fa55a9d9244/rosh.gif?extra=MrEfWTpCB5be5nnAHNLKdXFGWBmkndwE3Zs1isWTgkLCgSeZU5NvfEXCHJt7POJ_806v9ah6pr4ZRT5D-inwJAViIxd7SA"
+										img: "https://psv4.vk.me/c521212/u13896520/docs/a3065157ca53/rosh.gif?extra=L1wENncCBUROu9aLIAEtEZX77-VmCapnGEuo7qIjyi3a9exGoFSbQa8Tu492Mn7h-GphPjG3mWFk1xAP6x-j5pLMnlLRgQ"
 							}, {
 										type: "C",
-										img: "https://psv4.vk.me/c537200/u1639645/docs/d337e0acbccd/anigif_enhanced-buzz-22122-1355944229-1.gif?extra=fZ9cnpIYBkWHNQZ9kgWLupOzXsNyPT7VnMYkHolMfCmJ8bZSgSoAbYQLpTt7-wuWdH7Co2ZRMePCgATE06LA8HWZdCdcug"
+										img: "http://meowgifs.com/wp-content/uploads/2013/03/omg-it-was-you.gif"
 							}, {
 										type: "D",
-										img: "https://psv4.vk.me/c521502/u1639645/docs/e3188f2f9233/402725b14d86beb012ed294a44041ea0.gif?extra=_ticuq-3oFne9hd2LvlRpwbd3Z6ngiaCXC_ay39krG2QqIuEmU-otHX_wQ8xOr2eRsCqX0hdmJLjKWwzLXF5Pg0Gp6OXnw"
+										img: "http://2.bp.blogspot.com/-MMJJZSAOOak/UWcC3JPE0DI/AAAAAAAAHPo/EgT9ztccs78/s640/James+Harden+Creepy.gif"
 							}]
 				}, {
 							id: 10,
@@ -1302,7 +1302,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.acf3fc4a"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.ed9b70e7"});
 }
 
 /* jshint ignore:end */
