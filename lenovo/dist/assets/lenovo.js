@@ -390,7 +390,7 @@ define('lenovo/routes/question', ['exports', 'ember'], function (exports, Ember)
 			Ember['default'].run.schedule("afterRender", this, function () {
 				var tail = $("#tailCanvas");
 				tail.css({
-					display: "block"
+					display: "none"
 				});
 				$("#floatCanvas").css({ visibility: "visible" });
 				var answerBoxes = $(".answerBox");
@@ -1335,7 +1335,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.a5508b62"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.e174c763"});
 }
 
 /* jshint ignore:end */

@@ -26,7 +26,7 @@ var home = Ember.Route.extend({
 	      	var tail = $('#tailCanvas');
 	      	tail
 	      	.css({
-	      		'display':'block'
+	      		'display':'none'
 	      	})
 	    	$('#floatCanvas').css({'visibility':'visible'})
 	    	var answerBoxes = $('.answerBox');
