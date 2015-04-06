@@ -1314,7 +1314,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.5415b55f"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.a1b85a29"});
 }
 
 /* jshint ignore:end */
