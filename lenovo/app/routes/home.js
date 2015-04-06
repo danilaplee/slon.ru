@@ -37,10 +37,26 @@ var home = Ember.Route.extend({
 	      		pre.clear()
 	      	}
 	      	var z = [];
-	      	z[1] = Snap.load('images/elastic/up-left.svg', storeZone)
-	      	z[2] = Snap.load('images/elastic/up-right.svg', storeZone)
-	      	z[3] = Snap.load('images/elastic/down-left.svg', storeZone)
-	      	z[4] = Snap.load('images/elastic/down-right.svg', storeZone)
+	      	Snap.load('images/elastic/up-left.svg', function(data)
+	      	{
+	      		z[1] = pre.append(data).selectAll('path')
+	      		pre.clear();
+	      	})
+	      	Snap.load('images/elastic/up-right.svg', function(data)
+	      	{
+	      		z[2] = pre.append(data).selectAll('path')
+	      		pre.clear();
+	      	})
+	      	Snap.load('images/elastic/down-left.svg', function(data)
+	      	{
+	      		z[3] = pre.append(data).selectAll('path')
+	      		pre.clear();
+	      	})
+	      	Snap.load('images/elastic/down-right.svg', function(data)
+	      	{
+	      		z[4] = pre.append(data).selectAll('path')
+	      		pre.clear();
+	      	})
 	      	$(window).mousemove(function( event ) 
 	      	{
 				var y = event.pageY

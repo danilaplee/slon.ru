@@ -302,10 +302,22 @@ define('lenovo/routes/home', ['exports', 'ember'], function (exports, Ember) {
 					pre.clear();
 				};
 				var z = [];
-				z[1] = Snap.load("images/elastic/up-left.svg", storeZone);
-				z[2] = Snap.load("images/elastic/up-right.svg", storeZone);
-				z[3] = Snap.load("images/elastic/down-left.svg", storeZone);
-				z[4] = Snap.load("images/elastic/down-right.svg", storeZone);
+				Snap.load("images/elastic/up-left.svg", function (data) {
+					z[1] = pre.append(data).selectAll("path");
+					pre.clear();
+				});
+				Snap.load("images/elastic/up-right.svg", function (data) {
+					z[2] = pre.append(data).selectAll("path");
+					pre.clear();
+				});
+				Snap.load("images/elastic/down-left.svg", function (data) {
+					z[3] = pre.append(data).selectAll("path");
+					pre.clear();
+				});
+				Snap.load("images/elastic/down-right.svg", function (data) {
+					z[4] = pre.append(data).selectAll("path");
+					pre.clear();
+				});
 				$(window).mousemove(function (event) {
 					var y = event.pageY;
 					var x = event.pageX;
@@ -1243,7 +1255,7 @@ define('lenovo/tests/routes/home.jshint', function () {
 
   module('JSHint - routes');
   test('routes/home.js should pass jshint', function() { 
-    ok(false, 'routes/home.js should pass jshint.\nroutes/home.js: line 15, col 11, Missing semicolon.\nroutes/home.js: line 23, col 33, Missing semicolon.\nroutes/home.js: line 29, col 39, Missing semicolon.\nroutes/home.js: line 30, col 17, Missing semicolon.\nroutes/home.js: line 36, col 60, Missing semicolon.\nroutes/home.js: line 37, col 30, Missing semicolon.\nroutes/home.js: line 38, col 16, Missing semicolon.\nroutes/home.js: line 40, col 72, Missing semicolon.\nroutes/home.js: line 41, col 73, Missing semicolon.\nroutes/home.js: line 42, col 74, Missing semicolon.\nroutes/home.js: line 43, col 75, Missing semicolon.\nroutes/home.js: line 46, col 36, Missing semicolon.\nroutes/home.js: line 47, col 36, Missing semicolon.\nroutes/home.js: line 50, col 24, Missing semicolon.\nroutes/home.js: line 55, col 32, Missing semicolon.\nroutes/home.js: line 59, col 32, Missing semicolon.\nroutes/home.js: line 67, col 32, Missing semicolon.\nroutes/home.js: line 71, col 32, Missing semicolon.\nroutes/home.js: line 74, col 26, Missing semicolon.\nroutes/home.js: line 79, col 36, Missing semicolon.\nroutes/home.js: line 80, col 57, Missing semicolon.\nroutes/home.js: line 85, col 25, Missing semicolon.\nroutes/home.js: line 91, col 25, Missing semicolon.\nroutes/home.js: line 96, col 38, Missing semicolon.\nroutes/home.js: line 97, col 69, Missing semicolon.\nroutes/home.js: line 98, col 20, Unnecessary semicolon.\nroutes/home.js: line 99, col 14, Missing semicolon.\nroutes/home.js: line 103, col 3, Missing semicolon.\nroutes/home.js: line 26, col 32, \'Snap\' is not defined.\nroutes/home.js: line 27, col 15, \'Snap\' is not defined.\nroutes/home.js: line 31, col 25, \'Snap\' is not defined.\nroutes/home.js: line 40, col 22, \'Snap\' is not defined.\nroutes/home.js: line 41, col 22, \'Snap\' is not defined.\nroutes/home.js: line 42, col 22, \'Snap\' is not defined.\nroutes/home.js: line 43, col 22, \'Snap\' is not defined.\nroutes/home.js: line 44, col 15, \'$\' is not defined.\nroutes/home.js: line 48, col 33, \'$\' is not defined.\nroutes/home.js: line 49, col 34, \'$\' is not defined.\nroutes/home.js: line 83, col 23, \'$\' is not defined.\nroutes/home.js: line 89, col 23, \'$\' is not defined.\nroutes/home.js: line 97, col 55, \'mina\' is not defined.\n\n41 errors'); 
+    ok(false, 'routes/home.js should pass jshint.\nroutes/home.js: line 15, col 11, Missing semicolon.\nroutes/home.js: line 23, col 33, Missing semicolon.\nroutes/home.js: line 29, col 39, Missing semicolon.\nroutes/home.js: line 30, col 17, Missing semicolon.\nroutes/home.js: line 36, col 60, Missing semicolon.\nroutes/home.js: line 37, col 30, Missing semicolon.\nroutes/home.js: line 38, col 16, Missing semicolon.\nroutes/home.js: line 42, col 60, Missing semicolon.\nroutes/home.js: line 44, col 17, Missing semicolon.\nroutes/home.js: line 47, col 60, Missing semicolon.\nroutes/home.js: line 49, col 17, Missing semicolon.\nroutes/home.js: line 52, col 60, Missing semicolon.\nroutes/home.js: line 54, col 17, Missing semicolon.\nroutes/home.js: line 57, col 60, Missing semicolon.\nroutes/home.js: line 59, col 17, Missing semicolon.\nroutes/home.js: line 62, col 36, Missing semicolon.\nroutes/home.js: line 63, col 36, Missing semicolon.\nroutes/home.js: line 66, col 24, Missing semicolon.\nroutes/home.js: line 71, col 32, Missing semicolon.\nroutes/home.js: line 75, col 32, Missing semicolon.\nroutes/home.js: line 83, col 32, Missing semicolon.\nroutes/home.js: line 87, col 32, Missing semicolon.\nroutes/home.js: line 90, col 26, Missing semicolon.\nroutes/home.js: line 95, col 36, Missing semicolon.\nroutes/home.js: line 96, col 57, Missing semicolon.\nroutes/home.js: line 101, col 25, Missing semicolon.\nroutes/home.js: line 107, col 25, Missing semicolon.\nroutes/home.js: line 112, col 38, Missing semicolon.\nroutes/home.js: line 113, col 69, Missing semicolon.\nroutes/home.js: line 114, col 20, Unnecessary semicolon.\nroutes/home.js: line 115, col 14, Missing semicolon.\nroutes/home.js: line 119, col 3, Missing semicolon.\nroutes/home.js: line 26, col 32, \'Snap\' is not defined.\nroutes/home.js: line 27, col 15, \'Snap\' is not defined.\nroutes/home.js: line 31, col 25, \'Snap\' is not defined.\nroutes/home.js: line 40, col 15, \'Snap\' is not defined.\nroutes/home.js: line 45, col 15, \'Snap\' is not defined.\nroutes/home.js: line 50, col 15, \'Snap\' is not defined.\nroutes/home.js: line 55, col 15, \'Snap\' is not defined.\nroutes/home.js: line 60, col 15, \'$\' is not defined.\nroutes/home.js: line 64, col 33, \'$\' is not defined.\nroutes/home.js: line 65, col 34, \'$\' is not defined.\nroutes/home.js: line 99, col 23, \'$\' is not defined.\nroutes/home.js: line 105, col 23, \'$\' is not defined.\nroutes/home.js: line 113, col 55, \'mina\' is not defined.\nroutes/home.js: line 33, col 19, \'storeZone\' is defined but never used.\n\n46 errors'); 
   });
 
 });
@@ -1302,7 +1314,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.ed9b70e7"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.5415b55f"});
 }
 
 /* jshint ignore:end */
