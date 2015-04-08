@@ -18,7 +18,6 @@ body, html
 	font-size: 14px;
 	margin-top: 50px;
 	letter-spacing: 100px;
-	/*margin-left: 100px;*/
 }
 .title 
 {
@@ -170,7 +169,6 @@ footer.start
 }
 .bg-video video
 {
-	background: transparent url('/images/poster.png') 50% 50% / cover no-repeat ;
 	width: auto;
 }
 .navbar
@@ -192,7 +190,7 @@ footer.start
 	.bg-video,
 	.bg-video video
 	{
-		left:-60%;
+		left:-30%;
 	}
 	.title
 	{
