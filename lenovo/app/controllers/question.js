@@ -16,7 +16,6 @@ var quest = Ember.Controller.extend({
 			var end = this.container.lookup('controller:result');
 			var all = end.get('results');
 			var firstTimer = true;
-
 			if(all)
 			{
 				for (var i = all.length - 1; i >= 0; i--) 
@@ -43,7 +42,6 @@ var quest = Ember.Controller.extend({
 
 			if(nu < 10)
 			{
-				console.log(end.get('results'));
 				nu++;
 				this.transitionToRoute('question', nu);
 			}

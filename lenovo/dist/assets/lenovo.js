@@ -43,7 +43,6 @@ define('lenovo/controllers/question', ['exports', 'ember'], function (exports, E
 				var end = this.container.lookup("controller:result");
 				var all = end.get("results");
 				var firstTimer = true;
-
 				if (all) {
 					for (var i = all.length - 1; i >= 0; i--) {
 						if (all[i].id === nu) {
@@ -62,7 +61,6 @@ define('lenovo/controllers/question', ['exports', 'ember'], function (exports, E
 				end.set("results", all);
 
 				if (nu < 10) {
-					console.log(end.get("results"));
 					nu++;
 					this.transitionToRoute("question", nu);
 				} else {
@@ -517,65 +515,68 @@ define('lenovo/routes/question', ['exports', 'ember'], function (exports, Ember)
 				});
 				$("#floatCanvas").css({ visibility: "visible" });
 				var answerBoxes = $(".answerBox");
+				var width = $(window).width();
 				answerBoxes.find("p").lettering("words");
-				for (var i = answerBoxes.length - 1; i >= 0; i--) {
-					var box = $(answerBoxes[i]);
-					var words = $(box).find("span");
-					for (var b = words.length - 1; b >= 0; b--) {
-						var word = $(words[b]);
-						var r = Math.round(Math.random() * 10) * 5;
-						$(word[0]).css({
-							display: "inline-block",
-							transform: "rotate(" + r + "deg)"
+				if (width > 1100) {
+					for (var i = answerBoxes.length - 1; i >= 0; i--) {
+						var box = $(answerBoxes[i]);
+						var words = $(box).find("span");
+						for (var b = words.length - 1; b >= 0; b--) {
+							var word = $(words[b]);
+							var r = Math.round(Math.random() * 10) * 5;
+							$(word[0]).css({
+								display: "inline-block",
+								transform: "rotate(" + r + "deg)"
+							});
+						};
+						box.mouseover(function () {
+							var words = $(this).find("span");
+							if (words.length > 1) {
+								for (var b = words.length - 1; b >= 0; b--) {
+									var word = $(words[b]);
+									$(word[0]).css({
+										display: "inline",
+										transform: "rotate(0deg)"
+									});
+								};
+							} else {
+								$(this).find("img").css({
+									position: "absolute",
+									width: "160%",
+									height: "auto",
+									left: "-100px",
+									top: "-100px",
+									"z-index": "1000"
+								});
+							}
+						});
+						box.mouseout(function () {
+
+							var words = $(this).find("span");
+							// console.log(words.length);
+							if (words.length > 1) {
+								for (var b = words.length - 1; b >= 0; b--) {
+									var word = $(words[b]);
+									var r = Math.round(Math.random() * 10) * 5;
+									$(word[0]).css({
+										display: "inline-block",
+										transform: "rotate(" + r + "deg)"
+									});
+								};
+							} else {
+								// console.log('images');
+								$(this).find("img").css({
+									position: "relative",
+									width: "",
+									height: "",
+									left: "",
+									top: "",
+									"z-index": "1"
+								});
+							}
 						});
 					};
-					box.mouseover(function () {
-						var words = $(this).find("span");
-						if (words.length > 1) {
-							for (var b = words.length - 1; b >= 0; b--) {
-								var word = $(words[b]);
-								$(word[0]).css({
-									display: "inline",
-									transform: "rotate(0deg)"
-								});
-							};
-						} else {
-							$(this).find("img").css({
-								position: "absolute",
-								width: "160%",
-								height: "auto",
-								left: "-100px",
-								top: "-100px",
-								"z-index": "1000"
-							});
-						}
-					});
-					box.mouseout(function () {
-
-						var words = $(this).find("span");
-						// console.log(words.length);
-						if (words.length > 1) {
-							for (var b = words.length - 1; b >= 0; b--) {
-								var word = $(words[b]);
-								var r = Math.round(Math.random() * 10) * 5;
-								$(word[0]).css({
-									display: "inline-block",
-									transform: "rotate(" + r + "deg)"
-								});
-							};
-						} else {
-							// console.log('images');
-							$(this).find("img").css({
-								position: "relative",
-								width: "",
-								height: "",
-								left: "",
-								top: "",
-								"z-index": "1"
-							});
-						}
-					});
-				};
+				}
 			});
 		},
 		deactivate: function deactivate() {
@@ -875,7 +876,7 @@ define('lenovo/templates/question', ['exports'], function (exports) {
             var el1 = dom.createTextNode("			");
             dom.appendChild(el0, el1);
             var el1 = dom.createElement("img");
-            dom.setAttribute(el1,"class","image-responsive");
+            dom.setAttribute(el1,"class","image-responsive text-center");
             dom.appendChild(el0, el1);
             var el1 = dom.createTextNode("\n");
             dom.appendChild(el0, el1);
@@ -901,8 +902,9 @@ define('lenovo/templates/question', ['exports'], function (exports) {
             } else {
               fragment = this.build(dom);
             }
-            var element0 = dom.childAt(fragment, [1]);
-            element(env, element0, context, "bind-attr", [], {"src": get(env, context, "answer.img")});
+            var element1 = dom.childAt(fragment, [1]);
+            element(env, element1, context, "action", ["answerQuestion", get(env, context, "answer.type")], {});
+            element(env, element1, context, "bind-attr", [], {"src": get(env, context, "answer.img")});
             return fragment;
           }
         };
@@ -916,10 +918,17 @@ define('lenovo/templates/question', ['exports'], function (exports) {
           hasRendered: false,
           build: function build(dom) {
             var el0 = dom.createDocumentFragment();
-            var el1 = dom.createTextNode("			");
+            var el1 = dom.createTextNode("		");
             dom.appendChild(el0, el1);
-            var el1 = dom.createElement("p");
-            var el2 = dom.createComment("");
+            var el1 = dom.createElement("div");
+            dom.setAttribute(el1,"class","col-xs-6 answerBox");
+            var el2 = dom.createTextNode("\n			");
+            dom.appendChild(el1, el2);
+            var el2 = dom.createElement("p");
+            var el3 = dom.createComment("");
+            dom.appendChild(el2, el3);
+            dom.appendChild(el1, el2);
+            var el2 = dom.createTextNode("\n		");
             dom.appendChild(el1, el2);
             dom.appendChild(el0, el1);
             var el1 = dom.createTextNode("\n");
@@ -928,7 +937,7 @@ define('lenovo/templates/question', ['exports'], function (exports) {
           },
           render: function render(context, env, contextualElement) {
             var dom = env.dom;
-            var hooks = env.hooks, content = hooks.content;
+            var hooks = env.hooks, get = hooks.get, element = hooks.element, content = hooks.content;
             dom.detectNamespace(contextualElement);
             var fragment;
             if (env.useFragmentCache && dom.canClone) {
@@ -946,7 +955,9 @@ define('lenovo/templates/question', ['exports'], function (exports) {
             } else {
               fragment = this.build(dom);
             }
-            var morph0 = dom.createMorphAt(dom.childAt(fragment, [1]),0,0);
+            var element0 = dom.childAt(fragment, [1]);
+            var morph0 = dom.createMorphAt(dom.childAt(element0, [1]),0,0);
+            element(env, element0, context, "action", ["answerQuestion", get(env, context, "answer.type")], {});
             content(env, morph0, context, "answer.text");
             return fragment;
           }
@@ -960,24 +971,13 @@ define('lenovo/templates/question', ['exports'], function (exports) {
         hasRendered: false,
         build: function build(dom) {
           var el0 = dom.createDocumentFragment();
-          var el1 = dom.createTextNode("		");
-          dom.appendChild(el0, el1);
-          var el1 = dom.createElement("div");
-          dom.setAttribute(el1,"class","col-xs-6 answerBox");
-          var el2 = dom.createTextNode("\n");
-          dom.appendChild(el1, el2);
-          var el2 = dom.createComment("");
-          dom.appendChild(el1, el2);
-          var el2 = dom.createTextNode("		");
-          dom.appendChild(el1, el2);
-          dom.appendChild(el0, el1);
-          var el1 = dom.createTextNode("\n");
+          var el1 = dom.createComment("");
           dom.appendChild(el0, el1);
           return el0;
         },
         render: function render(context, env, contextualElement) {
           var dom = env.dom;
-          var hooks = env.hooks, get = hooks.get, element = hooks.element, block = hooks.block;
+          var hooks = env.hooks, get = hooks.get, block = hooks.block;
           dom.detectNamespace(contextualElement);
           var fragment;
           if (env.useFragmentCache && dom.canClone) {
@@ -995,9 +995,9 @@ define('lenovo/templates/question', ['exports'], function (exports) {
           } else {
             fragment = this.build(dom);
           }
-          var element1 = dom.childAt(fragment, [1]);
-          var morph0 = dom.createMorphAt(element1,1,1);
-          element(env, element1, context, "action", ["answerQuestion", get(env, context, "answer.type")], {});
+          var morph0 = dom.createMorphAt(fragment,0,0,contextualElement);
+          dom.insertBoundary(fragment, null);
+          dom.insertBoundary(fragment, 0);
           block(env, morph0, context, "if", [get(env, context, "answer.img")], {}, child0, child1);
           return fragment;
         }
@@ -1127,43 +1127,42 @@ define('lenovo/templates/result', ['exports'], function (exports) {
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2,"class","col-xs-12 text-center resultText");
+        var el3 = dom.createTextNode("\n        ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("h4");
+        dom.setAttribute(el3,"style","color:red;");
+        var el4 = dom.createTextNode("РЕЗУЛЬТАТ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n        ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("h2");
+        dom.setAttribute(el3,"style","text-transform:uppercase;");
+        var el4 = dom.createTextNode("ВЫ — ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n        ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("p");
+        var el4 = dom.createComment("");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n");
         dom.appendChild(el1, el2);
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
         var el1 = dom.createElement("div");
-        dom.setAttribute(el1,"class","col-xs-12 text-center resultText");
-        var el2 = dom.createTextNode("\n    ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("h4");
-        dom.setAttribute(el2,"style","color:red;");
-        var el3 = dom.createTextNode("РЕЗУЛЬТАТ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n    ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("h2");
-        dom.setAttribute(el2,"style","text-transform:uppercase;");
-        var el3 = dom.createTextNode("ВЫ — ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createComment("");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n    ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("p");
-        var el3 = dom.createComment("");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n");
-        dom.appendChild(el1, el2);
-        dom.appendChild(el0, el1);
-        var el1 = dom.createTextNode("\n");
-        dom.appendChild(el0, el1);
-        var el1 = dom.createElement("div");
-        dom.setAttribute(el1,"class","col-xs-12");
-        dom.setAttribute(el1,"style","margin-top:60%;position:relative;padding:0");
+        dom.setAttribute(el1,"class","col-xs-12 footerCon");
         var el2 = dom.createTextNode("\n    ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("footer");
@@ -1379,7 +1378,7 @@ define('lenovo/templates/result', ['exports'], function (exports) {
         } else {
           fragment = this.build(dom);
         }
-        var element0 = dom.childAt(fragment, [2]);
+        var element0 = dom.childAt(fragment, [0, 3]);
         var morph0 = dom.createMorphAt(dom.childAt(element0, [3]),1,1);
         var morph1 = dom.createMorphAt(dom.childAt(element0, [5]),0,0);
         content(env, morph0, context, "count.title");
@@ -1416,7 +1415,7 @@ define('lenovo/tests/controllers/question.jshint', function () {
 
   module('JSHint - controllers');
   test('controllers/question.js should pass jshint', function() { 
-    ok(false, 'controllers/question.js should pass jshint.\ncontrollers/question.js: line 9, col 37, Missing semicolon.\ncontrollers/question.js: line 14, col 14, Missing semicolon.\ncontrollers/question.js: line 30, col 18, Unnecessary semicolon.\ncontrollers/question.js: line 39, col 25, \'all\' is already defined.\ncontrollers/question.js: line 39, col 32, Missing semicolon.\ncontrollers/question.js: line 42, col 36, Missing semicolon.\ncontrollers/question.js: line 52, col 49, Missing semicolon.\ncontrollers/question.js: line 56, col 3, Missing semicolon.\n\n8 errors'); 
+    ok(false, 'controllers/question.js should pass jshint.\ncontrollers/question.js: line 9, col 37, Missing semicolon.\ncontrollers/question.js: line 14, col 14, Missing semicolon.\ncontrollers/question.js: line 29, col 18, Unnecessary semicolon.\ncontrollers/question.js: line 38, col 25, \'all\' is already defined.\ncontrollers/question.js: line 38, col 32, Missing semicolon.\ncontrollers/question.js: line 41, col 36, Missing semicolon.\ncontrollers/question.js: line 50, col 49, Missing semicolon.\ncontrollers/question.js: line 54, col 3, Missing semicolon.\n\n8 errors'); 
   });
 
 });
@@ -1533,7 +1532,7 @@ define('lenovo/tests/routes/question.jshint', function () {
 
   module('JSHint - routes');
   test('routes/question.js should pass jshint', function() { 
-    ok(false, 'routes/question.js should pass jshint.\nroutes/question.js: line 15, col 11, Missing semicolon.\nroutes/question.js: line 23, col 33, Missing semicolon.\nroutes/question.js: line 30, col 17, Missing semicolon.\nroutes/question.js: line 31, col 60, Missing semicolon.\nroutes/question.js: line 33, col 53, Missing semicolon.\nroutes/question.js: line 36, col 44, Missing semicolon.\nroutes/question.js: line 40, col 43, Missing semicolon.\nroutes/question.js: line 45, col 23, Missing semicolon.\nroutes/question.js: line 46, col 18, Unnecessary semicolon.\nroutes/question.js: line 54, col 51, Missing semicolon.\nroutes/question.js: line 58, col 31, Missing semicolon.\nroutes/question.js: line 59, col 26, Unnecessary semicolon.\nroutes/question.js: line 70, col 27, Missing semicolon.\nroutes/question.js: line 73, col 18, Don\'t make functions within a loop.\nroutes/question.js: line 73, col 19, Missing semicolon.\nroutes/question.js: line 83, col 51, Missing semicolon.\nroutes/question.js: line 88, col 31, Missing semicolon.\nroutes/question.js: line 89, col 26, Unnecessary semicolon.\nroutes/question.js: line 101, col 27, Missing semicolon.\nroutes/question.js: line 104, col 18, Don\'t make functions within a loop.\nroutes/question.js: line 104, col 19, Missing semicolon.\nroutes/question.js: line 105, col 14, Unnecessary semicolon.\nroutes/question.js: line 110, col 55, Missing semicolon.\nroutes/question.js: line 112, col 3, Missing semicolon.\nroutes/question.js: line 26, col 26, \'$\' is not defined.\nroutes/question.js: line 31, col 13, \'$\' is not defined.\nroutes/question.js: line 32, col 31, \'$\' is not defined.\nroutes/question.js: line 36, col 27, \'$\' is not defined.\nroutes/question.js: line 37, col 29, \'$\' is not defined.\nroutes/question.js: line 40, col 32, \'$\' is not defined.\nroutes/question.js: line 42, col 21, \'$\' is not defined.\nroutes/question.js: line 49, col 33, \'$\' is not defined.\nroutes/question.js: line 54, col 40, \'$\' is not defined.\nroutes/question.js: line 55, col 29, \'$\' is not defined.\nroutes/question.js: line 63, col 25, \'$\' is not defined.\nroutes/question.js: line 77, col 33, \'$\' is not defined.\nroutes/question.js: line 83, col 40, \'$\' is not defined.\nroutes/question.js: line 85, col 29, \'$\' is not defined.\nroutes/question.js: line 94, col 25, \'$\' is not defined.\nroutes/question.js: line 110, col 9, \'$\' is not defined.\n\n40 errors'); 
+    ok(false, 'routes/question.js should pass jshint.\nroutes/question.js: line 15, col 11, Missing semicolon.\nroutes/question.js: line 23, col 33, Missing semicolon.\nroutes/question.js: line 30, col 17, Missing semicolon.\nroutes/question.js: line 31, col 60, Missing semicolon.\nroutes/question.js: line 33, col 42, Missing semicolon.\nroutes/question.js: line 34, col 53, Missing semicolon.\nroutes/question.js: line 39, col 48, Missing semicolon.\nroutes/question.js: line 43, col 47, Missing semicolon.\nroutes/question.js: line 48, col 27, Missing semicolon.\nroutes/question.js: line 49, col 22, Unnecessary semicolon.\nroutes/question.js: line 57, col 55, Missing semicolon.\nroutes/question.js: line 61, col 35, Missing semicolon.\nroutes/question.js: line 62, col 30, Unnecessary semicolon.\nroutes/question.js: line 73, col 31, Missing semicolon.\nroutes/question.js: line 76, col 22, Don\'t make functions within a loop.\nroutes/question.js: line 76, col 23, Missing semicolon.\nroutes/question.js: line 86, col 55, Missing semicolon.\nroutes/question.js: line 91, col 35, Missing semicolon.\nroutes/question.js: line 92, col 30, Unnecessary semicolon.\nroutes/question.js: line 104, col 31, Missing semicolon.\nroutes/question.js: line 107, col 22, Don\'t make functions within a loop.\nroutes/question.js: line 107, col 23, Missing semicolon.\nroutes/question.js: line 108, col 18, Unnecessary semicolon.\nroutes/question.js: line 114, col 55, Missing semicolon.\nroutes/question.js: line 116, col 3, Missing semicolon.\nroutes/question.js: line 26, col 26, \'$\' is not defined.\nroutes/question.js: line 31, col 13, \'$\' is not defined.\nroutes/question.js: line 32, col 31, \'$\' is not defined.\nroutes/question.js: line 33, col 25, \'$\' is not defined.\nroutes/question.js: line 39, col 31, \'$\' is not defined.\nroutes/question.js: line 40, col 33, \'$\' is not defined.\nroutes/question.js: line 43, col 36, \'$\' is not defined.\nroutes/question.js: line 45, col 25, \'$\' is not defined.\nroutes/question.js: line 52, col 37, \'$\' is not defined.\nroutes/question.js: line 57, col 44, \'$\' is not defined.\nroutes/question.js: line 58, col 33, \'$\' is not defined.\nroutes/question.js: line 66, col 29, \'$\' is not defined.\nroutes/question.js: line 80, col 37, \'$\' is not defined.\nroutes/question.js: line 86, col 44, \'$\' is not defined.\nroutes/question.js: line 88, col 33, \'$\' is not defined.\nroutes/question.js: line 97, col 29, \'$\' is not defined.\nroutes/question.js: line 114, col 9, \'$\' is not defined.\n\n42 errors'); 
   });
 
 });
@@ -1543,7 +1542,7 @@ define('lenovo/tests/routes/result.jshint', function () {
 
   module('JSHint - routes');
   test('routes/result.js should pass jshint', function() { 
-    ok(false, 'routes/result.js should pass jshint.\nroutes/result.js: line 15, col 11, Missing semicolon.\nroutes/result.js: line 23, col 35, Missing semicolon.\nroutes/result.js: line 27, col 61, Missing semicolon.\nroutes/result.js: line 30, col 17, Missing semicolon.\nroutes/result.js: line 37, col 51, Missing semicolon.\nroutes/result.js: line 42, col 55, Missing semicolon.\nroutes/result.js: line 43, col 47, Missing semicolon.\nroutes/result.js: line 45, col 3, Missing semicolon.\nroutes/result.js: line 26, col 26, \'$\' is not defined.\nroutes/result.js: line 37, col 15, \'$\' is not defined.\nroutes/result.js: line 42, col 9, \'$\' is not defined.\nroutes/result.js: line 43, col 11, \'$\' is not defined.\n\n12 errors'); 
+    ok(false, 'routes/result.js should pass jshint.\nroutes/result.js: line 15, col 11, Missing semicolon.\nroutes/result.js: line 23, col 35, Missing semicolon.\nroutes/result.js: line 27, col 61, Missing semicolon.\nroutes/result.js: line 30, col 17, Missing semicolon.\nroutes/result.js: line 36, col 51, Missing semicolon.\nroutes/result.js: line 41, col 55, Missing semicolon.\nroutes/result.js: line 42, col 47, Missing semicolon.\nroutes/result.js: line 44, col 3, Missing semicolon.\nroutes/result.js: line 26, col 26, \'$\' is not defined.\nroutes/result.js: line 36, col 15, \'$\' is not defined.\nroutes/result.js: line 41, col 9, \'$\' is not defined.\nroutes/result.js: line 42, col 11, \'$\' is not defined.\n\n12 errors'); 
   });
 
 });
@@ -1592,7 +1591,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.cd6b4b94"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.dc5fc608"});
 }
 
 /* jshint ignore:end */

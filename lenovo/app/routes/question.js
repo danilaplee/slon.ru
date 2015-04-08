@@ -30,79 +30,83 @@ var home = Ember.Route.extend({
 	      	})
 	    	$('#floatCanvas').css({'visibility':'visible'})
 	    	var answerBoxes = $('.answerBox');
+	    	var width = $(window).width()
 	    	answerBoxes.find('p').lettering('words')
-	    	for (var i = answerBoxes.length - 1; i >= 0; i--) 
-	    	{
-	    		var box = $(answerBoxes[i])
-	    		var words = $(box).find('span');
-	    		for (var b = words.length - 1; b >= 0; b--) 
-	    		{
-	    			var word = $(words[b])
-	    			var r = Math.round(Math.random()*10) * 5;
-	    			$(word[0]).css({
-	    				'display':'inline-block',
-	    				'transform':'rotate('+r+'deg)'
-	    			})
-	    		};
-	    		box.mouseover(function()
-	    		{
-		    		var words = $(this).find('span');
-		    		if(words.length > 1)
+	    	if(width > 1100)
+		    {
+		    	for (var i = answerBoxes.length - 1; i >= 0; i--) 
+		    	{
+		    		var box = $(answerBoxes[i])
+		    		var words = $(box).find('span');
+		    		for (var b = words.length - 1; b >= 0; b--) 
 		    		{
-			    		for (var b = words.length - 1; b >= 0; b--) 
-			    		{
-			    			var word = $(words[b])
-			    			$(word[0]).css({
-			    				'display':'inline',
-			    				'transform':'rotate(0deg)'
-			    			})
-			    		};
-		    		}
-		    		else
-		    		{
-		    			$(this).find('img').css({
-		    				'position':'absolute',
-		    				'width':'160%',
-		    				'height':'auto',
-		    				'left':'-100px',
-		    				'top':'-100px',
-		    				'z-index':'1000'
+		    			var word = $(words[b])
+		    			var r = Math.round(Math.random()*10) * 5;
+		    			$(word[0]).css({
+		    				'display':'inline-block',
+		    				'transform':'rotate('+r+'deg)'
 		    			})
-		    		}
-
-	    		})
-	    		box.mouseout(function()
-	    		{
-
-		    		var words = $(this).find('span');
-		    		// console.log(words.length);
-		    		if(words.length > 1)
+		    		};
+		    		box.mouseover(function()
 		    		{
-			    		for (var b = words.length - 1; b >= 0; b--) 
+			    		var words = $(this).find('span');
+			    		if(words.length > 1)
 			    		{
-			    			var word = $(words[b])
-			    			var r = Math.round(Math.random()*10) * 5;
-			    			$(word[0]).css({
-			    				'display':'inline-block',
-			    				'transform':'rotate('+r+'deg)'
+				    		for (var b = words.length - 1; b >= 0; b--) 
+				    		{
+				    			var word = $(words[b])
+				    			$(word[0]).css({
+				    				'display':'inline',
+				    				'transform':'rotate(0deg)'
+				    			})
+				    		};
+			    		}
+			    		else
+			    		{
+			    			$(this).find('img').css({
+			    				'position':'absolute',
+			    				'width':'160%',
+			    				'height':'auto',
+			    				'left':'-100px',
+			    				'top':'-100px',
+			    				'z-index':'1000'
 			    			})
-			    		};
-		    		}
-		    		else
-		    		{
-		    			// console.log('images');
-		    			$(this).find('img').css({
-		    				'position':'relative',
-		    				'width':'',
-		    				'height':'',
-		    				'left':'',
-		    				'top':'',
-		    				'z-index':'1'
-		    			})
-		    		}
+			    		}
 
-	    		})
-	    	};
+		    		})
+		    		box.mouseout(function()
+		    		{
+
+			    		var words = $(this).find('span');
+			    		// console.log(words.length);
+			    		if(words.length > 1)
+			    		{
+				    		for (var b = words.length - 1; b >= 0; b--) 
+				    		{
+				    			var word = $(words[b])
+				    			var r = Math.round(Math.random()*10) * 5;
+				    			$(word[0]).css({
+				    				'display':'inline-block',
+				    				'transform':'rotate('+r+'deg)'
+				    			})
+				    		};
+			    		}
+			    		else
+			    		{
+			    			// console.log('images');
+			    			$(this).find('img').css({
+			    				'position':'relative',
+			    				'width':'',
+			    				'height':'',
+			    				'left':'',
+			    				'top':'',
+			    				'z-index':'1'
+			    			})
+			    		}
+
+		    		})
+		    	};
+		    }
 		});
 	},
 	deactivate: function()

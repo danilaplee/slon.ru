@@ -2,7 +2,7 @@
 var points = 25;
 
 // The distance between the points:
-var length = 35;
+var length = 15;
 
 var path = new Path({
     strokeColor: '#E4141B',

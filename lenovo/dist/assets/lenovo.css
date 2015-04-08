@@ -56,7 +56,7 @@ body, html
 }
 .hero-container section
 {
-	width: 600px;
+	width: 700px;
 	margin:10px auto;
 }
 
@@ -142,44 +142,75 @@ footer.start
 	-o-transition: all 0.3s ease-in;
 	transition: all 0.3s ease-in
 }
+.resultText
+{
+	height: 760px;
+	top:0px;
+	position: absolute;
+  	line-height: 1.5;
+}
 .resultText p 
 {
 	max-width: 700px;
 	display: inline-block;
 	font-size: 13px;
-	color:#898788;
+	/*color:#898788;*/
 }
 .resultText h4
 {
   margin-top: 50px;
 }
-.resultText
-{
-	height: calc(100% - 60px);
-}
 .bg-video,
 .bg-video video
 {
-	position: absolute;
+	position: relative;
 	width: 100%;
-	background: #ccc;
-	height: 100%;
-	top: 0;
-	left: 0;
+	background: #fff;
 }
 .bg-video video
 {
-	width: auto;
+	width: 100%;
+	height: auto;
+	position: relative;
+	text-align: center;
+}
+.bg-video
+{
+	overflow: hidden;
+	line-height: 0;
+	min-height: 600px;
 }
 .navbar
 {
 	z-index: 1000;
 }
+img.image-responsive.text-center 
+{
+  height: 90px;
+  padding: 0;
+  margin: 0;
+  font-size: 0;
+  cursor: pointer;
+  	-webkit-transition: all 0.3s ease-in;
+	-moz-transition: all 0.3s ease-in;
+	-o-transition: all 0.3s ease-in;
+	transition: all 0.3s ease-in
+}
+img.image-responsive.text-center:hover
+{
+	height: 130px;
+}
+.footerCon
+{
+	margin-top: 0;
+	position: relative;
+	padding: 0;
+	height: 320px;
+}
 @media screen and (max-width: 1100px) {
 	.bg-video,
 	.bg-video video
 	{
-		left:-40%;
 	}
 	.hero-container .bg
 	{
@@ -187,10 +218,13 @@ footer.start
 	}
 }
 @media screen and (max-width: 640px) {
-	.bg-video,
+	img.image-responsive.text-center 
+	{
+		height: 75px;
+	}
 	.bg-video video
 	{
-		left:-30%;
+	  top: 320px;
 	}
 	.title
 	{
@@ -235,5 +269,10 @@ footer.start
 	.test.number
 	{
 		margin-top:10px;
+	}
+	.resultText
+	{
+		height: auto;
+		margin-bottom: 20px;
 	}
 }

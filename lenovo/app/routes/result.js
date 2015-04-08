@@ -32,7 +32,6 @@ var home = Ember.Route.extend({
 	      	{ 
 			   this.currentTime = 7;
 			   this.pause();
-
 			}, false);
 	      	$('body').css({'overflow':'scroll'})
 		});
