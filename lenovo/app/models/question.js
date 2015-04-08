@@ -36,19 +36,19 @@ question.reopenClass({
     		'answers':[
 	    		{
 	    			'type':'A',
-	    			'img':'http://cdn.bleacherreport.net/images_root/slides/photos/002/086/001/IMG_0377_original_display_image.jpg',
+	    			'img':'images/questions/2/A.jpg',
 	    		},
 	    		{
 	    			'type':'B',
-	    			'img':'http://cdn.destructoid.com//ul/273959-tumblr_m52j762YZK1qlskj8o1_500.jpg'
+	    			'img':'images/questions/2/B.jpg'
 	    		},
 	    		{
 	    			'type':'C',
-	    			'img':'http://cdn29.elitedaily.com/wp-content/uploads/2014/04/wrestlemania-undertaker-fan-meme-elite-daily11.jpg'
+	    			'img':'images/questions/2/C.jpg'
 	    		},
 	    		{
 	    			'type':'D',
-	    			'img':'http://i.imgur.com/VSo2HQ0.jpg'
+	    			'img':'images/questions/2/D.jpg'
 	    		}
     		]
     	},
@@ -58,19 +58,19 @@ question.reopenClass({
     		'answers':[
 	    		{
 	    			'type':'A',
-	    			'img':'http://healthimpactnews.com/wp-content/uploads/sites/2/2013/08/broccoli-2.jpg',
+	    			'img':'images/questions/3/A.jpg',
 	    		},
 	    		{
 	    			'type':'B',
-	    			'img':'http://www.connectedrogers.ca/wp-content/uploads/2013/09/SOA-Season61.jpg'
+	    			'img':'images/questions/3/B.jpg'
 	    		},
 	    		{
 	    			'type':'C',
-	    			'img':'http://i.dailymail.co.uk/i/pix/2012/12/26/article-0-16A81E1D000005DC-528_634x384.jpg'
+	    			'img':'images/questions/3/C.jpg'
 	    		},
 	    		{
 	    			'type':'D',
-	    			'img':'http://i.kinja-img.com/gawker-media/image/upload/s--Eyk1VFjI--/18nyvddjcxfhdpng.png'
+	    			'img':'images/questions/3/D.png'
 	    		}
     		]
     	},
@@ -80,19 +80,19 @@ question.reopenClass({
     		'answers':[
 	    		{
 	    			'type':'A',
-	    			'img':'https://ktismatics.files.wordpress.com/2010/01/serious-chalk.png',
+	    			'img':'images/questions/4/A.png',
 	    		},
 	    		{
 	    			'type':'B',
-	    			'img':'http://media.catmoji.com/post/vpr4/oh-noes.jpg'
+	    			'img':'images/questions/4/B.jpg'
 	    		},
 	    		{
 	    			'type':'C',
-	    			'img':'http://i0.kym-cdn.com/photos/images/original/000/746/291/adf.jpg'
+	    			'img':'images/questions/4/C.jpg'
 	    		},
 	    		{
 	    			'type':'D',
-	    			'img':'http://tosh.cc.com/blog/files/2011/08/burning-house.jpg'
+	    			'img':'images/questions/4/D.jpg'
 	    		}
     		]
     	},
@@ -190,7 +190,7 @@ question.reopenClass({
     		'answers':[
 	    		{
 	    			'type':'A',
-	    			'img':'http://img.pandawhale.com/67272-NEAT-gif-9Bfi.gif',
+	    			'img':'images/questions/9/A.gif',
 	    		},
 	    		{
 	    			'type':'B',
@@ -198,11 +198,11 @@ question.reopenClass({
 	    		},
 	    		{
 	    			'type':'C',
-	    			'img':'http://meowgifs.com/wp-content/uploads/2013/03/omg-it-was-you.gif'
+	    			'img':'images/questions/9/C.gif'
 	    		},
 	    		{
 	    			'type':'D',
-	    			'img':'http://2.bp.blogspot.com/-MMJJZSAOOak/UWcC3JPE0DI/AAAAAAAAHPo/EgT9ztccs78/s640/James+Harden+Creepy.gif'
+	    			'img':'images/questions/9/D.gif'
 	    		}
     		]
     	},
@@ -212,19 +212,19 @@ question.reopenClass({
     		'answers':[
 	    		{
 	    			'type':'A',
-	    			'img':'http://cdn.meme.am/images/300x/5551529.jpg',
+	    			'img':'images/questions/10/A.jpg',
 	    		},
 	    		{
 	    			'type':'B',
-	    			'img':'https://danieldefo.ru/attachments/glavgeroy-3-jpg.6464'
+	    			'img':'images/questions/10/B.jpg'
 	    		},
 	    		{
 	    			'type':'C',
-	    			'img':'http://s3-static-ak.buzzfed.com/static/campaign_images/webdr02/2012/12/11/13/40-reasons-honey-boo-boo-became-a-national-treasu-1-20785-1355251953-2_big.jpg'
+	    			'img':'images/questions/10/C.jpg'
 	    		},
 	    		{
 	    			'type':'D',
-	    			'img':'http://image.thehothits.com/608x456/seal_as_a_seal_05_400x300.jpg'
+	    			'img':'images/questions/10/D.jpg'
 	    		}
     		]
     	}

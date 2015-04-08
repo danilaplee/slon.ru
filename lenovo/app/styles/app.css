@@ -104,7 +104,7 @@ footer.start
 .answerBox
 {
 	height: 130px;
-	border: 1px solid #000;
+	border: 1px solid #eaeaea;
 	padding: 15px 10px;
 	cursor: pointer;
   	-webkit-transition: all 0.3s ease-in;
@@ -121,7 +121,7 @@ footer.start
 }
 .answerBox:hover
 {
-	background: #18bc9c;
+	background: #3cb878;
 	color: #000;
 }
 
@@ -143,14 +143,57 @@ footer.start
 	-o-transition: all 0.3s ease-in;
 	transition: all 0.3s ease-in
 }
+.resultText p 
+{
+	max-width: 700px;
+	display: inline-block;
+	font-size: 13px;
+	color:#898788;
+}
+.resultText h4
+{
+  margin-top: 50px;
+}
+.resultText
+{
+	height: calc(100% - 60px);
+}
+.bg-video,
+.bg-video video
+{
+	position: absolute;
+	width: 100%;
+	background: #ccc;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+.bg-video video
+{
+	background: transparent url('/images/poster.png') 50% 50% / cover no-repeat ;
+	width: auto;
+}
+.navbar
+{
+	z-index: 1000;
+}
 @media screen and (max-width: 1100px) {
-
+	.bg-video,
+	.bg-video video
+	{
+		left:-40%;
+	}
 	.hero-container .bg
 	{
 		margin-top: 60px;
 	}
 }
 @media screen and (max-width: 640px) {
+	.bg-video,
+	.bg-video video
+	{
+		left:-60%;
+	}
 	.title
 	{
 		font-size: 28px;

@@ -6,7 +6,7 @@ var length = 35;
 
 var path = new Path({
     strokeColor: '#E4141B',
-    strokeWidth: 20,
+    strokeWidth: 10,
     strokeCap: 'round'
 });
 

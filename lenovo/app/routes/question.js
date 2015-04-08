@@ -60,7 +60,6 @@ var home = Ember.Route.extend({
 		    		}
 		    		else
 		    		{
-		    			console.log('images');
 		    			$(this).find('img').css({
 		    				'position':'absolute',
 		    				'width':'160%',

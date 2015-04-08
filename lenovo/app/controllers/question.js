@@ -6,11 +6,51 @@ var quest = Ember.Controller.extend({
 		answerQuestion: function(type)
 		{
 			var model = this.get('model');
-			// console.log(type, model.id);
 			var nu = model.get('id')
-			console.log(nu++);
-			 this.transitionToRoute('question', nu++);
-			// this.set('model', newModel);
+			var res = 
+			{
+				'type':type,
+				'id':nu
+			}
+
+			var end = this.container.lookup('controller:result');
+			var all = end.get('results');
+			var firstTimer = true;
+
+			if(all)
+			{
+				for (var i = all.length - 1; i >= 0; i--) 
+				{
+					if(all[i].id === nu)
+					{
+						all[i].type = type;
+						firstTimer = false;
+					}
+
+				};
+
+				if(firstTimer)
+				{
+					all.push(res);
+				}
+			}
+			else
+			{
+				var all = [res]
+			}
+
+			end.set('results', all)
+
+			if(nu < 10)
+			{
+				console.log(end.get('results'));
+				nu++;
+				this.transitionToRoute('question', nu);
+			}
+			else
+			{
+				this.transitionToRoute('result')
+			}
 		}
 	}
 })

@@ -34,16 +34,107 @@ define('lenovo/controllers/question', ['exports', 'ember'], function (exports, E
 		actions: {
 			answerQuestion: function answerQuestion(type) {
 				var model = this.get("model");
-				// console.log(type, model.id);
 				var nu = model.get("id");
-				console.log(nu++);
-				this.transitionToRoute("question", nu++);
-				// this.set('model', newModel);
+				var res = {
+					type: type,
+					id: nu
+				};
+
+				var end = this.container.lookup("controller:result");
+				var all = end.get("results");
+				var firstTimer = true;
+
+				if (all) {
+					for (var i = all.length - 1; i >= 0; i--) {
+						if (all[i].id === nu) {
+							all[i].type = type;
+							firstTimer = false;
+						}
+					};
+
+					if (firstTimer) {
+						all.push(res);
+					}
+				} else {
+					var all = [res];
+				}
+
+				end.set("results", all);
+
+				if (nu < 10) {
+					console.log(end.get("results"));
+					nu++;
+					this.transitionToRoute("question", nu);
+				} else {
+					this.transitionToRoute("result");
+				}
 			}
 		}
 	});
 
 	exports['default'] = quest;
+
+});
+define('lenovo/controllers/result', ['exports', 'ember'], function (exports, Ember) {
+
+	'use strict';
+
+	var result = Ember['default'].ArrayController.extend({
+		results: null,
+		count: (function () {
+			var res = this.get("results");
+			var count = [];
+			count[0] = { type: "A", value: 0 };
+			count[1] = { type: "B", value: 0 };
+			count[2] = { type: "C", value: 0 };
+			count[3] = { type: "D", value: 0 };
+			var predicatBy = function predicatBy(prop) {
+				return function (a, b) {
+					if (a[prop] > b[prop]) {
+						return 1;
+					} else if (a[prop] < b[prop]) {
+						return -1;
+					}
+					return 0;
+				};
+			};
+
+			for (var i = res.length - 1; i >= 0; i--) {
+				var r = res[i];
+				if (r.type == "A") {
+					count[0].value++;
+				}
+				if (r.type == "B") {
+					count[1].value++;
+				}
+				if (r.type == "C") {
+					count[2].value++;
+				}
+				if (r.type == "D") {
+					count[3].value++;
+				}
+			};
+
+			var d = count.sort(predicatBy("value"));
+			var t = d[3].type;
+			var f = this.store;
+
+			if (t == "A") {
+				return f.find("result", 1);
+			}
+			if (t == "B") {
+				return f.find("result", 2);
+			}
+			if (t == "C") {
+				return f.find("result", 3);
+			}
+			if (t == "D") {
+				return f.find("result", 4);
+			}
+		}).property("model")
+	});
+
+	exports['default'] = result;
 
 });
 define('lenovo/initializers/app-version', ['exports', 'lenovo/config/environment', 'ember'], function (exports, config, Ember) {
@@ -118,45 +209,45 @@ define('lenovo/models/question', ['exports', 'ember-data'], function (exports, D
 							text: "Коллеги зовут вас заниматься йогой каждый день в шесть часов утра. Ваша реакция:",
 							answers: [{
 										type: "A",
-										img: "http://cdn.bleacherreport.net/images_root/slides/photos/002/086/001/IMG_0377_original_display_image.jpg" }, {
+										img: "images/questions/2/A.jpg" }, {
 										type: "B",
-										img: "http://cdn.destructoid.com//ul/273959-tumblr_m52j762YZK1qlskj8o1_500.jpg"
+										img: "images/questions/2/B.jpg"
 							}, {
 										type: "C",
-										img: "http://cdn29.elitedaily.com/wp-content/uploads/2014/04/wrestlemania-undertaker-fan-meme-elite-daily11.jpg"
+										img: "images/questions/2/C.jpg"
 							}, {
 										type: "D",
-										img: "http://i.imgur.com/VSo2HQ0.jpg"
+										img: "images/questions/2/D.jpg"
 							}]
 				}, {
 							id: 3,
 							text: "Что для вас командный дух?",
 							answers: [{
 										type: "A",
-										img: "http://healthimpactnews.com/wp-content/uploads/sites/2/2013/08/broccoli-2.jpg" }, {
+										img: "images/questions/3/A.jpg" }, {
 										type: "B",
-										img: "http://www.connectedrogers.ca/wp-content/uploads/2013/09/SOA-Season61.jpg"
+										img: "images/questions/3/B.jpg"
 							}, {
 										type: "C",
-										img: "http://i.dailymail.co.uk/i/pix/2012/12/26/article-0-16A81E1D000005DC-528_634x384.jpg"
+										img: "images/questions/3/C.jpg"
 							}, {
 										type: "D",
-										img: "http://i.kinja-img.com/gawker-media/image/upload/s--Eyk1VFjI--/18nyvddjcxfhdpng.png"
+										img: "images/questions/3/D.png"
 							}]
 				}, {
 							id: 4,
 							text: "Что больше всего похоже на ваш типичный рабочий день?",
 							answers: [{
 										type: "A",
-										img: "https://ktismatics.files.wordpress.com/2010/01/serious-chalk.png" }, {
+										img: "images/questions/4/A.png" }, {
 										type: "B",
-										img: "http://media.catmoji.com/post/vpr4/oh-noes.jpg"
+										img: "images/questions/4/B.jpg"
 							}, {
 										type: "C",
-										img: "http://i0.kym-cdn.com/photos/images/original/000/746/291/adf.jpg"
+										img: "images/questions/4/C.jpg"
 							}, {
 										type: "D",
-										img: "http://tosh.cc.com/blog/files/2011/08/burning-house.jpg"
+										img: "images/questions/4/D.jpg"
 							}]
 				}, {
 							id: 5,
@@ -223,35 +314,67 @@ define('lenovo/models/question', ['exports', 'ember-data'], function (exports, D
 							text: "Коллеги воспринимают вас...",
 							answers: [{
 										type: "A",
-										img: "http://img.pandawhale.com/67272-NEAT-gif-9Bfi.gif" }, {
+										img: "images/questions/9/A.gif" }, {
 										type: "B",
 										img: "https://psv4.vk.me/c521212/u13896520/docs/a3065157ca53/rosh.gif?extra=L1wENncCBUROu9aLIAEtEZX77-VmCapnGEuo7qIjyi3a9exGoFSbQa8Tu492Mn7h-GphPjG3mWFk1xAP6x-j5pLMnlLRgQ"
 							}, {
 										type: "C",
-										img: "http://meowgifs.com/wp-content/uploads/2013/03/omg-it-was-you.gif"
+										img: "images/questions/9/C.gif"
 							}, {
 										type: "D",
-										img: "http://2.bp.blogspot.com/-MMJJZSAOOak/UWcC3JPE0DI/AAAAAAAAHPo/EgT9ztccs78/s640/James+Harden+Creepy.gif"
+										img: "images/questions/9/D.gif"
 							}]
 				}, {
 							id: 10,
 							text: "Командировка на Когалым в середине февраля для вас — это …",
 							answers: [{
 										type: "A",
-										img: "http://cdn.meme.am/images/300x/5551529.jpg" }, {
+										img: "images/questions/10/A.jpg" }, {
 										type: "B",
-										img: "https://danieldefo.ru/attachments/glavgeroy-3-jpg.6464"
+										img: "images/questions/10/B.jpg"
 							}, {
 										type: "C",
-										img: "http://s3-static-ak.buzzfed.com/static/campaign_images/webdr02/2012/12/11/13/40-reasons-honey-boo-boo-became-a-national-treasu-1-20785-1355251953-2_big.jpg"
+										img: "images/questions/10/C.jpg"
 							}, {
 										type: "D",
-										img: "http://image.thehothits.com/608x456/seal_as_a_seal_05_400x300.jpg"
+										img: "images/questions/10/D.jpg"
 							}]
 				}]
 	});
 
 	exports['default'] = question;
+
+});
+define('lenovo/models/result', ['exports', 'ember-data'], function (exports, DS) {
+
+  'use strict';
+
+  var result = DS['default'].Model.extend({
+    text: DS['default'].attr("string"),
+    title: DS['default'].attr("string")
+  });
+
+  result.reopenClass({
+    FIXTURES: [{
+      id: 1,
+      text: "Бизнес-план и вы — это синонимы, а то и вовсе единоутробные понятия. Стратегия, диверсификация, коэффициент Парето — все это про вас. Вы так погружены в теоретическую деятельность, что на работе вам планшет Yoga Tablet 2, скорее всего, потребуется в качестве книги. Куда вы, наверняка, загрузите новый шедевр Нассима Талеба или еще какого-нибудь умника.",
+      title: "Яйцеголовый"
+    }, {
+      id: 2,
+      text: "Обожаете манипулировать людьми, делаете все ради достижения цели, идете по головам коллег. Короче, вы квинтэссенция большинства героев старины Кевина — Фрэнк Андервуд из «Карточного домика» и Кайзер Созе из «Обычных подозреваемых» нервно покуривают в сторонке. Презентации, которые вы показываете с планшета Yoga Tablet 2 в режиме консоли, мгновенно превращают пространство в черную дыру, настолько они сильные и притягательные.",
+      title: "Кевин Спейси"
+    }, {
+      id: 3,
+      text: "Еще философ Томас Гоббс писал, что государством должно управлять такое мифическое чудище, как вы. Гарант неукоснительного выполнения внутреннего распорядка, вы очень часто берете на себя многое, иногда слишком. Каждый ваш удар по планшету Yoga Tablet 2 в режиме клавиатуры — это стук вселенского рока и космическая сила. Только бы эта неуемная энергия всегда была во благо! ",
+      title: "Левиафан"
+    }, {
+      id: 4,
+      text: "Любите поиграть в последнюю версию Angry Birds и посмотреть последнюю серию «Лучше позвонить Сола» на планшете? Поздравляем, вы тот самый сотрудник, которого невозможно любить и сложно ненавидеть. Ваше праздное времяпрепровождение — повод для разговоров в кулуарах, но вы слишком хороши, чтобы обращать вообще на это внимание. Для таких, как вы, в планшете Yoga Tablet 2 предусмотрена возможность повесить его на стену в режиме картины и созерцать, сколько душе угодно.",
+      title: "Джонни Браво"
+    }]
+  });
+
+  exports['default'] = result;
 
 });
 define('lenovo/router', ['exports', 'ember', 'lenovo/config/environment'], function (exports, Ember, config) {
@@ -417,7 +540,6 @@ define('lenovo/routes/question', ['exports', 'ember'], function (exports, Ember)
 								});
 							};
 						} else {
-							console.log("images");
 							$(this).find("img").css({
 								position: "absolute",
 								width: "160%",
@@ -462,6 +584,48 @@ define('lenovo/routes/question', ['exports', 'ember'], function (exports, Ember)
 	});
 
 	exports['default'] = home;
+
+});
+define('lenovo/routes/result', ['exports', 'ember'], function (exports, Ember) {
+
+  'use strict';
+
+  var home = Ember['default'].Route.extend({
+    model: function model() {
+      return [];
+    },
+    renderTemplate: function renderTemplate() {
+      this.render("result", {
+        into: "application",
+        outlet: "main",
+        controller: "result"
+      });
+    },
+    activate: function activate() {
+      this._super.apply(this, arguments);
+    },
+    setupController: function setupController(result, model) {
+      result.set("model", model);
+      Ember['default'].run.schedule("afterRender", this, function () {
+        var tail = $("div.canvas.two");
+        var shot = document.getElementById("packshot");
+        tail.css({
+          display: "none"
+        });
+        shot.addEventListener("ended", function () {
+          this.currentTime = 7;
+          this.pause();
+        }, false);
+        $("body").css({ overflow: "scroll" });
+      });
+    },
+    deactivate: function deactivate() {
+      $("#floatCanvas").css({ visibility: "hidden" });
+      $("body").css({ overflow: "hidden" });
+    }
+  });
+
+  exports['default'] = home;
 
 });
 define('lenovo/templates/application', ['exports'], function (exports) {
@@ -946,98 +1110,156 @@ define('lenovo/templates/result', ['exports'], function (exports) {
       hasRendered: false,
       build: function build(dom) {
         var el0 = dom.createDocumentFragment();
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1,"class","bg-video");
+        var el2 = dom.createTextNode("\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("video");
+        dom.setAttribute(el2,"id","packshot");
+        dom.setAttribute(el2,"autoplay","");
+        dom.setAttribute(el2,"muted","");
+        dom.setAttribute(el2,"poster","images/poster.png");
+        var el3 = dom.createTextNode("\n      ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("source");
+        dom.setAttribute(el3,"src","video/Lenovo-Yoga-packshot.mp4");
+        dom.setAttribute(el3,"type","video/mp4");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n    ");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
-        var el1 = dom.createElement("footer");
-        dom.setAttribute(el1,"class","footer");
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1,"class","col-xs-12 text-center resultText");
         var el2 = dom.createTextNode("\n    ");
         dom.appendChild(el1, el2);
-        var el2 = dom.createComment(" Secondary menu ");
+        var el2 = dom.createElement("h4");
+        dom.setAttribute(el2,"style","color:red;");
+        var el3 = dom.createTextNode("РЕЗУЛЬТАТ");
+        dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n    ");
         dom.appendChild(el1, el2);
-        var el2 = dom.createElement("nav");
-        dom.setAttribute(el2,"class","navbar navbar-default navbar-black");
+        var el2 = dom.createElement("h2");
+        dom.setAttribute(el2,"style","text-transform:uppercase;");
+        var el3 = dom.createTextNode("ВЫ — ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createComment("");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("p");
+        var el3 = dom.createComment("");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1,"class","col-xs-12");
+        dom.setAttribute(el1,"style","margin-top:60%;position:relative;padding:0");
+        var el2 = dom.createTextNode("\n    ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("footer");
+        dom.setAttribute(el2,"class","footer");
         var el3 = dom.createTextNode("\n        ");
         dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3,"class","container");
+        var el3 = dom.createComment(" Secondary menu ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n        ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("nav");
+        dom.setAttribute(el3,"class","navbar navbar-default navbar-black");
         var el4 = dom.createTextNode("\n            ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("div");
-        dom.setAttribute(el4,"class","navbar-header");
+        dom.setAttribute(el4,"class","container");
         var el5 = dom.createTextNode("\n                ");
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("a");
-        dom.setAttribute(el5,"class","navbar-brand");
-        dom.setAttribute(el5,"href","/");
+        var el5 = dom.createElement("div");
+        dom.setAttribute(el5,"class","navbar-header");
+        var el6 = dom.createTextNode("\n                    ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("a");
+        dom.setAttribute(el6,"class","navbar-brand");
+        dom.setAttribute(el6,"href","/");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n                ");
+        dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n            ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4,"class","show-menu");
         var el5 = dom.createTextNode("\n                ");
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("i");
-        dom.setAttribute(el5,"class","icon-svg17");
+        var el5 = dom.createElement("div");
+        dom.setAttribute(el5,"class","show-menu");
+        var el6 = dom.createTextNode("\n                    ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("i");
+        dom.setAttribute(el6,"class","icon-svg17");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n                ");
+        dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n            ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n            ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4,"class","collapse-block");
         var el5 = dom.createTextNode("\n                ");
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("ul");
-        dom.setAttribute(el5,"class","nav navbar-nav");
+        var el5 = dom.createElement("div");
+        dom.setAttribute(el5,"class","collapse-block");
         var el6 = dom.createTextNode("\n                    ");
         dom.appendChild(el5, el6);
-        var el6 = dom.createElement("li");
-        var el7 = dom.createElement("a");
-        dom.setAttribute(el7,"href","/about");
-        var el8 = dom.createTextNode("О проекте");
+        var el6 = dom.createElement("ul");
+        dom.setAttribute(el6,"class","nav navbar-nav");
+        var el7 = dom.createTextNode("\n                        ");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createElement("li");
+        var el8 = dom.createElement("a");
+        dom.setAttribute(el8,"href","/about");
+        var el9 = dom.createTextNode("О проекте");
+        dom.appendChild(el8, el9);
         dom.appendChild(el7, el8);
         dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n                    ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("li");
-        var el7 = dom.createElement("a");
-        dom.setAttribute(el7,"href","/pr/");
-        var el8 = dom.createTextNode("Реклама");
+        var el7 = dom.createTextNode("\n                        ");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createElement("li");
+        var el8 = dom.createElement("a");
+        dom.setAttribute(el8,"href","/pr/");
+        var el9 = dom.createTextNode("Реклама");
+        dom.appendChild(el8, el9);
         dom.appendChild(el7, el8);
         dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n                    ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("li");
-        var el7 = dom.createElement("a");
-        dom.setAttribute(el7,"href","mailto:editor@slon.ru");
-        var el8 = dom.createTextNode("Написать в редакцию");
+        var el7 = dom.createTextNode("\n                        ");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createElement("li");
+        var el8 = dom.createElement("a");
+        dom.setAttribute(el8,"href","mailto:editor@slon.ru");
+        var el9 = dom.createTextNode("Написать в редакцию");
+        dom.appendChild(el8, el9);
         dom.appendChild(el7, el8);
         dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n                    ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("li");
-        var el7 = dom.createElement("a");
-        dom.setAttribute(el7,"href","mailto:support@slon.ru");
-        var el8 = dom.createTextNode("Техподдержка");
+        var el7 = dom.createTextNode("\n                        ");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createElement("li");
+        var el8 = dom.createElement("a");
+        dom.setAttribute(el8,"href","mailto:support@slon.ru");
+        var el9 = dom.createTextNode("Техподдержка");
+        dom.appendChild(el8, el9);
         dom.appendChild(el7, el8);
         dom.appendChild(el6, el7);
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("\n                    ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("li");
-        var el7 = dom.createElement("a");
-        dom.setAttribute(el7,"href","/eula");
-        var el8 = dom.createTextNode("Пользовательское соглашение");
+        var el7 = dom.createTextNode("\n                        ");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createElement("li");
+        var el8 = dom.createElement("a");
+        dom.setAttribute(el8,"href","/eula");
+        var el9 = dom.createTextNode("Пользовательское соглашение");
+        dom.appendChild(el8, el9);
         dom.appendChild(el7, el8);
+        dom.appendChild(el6, el7);
+        var el7 = dom.createTextNode("\n                    ");
         dom.appendChild(el6, el7);
         dom.appendChild(el5, el6);
         var el6 = dom.createTextNode("\n                ");
@@ -1049,47 +1271,54 @@ define('lenovo/templates/result', ['exports'], function (exports) {
         var el4 = dom.createTextNode("\n        ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n    ");
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n    ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createComment(" Copyright ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n    ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("section");
-        dom.setAttribute(el2,"class","copyright-container");
         var el3 = dom.createTextNode("\n        ");
         dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3,"class","row");
+        var el3 = dom.createComment(" Copyright ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n        ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("section");
+        dom.setAttribute(el3,"class","copyright-container");
         var el4 = dom.createTextNode("\n            ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("div");
-        dom.setAttribute(el4,"class","col col-sm-8 col-xs-12");
+        dom.setAttribute(el4,"class","row");
         var el5 = dom.createTextNode("\n                ");
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("p");
-        var el6 = dom.createTextNode("© 2009 — 2015. Все права защищены.");
+        var el5 = dom.createElement("div");
+        dom.setAttribute(el5,"class","col col-sm-8 col-xs-12");
+        var el6 = dom.createTextNode("\n                    ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("p");
+        var el7 = dom.createTextNode("© 2009 — 2015. Все права защищены.");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n                    ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("p");
+        var el7 = dom.createTextNode("\n                        Любое использование материалов допускается только с согласия редакции. Свидетельство о регистрации Эл №ФС77-35629.\n                        Выдано Роскомнадзором 17 марта 2009 года.\n                    ");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n                    ");
+        dom.appendChild(el5, el6);
+        var el6 = dom.createElement("p");
+        dom.setAttribute(el6,"class","proofreading-invite");
+        var el7 = dom.createTextNode("\n                        Заметили ошибку? Выделите ее и нажмите ");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createElement("span");
+        dom.setAttribute(el7,"class","modifier");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createTextNode("+Enter\n                    ");
+        dom.appendChild(el6, el7);
+        dom.appendChild(el5, el6);
+        var el6 = dom.createTextNode("\n                ");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n                ");
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("p");
-        var el6 = dom.createTextNode("\n                    Любое использование материалов допускается только с согласия редакции. Свидетельство о регистрации Эл №ФС77-35629.\n                    Выдано Роскомнадзором 17 марта 2009 года.\n                ");
-        dom.appendChild(el5, el6);
-        dom.appendChild(el4, el5);
-        var el5 = dom.createTextNode("\n                ");
-        dom.appendChild(el4, el5);
-        var el5 = dom.createElement("p");
-        dom.setAttribute(el5,"class","proofreading-invite");
-        var el6 = dom.createTextNode("\n                    Заметили ошибку? Выделите ее и нажмите ");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createElement("span");
-        dom.setAttribute(el6,"class","modifier");
-        dom.appendChild(el5, el6);
-        var el6 = dom.createTextNode("+Enter\n                ");
+        var el5 = dom.createElement("div");
+        dom.setAttribute(el5,"class","col col-sm-3 col-sm-offset-1 col-xs-12");
+        var el6 = dom.createTextNode("\n                                ");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n            ");
@@ -1098,28 +1327,21 @@ define('lenovo/templates/result', ['exports'], function (exports) {
         var el4 = dom.createTextNode("\n            ");
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("div");
-        dom.setAttribute(el4,"class","col col-sm-3 col-sm-offset-1 col-xs-12");
-        var el5 = dom.createTextNode("\n                            ");
-        dom.appendChild(el4, el5);
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode("\n        ");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        var el3 = dom.createTextNode("\n        ");
-        dom.appendChild(el2, el3);
-        var el3 = dom.createElement("div");
-        dom.setAttribute(el3,"class","row");
-        var el4 = dom.createTextNode("\n            ");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createElement("div");
-        dom.setAttribute(el4,"class","col col-xs-12");
+        dom.setAttribute(el4,"class","row");
         var el5 = dom.createTextNode("\n                ");
         dom.appendChild(el4, el5);
-        var el5 = dom.createElement("p");
-        var el6 = dom.createTextNode("\n                    Партнер «Рамблера»     ");
+        var el5 = dom.createElement("div");
+        dom.setAttribute(el5,"class","col col-xs-12");
+        var el6 = dom.createTextNode("\n                    ");
         dom.appendChild(el5, el6);
-        var el6 = dom.createElement("div");
-        dom.setAttribute(el6,"id","top100counter");
+        var el6 = dom.createElement("p");
+        var el7 = dom.createTextNode("\n                        Партнер «Рамблера»     ");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createElement("div");
+        dom.setAttribute(el7,"id","top100counter");
+        dom.appendChild(el6, el7);
+        var el7 = dom.createTextNode("\n                    ");
+        dom.appendChild(el6, el7);
         dom.appendChild(el5, el6);
         var el6 = dom.createTextNode("\n                ");
         dom.appendChild(el5, el6);
@@ -1140,6 +1362,7 @@ define('lenovo/templates/result', ['exports'], function (exports) {
       },
       render: function render(context, env, contextualElement) {
         var dom = env.dom;
+        var hooks = env.hooks, content = hooks.content;
         dom.detectNamespace(contextualElement);
         var fragment;
         if (env.useFragmentCache && dom.canClone) {
@@ -1157,6 +1380,11 @@ define('lenovo/templates/result', ['exports'], function (exports) {
         } else {
           fragment = this.build(dom);
         }
+        var element0 = dom.childAt(fragment, [2]);
+        var morph0 = dom.createMorphAt(dom.childAt(element0, [3]),1,1);
+        var morph1 = dom.createMorphAt(dom.childAt(element0, [5]),0,0);
+        content(env, morph0, context, "count.title");
+        content(env, morph1, context, "count.text");
         return fragment;
       }
     };
@@ -1189,7 +1417,17 @@ define('lenovo/tests/controllers/question.jshint', function () {
 
   module('JSHint - controllers');
   test('controllers/question.js should pass jshint', function() { 
-    ok(false, 'controllers/question.js should pass jshint.\ncontrollers/question.js: line 10, col 37, Missing semicolon.\ncontrollers/question.js: line 16, col 3, Missing semicolon.\ncontrollers/question.js: line 6, col 34, \'type\' is defined but never used.\n\n3 errors'); 
+    ok(false, 'controllers/question.js should pass jshint.\ncontrollers/question.js: line 9, col 37, Missing semicolon.\ncontrollers/question.js: line 14, col 14, Missing semicolon.\ncontrollers/question.js: line 30, col 18, Unnecessary semicolon.\ncontrollers/question.js: line 39, col 25, \'all\' is already defined.\ncontrollers/question.js: line 39, col 32, Missing semicolon.\ncontrollers/question.js: line 42, col 36, Missing semicolon.\ncontrollers/question.js: line 52, col 49, Missing semicolon.\ncontrollers/question.js: line 56, col 3, Missing semicolon.\n\n8 errors'); 
+  });
+
+});
+define('lenovo/tests/controllers/result.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - controllers');
+  test('controllers/result.js should pass jshint', function() { 
+    ok(false, 'controllers/result.js should pass jshint.\ncontrollers/result.js: line 9, col 47, Missing semicolon.\ncontrollers/result.js: line 10, col 47, Missing semicolon.\ncontrollers/result.js: line 11, col 47, Missing semicolon.\ncontrollers/result.js: line 12, col 47, Missing semicolon.\ncontrollers/result.js: line 26, col 13, Missing semicolon.\ncontrollers/result.js: line 27, col 10, Missing semicolon.\ncontrollers/result.js: line 31, col 27, Missing semicolon.\ncontrollers/result.js: line 32, col 25, Expected \'===\' and instead saw \'==\'.\ncontrollers/result.js: line 36, col 25, Expected \'===\' and instead saw \'==\'.\ncontrollers/result.js: line 40, col 25, Expected \'===\' and instead saw \'==\'.\ncontrollers/result.js: line 44, col 25, Expected \'===\' and instead saw \'==\'.\ncontrollers/result.js: line 48, col 10, Unnecessary semicolon.\ncontrollers/result.js: line 50, col 48, Missing semicolon.\ncontrollers/result.js: line 54, col 16, Expected \'===\' and instead saw \'==\'.\ncontrollers/result.js: line 56, col 39, Missing semicolon.\ncontrollers/result.js: line 58, col 16, Expected \'===\' and instead saw \'==\'.\ncontrollers/result.js: line 60, col 39, Missing semicolon.\ncontrollers/result.js: line 62, col 16, Expected \'===\' and instead saw \'==\'.\ncontrollers/result.js: line 64, col 39, Missing semicolon.\ncontrollers/result.js: line 66, col 16, Expected \'===\' and instead saw \'==\'.\ncontrollers/result.js: line 68, col 39, Missing semicolon.\ncontrollers/result.js: line 72, col 3, Missing semicolon.\n\n22 errors'); 
   });
 
 });
@@ -1260,6 +1498,16 @@ define('lenovo/tests/models/question.jshint', function () {
   });
 
 });
+define('lenovo/tests/models/result.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - models');
+  test('models/result.js should pass jshint', function() { 
+    ok(false, 'models/result.js should pass jshint.\nmodels/result.js: line 34, col 22, Missing semicolon.\n\n1 error'); 
+  });
+
+});
 define('lenovo/tests/router.jshint', function () {
 
   'use strict';
@@ -1286,7 +1534,17 @@ define('lenovo/tests/routes/question.jshint', function () {
 
   module('JSHint - routes');
   test('routes/question.js should pass jshint', function() { 
-    ok(false, 'routes/question.js should pass jshint.\nroutes/question.js: line 15, col 11, Missing semicolon.\nroutes/question.js: line 23, col 33, Missing semicolon.\nroutes/question.js: line 30, col 17, Missing semicolon.\nroutes/question.js: line 31, col 60, Missing semicolon.\nroutes/question.js: line 33, col 53, Missing semicolon.\nroutes/question.js: line 36, col 44, Missing semicolon.\nroutes/question.js: line 40, col 43, Missing semicolon.\nroutes/question.js: line 45, col 23, Missing semicolon.\nroutes/question.js: line 46, col 18, Unnecessary semicolon.\nroutes/question.js: line 54, col 51, Missing semicolon.\nroutes/question.js: line 58, col 31, Missing semicolon.\nroutes/question.js: line 59, col 26, Unnecessary semicolon.\nroutes/question.js: line 71, col 27, Missing semicolon.\nroutes/question.js: line 74, col 18, Don\'t make functions within a loop.\nroutes/question.js: line 74, col 19, Missing semicolon.\nroutes/question.js: line 84, col 51, Missing semicolon.\nroutes/question.js: line 89, col 31, Missing semicolon.\nroutes/question.js: line 90, col 26, Unnecessary semicolon.\nroutes/question.js: line 102, col 27, Missing semicolon.\nroutes/question.js: line 105, col 18, Don\'t make functions within a loop.\nroutes/question.js: line 105, col 19, Missing semicolon.\nroutes/question.js: line 106, col 14, Unnecessary semicolon.\nroutes/question.js: line 111, col 55, Missing semicolon.\nroutes/question.js: line 113, col 3, Missing semicolon.\nroutes/question.js: line 26, col 26, \'$\' is not defined.\nroutes/question.js: line 31, col 13, \'$\' is not defined.\nroutes/question.js: line 32, col 31, \'$\' is not defined.\nroutes/question.js: line 36, col 27, \'$\' is not defined.\nroutes/question.js: line 37, col 29, \'$\' is not defined.\nroutes/question.js: line 40, col 32, \'$\' is not defined.\nroutes/question.js: line 42, col 21, \'$\' is not defined.\nroutes/question.js: line 49, col 33, \'$\' is not defined.\nroutes/question.js: line 54, col 40, \'$\' is not defined.\nroutes/question.js: line 55, col 29, \'$\' is not defined.\nroutes/question.js: line 64, col 25, \'$\' is not defined.\nroutes/question.js: line 78, col 33, \'$\' is not defined.\nroutes/question.js: line 84, col 40, \'$\' is not defined.\nroutes/question.js: line 86, col 29, \'$\' is not defined.\nroutes/question.js: line 95, col 25, \'$\' is not defined.\nroutes/question.js: line 111, col 9, \'$\' is not defined.\n\n40 errors'); 
+    ok(false, 'routes/question.js should pass jshint.\nroutes/question.js: line 15, col 11, Missing semicolon.\nroutes/question.js: line 23, col 33, Missing semicolon.\nroutes/question.js: line 30, col 17, Missing semicolon.\nroutes/question.js: line 31, col 60, Missing semicolon.\nroutes/question.js: line 33, col 53, Missing semicolon.\nroutes/question.js: line 36, col 44, Missing semicolon.\nroutes/question.js: line 40, col 43, Missing semicolon.\nroutes/question.js: line 45, col 23, Missing semicolon.\nroutes/question.js: line 46, col 18, Unnecessary semicolon.\nroutes/question.js: line 54, col 51, Missing semicolon.\nroutes/question.js: line 58, col 31, Missing semicolon.\nroutes/question.js: line 59, col 26, Unnecessary semicolon.\nroutes/question.js: line 70, col 27, Missing semicolon.\nroutes/question.js: line 73, col 18, Don\'t make functions within a loop.\nroutes/question.js: line 73, col 19, Missing semicolon.\nroutes/question.js: line 83, col 51, Missing semicolon.\nroutes/question.js: line 88, col 31, Missing semicolon.\nroutes/question.js: line 89, col 26, Unnecessary semicolon.\nroutes/question.js: line 101, col 27, Missing semicolon.\nroutes/question.js: line 104, col 18, Don\'t make functions within a loop.\nroutes/question.js: line 104, col 19, Missing semicolon.\nroutes/question.js: line 105, col 14, Unnecessary semicolon.\nroutes/question.js: line 110, col 55, Missing semicolon.\nroutes/question.js: line 112, col 3, Missing semicolon.\nroutes/question.js: line 26, col 26, \'$\' is not defined.\nroutes/question.js: line 31, col 13, \'$\' is not defined.\nroutes/question.js: line 32, col 31, \'$\' is not defined.\nroutes/question.js: line 36, col 27, \'$\' is not defined.\nroutes/question.js: line 37, col 29, \'$\' is not defined.\nroutes/question.js: line 40, col 32, \'$\' is not defined.\nroutes/question.js: line 42, col 21, \'$\' is not defined.\nroutes/question.js: line 49, col 33, \'$\' is not defined.\nroutes/question.js: line 54, col 40, \'$\' is not defined.\nroutes/question.js: line 55, col 29, \'$\' is not defined.\nroutes/question.js: line 63, col 25, \'$\' is not defined.\nroutes/question.js: line 77, col 33, \'$\' is not defined.\nroutes/question.js: line 83, col 40, \'$\' is not defined.\nroutes/question.js: line 85, col 29, \'$\' is not defined.\nroutes/question.js: line 94, col 25, \'$\' is not defined.\nroutes/question.js: line 110, col 9, \'$\' is not defined.\n\n40 errors'); 
+  });
+
+});
+define('lenovo/tests/routes/result.jshint', function () {
+
+  'use strict';
+
+  module('JSHint - routes');
+  test('routes/result.js should pass jshint', function() { 
+    ok(false, 'routes/result.js should pass jshint.\nroutes/result.js: line 15, col 11, Missing semicolon.\nroutes/result.js: line 23, col 35, Missing semicolon.\nroutes/result.js: line 27, col 61, Missing semicolon.\nroutes/result.js: line 30, col 17, Missing semicolon.\nroutes/result.js: line 37, col 51, Missing semicolon.\nroutes/result.js: line 42, col 55, Missing semicolon.\nroutes/result.js: line 43, col 47, Missing semicolon.\nroutes/result.js: line 45, col 3, Missing semicolon.\nroutes/result.js: line 26, col 26, \'$\' is not defined.\nroutes/result.js: line 37, col 15, \'$\' is not defined.\nroutes/result.js: line 42, col 9, \'$\' is not defined.\nroutes/result.js: line 43, col 11, \'$\' is not defined.\n\n12 errors'); 
   });
 
 });
@@ -1335,7 +1593,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.8b1f9932"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.8707300c"});
 }
 
 /* jshint ignore:end */
