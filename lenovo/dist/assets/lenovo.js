@@ -1270,6 +1270,7 @@ define('lenovo/templates/result', ['exports'], function (exports) {
         dom.appendChild(el0, el1);
         var el1 = dom.createElement("div");
         dom.setAttribute(el1,"class","col-xs-12 footerCon");
+        dom.setAttribute(el1,"style","display:none");
         var el2 = dom.createTextNode("\n    ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("footer");
@@ -1698,7 +1699,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.652230ed"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.d5278e8c"});
 }
 
 /* jshint ignore:end */
