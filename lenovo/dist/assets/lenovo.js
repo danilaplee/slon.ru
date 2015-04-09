@@ -617,44 +617,50 @@ define('lenovo/routes/question', ['exports', 'ember'], function (exports, Ember)
 });
 define('lenovo/routes/result', ['exports', 'ember'], function (exports, Ember) {
 
-  'use strict';
+	'use strict';
 
-  var home = Ember['default'].Route.extend({
-    model: function model() {
-      return [];
-    },
-    renderTemplate: function renderTemplate() {
-      this.render("result", {
-        into: "application",
-        outlet: "main",
-        controller: "result"
-      });
-    },
-    activate: function activate() {
-      this._super.apply(this, arguments);
-    },
-    setupController: function setupController(result, model) {
-      result.set("model", model);
-      Ember['default'].run.schedule("afterRender", this, function () {
-        var tail = $("div.canvas.two");
-        var shot = document.getElementById("packshot");
-        tail.css({
-          display: "none"
-        });
-        shot.addEventListener("ended", function () {
-          this.currentTime = 7;
-          this.pause();
-        }, false);
-        $("body").css({ overflow: "scroll" });
-      });
-    },
-    deactivate: function deactivate() {
-      $("#floatCanvas").css({ visibility: "hidden" });
-      $("body").css({ overflow: "hidden" });
-    }
-  });
+	var home = Ember['default'].Route.extend({
+			model: function model() {
+					return [];
+			},
+			renderTemplate: function renderTemplate() {
+					this.render("result", {
+							into: "application",
+							outlet: "main",
+							controller: "result"
+					});
+			},
+			activate: function activate() {
+					this._super.apply(this, arguments);
+			},
+			setupController: function setupController(result, model) {
+					result.set("model", model);
+					Ember['default'].run.schedule("afterRender", this, function () {
+							$(".social-likes").socialLikes({
+									url: "https://slon.ru/specials/flex-test",
+									title: "Тест: Насколько вы гибкий на работе? || slon.ru",
+									counters: true,
+									singleTitle: ""
+							});
+							var tail = $("div.canvas.two");
+							var shot = document.getElementById("packshot");
+							tail.css({
+									display: "none"
+							});
+							shot.addEventListener("ended", function () {
+									this.currentTime = 7;
+									this.pause();
+							}, false);
+							$("body").css({ overflow: "scroll" });
+					});
+			},
+			deactivate: function deactivate() {
+					$("#floatCanvas").css({ visibility: "hidden" });
+					$("body").css({ overflow: "hidden" });
+			}
+	});
 
-  exports['default'] = home;
+	exports['default'] = home;
 
 });
 define('lenovo/templates/application', ['exports'], function (exports) {
@@ -1195,6 +1201,46 @@ define('lenovo/templates/result', ['exports'], function (exports) {
         var el4 = dom.createTextNode("\n        ");
         dom.appendChild(el3, el4);
         dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n        ");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3,"class","col-xs-12 social-conn");
+        var el4 = dom.createTextNode("\n            ");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("div");
+        dom.setAttribute(el4,"class","social-likes");
+        dom.setAttribute(el4,"data-url","http://slon.ru/specials/flex-test");
+        var el5 = dom.createTextNode("\n                ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("div");
+        dom.setAttribute(el5,"class","facebook");
+        dom.setAttribute(el5,"title","Поделиться ссылкой на Фейсбуке");
+        var el6 = dom.createTextNode("Facebook");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("div");
+        dom.setAttribute(el5,"class","twitter");
+        dom.setAttribute(el5,"data-via","slon.ru");
+        dom.setAttribute(el5,"title","Поделиться ссылкой в Твиттере");
+        var el6 = dom.createTextNode("Twitter");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n                ");
+        dom.appendChild(el4, el5);
+        var el5 = dom.createElement("div");
+        dom.setAttribute(el5,"class","vkontakte");
+        dom.setAttribute(el5,"title","Поделиться ссылкой во Вконтакте");
+        var el6 = dom.createTextNode("Вконтакте");
+        dom.appendChild(el5, el6);
+        dom.appendChild(el4, el5);
+        var el5 = dom.createTextNode("\n            ");
+        dom.appendChild(el4, el5);
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n        ");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
         var el3 = dom.createTextNode("\n    ");
         dom.appendChild(el2, el3);
         dom.appendChild(el1, el2);
@@ -1584,7 +1630,7 @@ define('lenovo/tests/routes/result.jshint', function () {
 
   module('JSHint - routes');
   test('routes/result.js should pass jshint', function() { 
-    ok(false, 'routes/result.js should pass jshint.\nroutes/result.js: line 15, col 11, Missing semicolon.\nroutes/result.js: line 23, col 35, Missing semicolon.\nroutes/result.js: line 27, col 61, Missing semicolon.\nroutes/result.js: line 31, col 17, Missing semicolon.\nroutes/result.js: line 37, col 51, Missing semicolon.\nroutes/result.js: line 42, col 55, Missing semicolon.\nroutes/result.js: line 43, col 47, Missing semicolon.\nroutes/result.js: line 45, col 3, Missing semicolon.\nroutes/result.js: line 26, col 26, \'$\' is not defined.\nroutes/result.js: line 37, col 15, \'$\' is not defined.\nroutes/result.js: line 42, col 9, \'$\' is not defined.\nroutes/result.js: line 43, col 11, \'$\' is not defined.\n\n12 errors'); 
+    ok(false, 'routes/result.js should pass jshint.\nroutes/result.js: line 15, col 11, Missing semicolon.\nroutes/result.js: line 23, col 35, Missing semicolon.\nroutes/result.js: line 33, col 61, Missing semicolon.\nroutes/result.js: line 37, col 17, Missing semicolon.\nroutes/result.js: line 43, col 51, Missing semicolon.\nroutes/result.js: line 48, col 55, Missing semicolon.\nroutes/result.js: line 49, col 47, Missing semicolon.\nroutes/result.js: line 51, col 3, Missing semicolon.\nroutes/result.js: line 26, col 13, \'$\' is not defined.\nroutes/result.js: line 32, col 26, \'$\' is not defined.\nroutes/result.js: line 43, col 15, \'$\' is not defined.\nroutes/result.js: line 48, col 9, \'$\' is not defined.\nroutes/result.js: line 49, col 11, \'$\' is not defined.\n\n13 errors'); 
   });
 
 });
@@ -1633,7 +1679,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.191a29f6"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.95cbb99d"});
 }
 
 /* jshint ignore:end */

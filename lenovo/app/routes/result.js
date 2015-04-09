@@ -23,6 +23,12 @@ var home = Ember.Route.extend({
         result.set('model', model)
 	    Ember.run.schedule('afterRender', this, function () 
 	    {
+	    	$('.social-likes').socialLikes({
+			    url: 'https://slon.ru/specials/flex-test',
+			    title: 'Тест: Насколько вы гибкий на работе? || slon.ru',
+			    counters: true,
+			    singleTitle: ''
+			});
 	      	var tail = $('div.canvas.two');
 	      	var shot = document.getElementById('packshot')
 	      	tail
