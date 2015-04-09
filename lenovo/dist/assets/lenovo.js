@@ -1240,8 +1240,6 @@ define('lenovo/templates/result', ['exports'], function (exports) {
         var el5 = dom.createElement("div");
         dom.setAttribute(el5,"class","facebook");
         dom.setAttribute(el5,"title","Поделиться ссылкой на Фейсбуке");
-        var el6 = dom.createTextNode("Facebook");
-        dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n                ");
         dom.appendChild(el4, el5);
@@ -1249,16 +1247,12 @@ define('lenovo/templates/result', ['exports'], function (exports) {
         dom.setAttribute(el5,"class","twitter");
         dom.setAttribute(el5,"data-via","slon.ru");
         dom.setAttribute(el5,"title","Поделиться ссылкой в Твиттере");
-        var el6 = dom.createTextNode("Twitter");
-        dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n                ");
         dom.appendChild(el4, el5);
         var el5 = dom.createElement("div");
         dom.setAttribute(el5,"class","vkontakte");
         dom.setAttribute(el5,"title","Поделиться ссылкой во Вконтакте");
-        var el6 = dom.createTextNode("Вконтакте");
-        dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
         var el5 = dom.createTextNode("\n            ");
         dom.appendChild(el4, el5);
@@ -1704,7 +1698,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.715f565d"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.220ddabb"});
 }
 
 /* jshint ignore:end */
