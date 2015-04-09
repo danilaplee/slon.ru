@@ -25,7 +25,8 @@ var home = Ember.Route.extend({
 	    {
 	      	var tail = $('div.canvas.two');
 	      	var shot = document.getElementById('packshot')
-	      	tail.css({
+	      	tail
+	      	.css({
 	      		'display':'none'
 	      	})
 	      	shot.addEventListener('ended', function() 

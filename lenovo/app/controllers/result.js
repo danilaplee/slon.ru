@@ -10,6 +10,7 @@ var result = Ember.ArrayController.extend({
 			count[1] = {'type':'B', 'value':0}
 			count[2] = {'type':'C', 'value':0}
 			count[3] = {'type':'D', 'value':0}
+			
 		var predicatBy = function(prop)
 		{
 		   return function(a,b)

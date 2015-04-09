@@ -15,17 +15,17 @@
 			</div>
 			НА РАБОТЕ
 		</h1>
-		<div class="col-xs-12 col-lg-7 col-md-7 col-sm-7" style="padding:0">
+		<div class="col-xs-7 col-sm-7" style="padding:0;">
 			<p>
 				Говорят, что на дворе кризис, а значит рабочих мест не так много. Но раз вы читаете этот текст, то значит, что у вас есть время для профориентации, и вы можете позволить себе самоопределение на рабочем месте. Наш тест поможет вам узнать о себе чуть больше и подскажет, над чем вам нужно поработать, чтобы стать еще более успешным.
 			</p>
 		</div>
+		<div class="col-xs-4 col-sm-4" style="padding:0;vertical-align:bottom;height:170px;">
+				<div id="startQuestions">
+				{{#link-to 'question' 1 }}
+					<figure id="start"></figure>
+				{{/link-to}}
+				</div>
+		</div>
 	</section>
 </div>
-<footer class="start text-center">
-	{{#link-to 'question' 1 }}
-		<p>Пройти тест</p>
-		<div class="glyphicon glyphicon-triangle-bottom">
-		</div>
-	{{/link-to}}
-</footer>

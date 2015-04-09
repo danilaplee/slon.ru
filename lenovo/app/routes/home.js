@@ -24,23 +24,35 @@ var home = Ember.Route.extend({
 	    Ember.run.schedule('afterRender', this, function () 
 	    {
 	      	var	elastic = Snap.select('#elastic');
+	      	var start = Snap.select('#start');
+	      	var start_off
+	      	var start_on
+	      	var pre = Snap.select('#preloading');
+	      	var n = 0;
+	      	var z = [];
 	      	var tail = $('div.canvas.two');
 	      	tail.css({
 	      		'display':'block'
 	      	})
+	      	//PRELOADING
 	      	Snap.load('images/new_3.svg', function(data)
 	      	{
 	      		elastic.append(data)
 	      	})
-	      	var pre = Snap.select('#preloading');
-	      	var n = 0;
-	      	var storeZone = function(data)
+	      	Snap.load('images/button_on.svg', function(data)
 	      	{
-	      		n++;
-	      		z[n] = pre.append(data).selectAll('path')
-	      		pre.clear()
-	      	}
-	      	var z = [];
+	      		start.append(data);
+	      		start_on = pre.append(data).selectAll('path');
+	      	})
+	      	Snap.load('images/button_off.svg', function(data)
+	      	{
+	      		start_off = pre.append(data).selectAll('path');
+	      		var width = $(window).width()
+	      		if(width < 1000)
+	      		{
+	      			start.append(data)
+	      		}
+	      	})
 	      	Snap.load('images/elastic/up-left.svg', function(data)
 	      	{
 	      		z[1] = pre.append(data).selectAll('path')
@@ -94,6 +106,7 @@ var home = Ember.Route.extend({
 				make(pos)
 
 			});
+
 	      	var make = function(pos)
 	      	{
 	      		var zone = z[pos]
@@ -117,6 +130,29 @@ var home = Ember.Route.extend({
 		      		target[i].animate({'d':y}, 700, mina.easein())
 	      		};
 		    }
+		    start.mouseover(function()
+		    {
+		    	var zone = start_off;
+		    	var target = this.selectAll('path');
+	      		for (var i = zone.length - 1; i >= 0; i--) 
+	      		{
+	      			var y = zone[i]
+		      		target[i].animate({'d':y}, 700, mina.easein())
+	      		};
+
+		    })
+		    start.mouseout(function()
+		    {
+		    	var zone = start_on;
+		    	var target = this.selectAll('path');
+	      		for (var i = zone.length - 1; i >= 0; i--) 
+	      		{
+	      			var y = zone[i]
+	      			console.log(y);
+		      		target[i].animate({'d':y}, 700, mina.easein())
+	      		};
+		    	
+		    })
 
 		});
 	}

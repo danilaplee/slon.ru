@@ -78,7 +78,6 @@ var home = Ember.Route.extend({
 		    		{
 
 			    		var words = $(this).find('span');
-			    		// console.log(words.length);
 			    		if(words.length > 1)
 			    		{
 				    		for (var b = words.length - 1; b >= 0; b--) 

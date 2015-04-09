@@ -10,23 +10,23 @@ question.reopenClass({
   [
 		{
     		'id':1,
-    		'text':'На пути к вашему офису случился транспортный коллапс, а шеф требует быть вовремя. Как будете решать проблему?',
+    		'text':'Коллеги воспринимают вас...',
     		'answers':[
 	    		{
 	    			'type':'A',
-	    			'text':'Остаток рабочего дня посвятите модификации транспортных развязок в столице.',
+	    			'img':'images/questions/9/A.gif',
 	    		},
 	    		{
 	    			'type':'B',
-	    			'text':'Угрозами и истериками расчистите себе путь до рабочего места.'
+	    			'img':'images/questions/9/B.gif'
 	    		},
 	    		{
 	    			'type':'C',
-	    			'text':'Угоните машину у правоохранительных органов и доберетесь в срок.'
+	    			'img':'images/questions/9/C.gif'
 	    		},
 	    		{
 	    			'type':'D',
-	    			'text':'Нацепите значок «Езжу как хочу» и поедете как хотите.'
+	    			'img':'images/questions/9/D.gif'
 	    		}
     		]
     	},
@@ -76,23 +76,23 @@ question.reopenClass({
     	},
     	{
     		'id':4,
-    		'text':'Что больше всего похоже на ваш типичный рабочий день?',
+    		'text':'На пути к вашему офису случился транспортный коллапс, а шеф требует быть вовремя. Как будете решать проблему?',
     		'answers':[
 	    		{
 	    			'type':'A',
-	    			'img':'images/questions/4/A.png',
+	    			'text':'Остаток рабочего дня посвятите модификации транспортных развязок в столице.',
 	    		},
 	    		{
 	    			'type':'B',
-	    			'img':'images/questions/4/B.jpg'
+	    			'text':'Угрозами и истериками расчистите себе путь до рабочего места.'
 	    		},
 	    		{
 	    			'type':'C',
-	    			'img':'images/questions/4/C.jpg'
+	    			'text':'Угоните машину у правоохранительных органов и доберетесь в срок.'
 	    		},
 	    		{
 	    			'type':'D',
-	    			'img':'images/questions/4/D.jpg'
+	    			'text':'Нацепите значок «Езжу как хочу» и поедете как хотите.'
 	    		}
     		]
     	},
@@ -186,23 +186,23 @@ question.reopenClass({
     	},
     	{
     		'id':9,
-    		'text':'Коллеги воспринимают вас...',
+    		'text':'Что больше всего похоже на ваш типичный рабочий день?',
     		'answers':[
 	    		{
 	    			'type':'A',
-	    			'img':'images/questions/9/A.gif',
+	    			'img':'images/questions/4/A.png',
 	    		},
 	    		{
 	    			'type':'B',
-	    			'img':'https://psv4.vk.me/c521212/u13896520/docs/a3065157ca53/rosh.gif?extra=L1wENncCBUROu9aLIAEtEZX77-VmCapnGEuo7qIjyi3a9exGoFSbQa8Tu492Mn7h-GphPjG3mWFk1xAP6x-j5pLMnlLRgQ'
+	    			'img':'images/questions/4/B.jpg'
 	    		},
 	    		{
 	    			'type':'C',
-	    			'img':'images/questions/9/C.gif'
+	    			'img':'images/questions/4/C.jpg'
 	    		},
 	    		{
 	    			'type':'D',
-	    			'img':'images/questions/9/D.gif'
+	    			'img':'images/questions/4/D.jpg'
 	    		}
     		]
     	},
