@@ -30,11 +30,15 @@ var home = Ember.Route.extend({
 			    singleTitle: ''
 			});
 			var canvas = $('.canvas');
+	      	var tail = $('div.canvas.two');
 			canvas.css({
 				'display':'none'
 			})
 	      	if($(window).width() < 600)
 	      	{
+	      		tail.css({
+	      			'display':'none'
+	      		})
 	      		$('#floatCanvas').css({
 	      			'z-index':'-1',
 	      			'display':'none'
