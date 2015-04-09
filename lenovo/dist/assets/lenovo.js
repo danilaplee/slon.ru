@@ -554,7 +554,10 @@ define('lenovo/routes/question', ['exports', 'ember'], function (exports, Ember)
 				var answerBoxes = $(".answerBox");
 				var width = $(window).width();
 				answerBoxes.find("p").lettering("words");
-				if (width > 1100) {
+				if (width > 1000) {
+					$("#floatCanvas").css({
+						visibility: "visible"
+					});
 					for (var i = answerBoxes.length - 1; i >= 0; i--) {
 						var box = $(answerBoxes[i]);
 						var words = $(box).find("span");
@@ -651,10 +654,14 @@ define('lenovo/routes/result', ['exports', 'ember'], function (exports, Ember) {
 									singleTitle: ""
 							});
 							var canvas = $(".canvas");
+							var tail = $("div.canvas.two");
 							canvas.css({
 									display: "none"
 							});
 							if ($(window).width() < 600) {
+									tail.css({
+											display: "none"
+									});
 									$("#floatCanvas").css({
 											"z-index": "-1",
 											display: "none"
@@ -1638,7 +1645,7 @@ define('lenovo/tests/routes/question.jshint', function () {
 
   module('JSHint - routes');
   test('routes/question.js should pass jshint', function() { 
-    ok(false, 'routes/question.js should pass jshint.\nroutes/question.js: line 15, col 11, Missing semicolon.\nroutes/question.js: line 23, col 33, Missing semicolon.\nroutes/question.js: line 30, col 17, Missing semicolon.\nroutes/question.js: line 32, col 42, Missing semicolon.\nroutes/question.js: line 33, col 53, Missing semicolon.\nroutes/question.js: line 38, col 48, Missing semicolon.\nroutes/question.js: line 42, col 47, Missing semicolon.\nroutes/question.js: line 47, col 27, Missing semicolon.\nroutes/question.js: line 48, col 22, Unnecessary semicolon.\nroutes/question.js: line 56, col 55, Missing semicolon.\nroutes/question.js: line 60, col 35, Missing semicolon.\nroutes/question.js: line 61, col 30, Unnecessary semicolon.\nroutes/question.js: line 72, col 31, Missing semicolon.\nroutes/question.js: line 75, col 22, Don\'t make functions within a loop.\nroutes/question.js: line 75, col 23, Missing semicolon.\nroutes/question.js: line 84, col 55, Missing semicolon.\nroutes/question.js: line 89, col 35, Missing semicolon.\nroutes/question.js: line 90, col 30, Unnecessary semicolon.\nroutes/question.js: line 102, col 31, Missing semicolon.\nroutes/question.js: line 105, col 22, Don\'t make functions within a loop.\nroutes/question.js: line 105, col 23, Missing semicolon.\nroutes/question.js: line 106, col 18, Unnecessary semicolon.\nroutes/question.js: line 112, col 55, Missing semicolon.\nroutes/question.js: line 114, col 3, Missing semicolon.\nroutes/question.js: line 26, col 26, \'$\' is not defined.\nroutes/question.js: line 31, col 31, \'$\' is not defined.\nroutes/question.js: line 32, col 25, \'$\' is not defined.\nroutes/question.js: line 38, col 31, \'$\' is not defined.\nroutes/question.js: line 39, col 33, \'$\' is not defined.\nroutes/question.js: line 42, col 36, \'$\' is not defined.\nroutes/question.js: line 44, col 25, \'$\' is not defined.\nroutes/question.js: line 51, col 37, \'$\' is not defined.\nroutes/question.js: line 56, col 44, \'$\' is not defined.\nroutes/question.js: line 57, col 33, \'$\' is not defined.\nroutes/question.js: line 65, col 29, \'$\' is not defined.\nroutes/question.js: line 79, col 37, \'$\' is not defined.\nroutes/question.js: line 84, col 44, \'$\' is not defined.\nroutes/question.js: line 86, col 33, \'$\' is not defined.\nroutes/question.js: line 95, col 29, \'$\' is not defined.\nroutes/question.js: line 112, col 9, \'$\' is not defined.\n\n40 errors'); 
+    ok(false, 'routes/question.js should pass jshint.\nroutes/question.js: line 15, col 11, Missing semicolon.\nroutes/question.js: line 23, col 33, Missing semicolon.\nroutes/question.js: line 30, col 17, Missing semicolon.\nroutes/question.js: line 32, col 42, Missing semicolon.\nroutes/question.js: line 33, col 53, Missing semicolon.\nroutes/question.js: line 38, col 21, Missing semicolon.\nroutes/question.js: line 41, col 48, Missing semicolon.\nroutes/question.js: line 45, col 47, Missing semicolon.\nroutes/question.js: line 50, col 27, Missing semicolon.\nroutes/question.js: line 51, col 22, Unnecessary semicolon.\nroutes/question.js: line 59, col 55, Missing semicolon.\nroutes/question.js: line 63, col 35, Missing semicolon.\nroutes/question.js: line 64, col 30, Unnecessary semicolon.\nroutes/question.js: line 75, col 31, Missing semicolon.\nroutes/question.js: line 78, col 22, Don\'t make functions within a loop.\nroutes/question.js: line 78, col 23, Missing semicolon.\nroutes/question.js: line 87, col 55, Missing semicolon.\nroutes/question.js: line 92, col 35, Missing semicolon.\nroutes/question.js: line 93, col 30, Unnecessary semicolon.\nroutes/question.js: line 105, col 31, Missing semicolon.\nroutes/question.js: line 108, col 22, Don\'t make functions within a loop.\nroutes/question.js: line 108, col 23, Missing semicolon.\nroutes/question.js: line 109, col 18, Unnecessary semicolon.\nroutes/question.js: line 115, col 55, Missing semicolon.\nroutes/question.js: line 117, col 3, Missing semicolon.\nroutes/question.js: line 26, col 26, \'$\' is not defined.\nroutes/question.js: line 31, col 31, \'$\' is not defined.\nroutes/question.js: line 32, col 25, \'$\' is not defined.\nroutes/question.js: line 36, col 19, \'$\' is not defined.\nroutes/question.js: line 41, col 31, \'$\' is not defined.\nroutes/question.js: line 42, col 33, \'$\' is not defined.\nroutes/question.js: line 45, col 36, \'$\' is not defined.\nroutes/question.js: line 47, col 25, \'$\' is not defined.\nroutes/question.js: line 54, col 37, \'$\' is not defined.\nroutes/question.js: line 59, col 44, \'$\' is not defined.\nroutes/question.js: line 60, col 33, \'$\' is not defined.\nroutes/question.js: line 68, col 29, \'$\' is not defined.\nroutes/question.js: line 82, col 37, \'$\' is not defined.\nroutes/question.js: line 87, col 44, \'$\' is not defined.\nroutes/question.js: line 89, col 33, \'$\' is not defined.\nroutes/question.js: line 98, col 29, \'$\' is not defined.\nroutes/question.js: line 115, col 9, \'$\' is not defined.\n\n42 errors'); 
   });
 
 });
@@ -1648,7 +1655,7 @@ define('lenovo/tests/routes/result.jshint', function () {
 
   module('JSHint - routes');
   test('routes/result.js should pass jshint', function() { 
-    ok(false, 'routes/result.js should pass jshint.\nroutes/result.js: line 15, col 11, Missing semicolon.\nroutes/result.js: line 23, col 35, Missing semicolon.\nroutes/result.js: line 35, col 15, Missing semicolon.\nroutes/result.js: line 41, col 21, Missing semicolon.\nroutes/result.js: line 44, col 61, Missing semicolon.\nroutes/result.js: line 48, col 17, Missing semicolon.\nroutes/result.js: line 54, col 51, Missing semicolon.\nroutes/result.js: line 59, col 55, Missing semicolon.\nroutes/result.js: line 60, col 47, Missing semicolon.\nroutes/result.js: line 62, col 3, Missing semicolon.\nroutes/result.js: line 26, col 13, \'$\' is not defined.\nroutes/result.js: line 32, col 26, \'$\' is not defined.\nroutes/result.js: line 36, col 18, \'$\' is not defined.\nroutes/result.js: line 38, col 19, \'$\' is not defined.\nroutes/result.js: line 43, col 26, \'$\' is not defined.\nroutes/result.js: line 54, col 15, \'$\' is not defined.\nroutes/result.js: line 59, col 9, \'$\' is not defined.\nroutes/result.js: line 60, col 11, \'$\' is not defined.\n\n18 errors'); 
+    ok(false, 'routes/result.js should pass jshint.\nroutes/result.js: line 15, col 11, Missing semicolon.\nroutes/result.js: line 23, col 35, Missing semicolon.\nroutes/result.js: line 36, col 15, Missing semicolon.\nroutes/result.js: line 41, col 21, Missing semicolon.\nroutes/result.js: line 45, col 21, Missing semicolon.\nroutes/result.js: line 47, col 24, \'tail\' is already defined.\nroutes/result.js: line 48, col 61, Missing semicolon.\nroutes/result.js: line 52, col 17, Missing semicolon.\nroutes/result.js: line 58, col 51, Missing semicolon.\nroutes/result.js: line 63, col 55, Missing semicolon.\nroutes/result.js: line 64, col 47, Missing semicolon.\nroutes/result.js: line 66, col 3, Missing semicolon.\nroutes/result.js: line 26, col 13, \'$\' is not defined.\nroutes/result.js: line 32, col 26, \'$\' is not defined.\nroutes/result.js: line 33, col 26, \'$\' is not defined.\nroutes/result.js: line 37, col 18, \'$\' is not defined.\nroutes/result.js: line 42, col 19, \'$\' is not defined.\nroutes/result.js: line 47, col 26, \'$\' is not defined.\nroutes/result.js: line 58, col 15, \'$\' is not defined.\nroutes/result.js: line 63, col 9, \'$\' is not defined.\nroutes/result.js: line 64, col 11, \'$\' is not defined.\n\n21 errors'); 
   });
 
 });
@@ -1697,7 +1704,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.e25cd379"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.2533c05a"});
 }
 
 /* jshint ignore:end */

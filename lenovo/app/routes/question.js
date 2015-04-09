@@ -31,7 +31,7 @@ var home = Ember.Route.extend({
 	    	var answerBoxes = $('.answerBox');
 	    	var width = $(window).width()
 	    	answerBoxes.find('p').lettering('words')
-	    	if(width > 1100)
+	    	if(width > 1000)
 		    {
 	      		$('#floatCanvas').css({
 	      			'visibility':'visible'
