@@ -1699,7 +1699,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.ac8879a3"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.bf25f167"});
 }
 
 /* jshint ignore:end */
