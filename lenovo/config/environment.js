@@ -4,7 +4,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'lenovo',
     environment: environment,
-    baseURL: '/specials/flex-test',
+    baseURL: '/',
     locationType: 'hash',
     EmberENV: {
       FEATURES: {

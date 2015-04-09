@@ -423,6 +423,15 @@ define('lenovo/routes/home', ['exports', 'ember'], function (exports, Ember) {
 				tail.css({
 					display: "block"
 				});
+				if ($(window).width() < 600) {
+					tail.css({
+						display: "none"
+					});
+					$("#floatCanvas").css({
+						"z-index": "-1",
+						display: "none"
+					});
+				}
 				//PRELOADING
 				Snap.load("images/new_3.svg", function (data) {
 					elastic.append(data);
@@ -542,7 +551,6 @@ define('lenovo/routes/question', ['exports', 'ember'], function (exports, Ember)
 				tail.css({
 					display: "none"
 				});
-				$("#floatCanvas").css({ visibility: "visible" });
 				var answerBoxes = $(".answerBox");
 				var width = $(window).width();
 				answerBoxes.find("p").lettering("words");
@@ -642,6 +650,16 @@ define('lenovo/routes/result', ['exports', 'ember'], function (exports, Ember) {
 									counters: true,
 									singleTitle: ""
 							});
+							var canvas = $(".canvas");
+							canvas.css({
+									display: "none"
+							});
+							if ($(window).width() < 600) {
+									$("#floatCanvas").css({
+											"z-index": "-1",
+											display: "none"
+									});
+							}
 							var tail = $("div.canvas.two");
 							var shot = document.getElementById("packshot");
 							tail.css({
@@ -1610,7 +1628,7 @@ define('lenovo/tests/routes/home.jshint', function () {
 
   module('JSHint - routes');
   test('routes/home.js should pass jshint', function() { 
-    ok(false, 'routes/home.js should pass jshint.\nroutes/home.js: line 15, col 11, Missing semicolon.\nroutes/home.js: line 23, col 33, Missing semicolon.\nroutes/home.js: line 28, col 28, Missing semicolon.\nroutes/home.js: line 29, col 27, Missing semicolon.\nroutes/home.js: line 36, col 17, Missing semicolon.\nroutes/home.js: line 40, col 39, Missing semicolon.\nroutes/home.js: line 41, col 17, Missing semicolon.\nroutes/home.js: line 46, col 17, Missing semicolon.\nroutes/home.js: line 50, col 48, Missing semicolon.\nroutes/home.js: line 53, col 41, Missing semicolon.\nroutes/home.js: line 55, col 17, Missing semicolon.\nroutes/home.js: line 58, col 60, Missing semicolon.\nroutes/home.js: line 60, col 17, Missing semicolon.\nroutes/home.js: line 63, col 60, Missing semicolon.\nroutes/home.js: line 65, col 17, Missing semicolon.\nroutes/home.js: line 68, col 60, Missing semicolon.\nroutes/home.js: line 70, col 17, Missing semicolon.\nroutes/home.js: line 73, col 60, Missing semicolon.\nroutes/home.js: line 75, col 17, Missing semicolon.\nroutes/home.js: line 78, col 36, Missing semicolon.\nroutes/home.js: line 79, col 36, Missing semicolon.\nroutes/home.js: line 82, col 24, Missing semicolon.\nroutes/home.js: line 87, col 32, Missing semicolon.\nroutes/home.js: line 91, col 32, Missing semicolon.\nroutes/home.js: line 99, col 32, Missing semicolon.\nroutes/home.js: line 103, col 32, Missing semicolon.\nroutes/home.js: line 106, col 26, Missing semicolon.\nroutes/home.js: line 112, col 36, Missing semicolon.\nroutes/home.js: line 113, col 57, Missing semicolon.\nroutes/home.js: line 118, col 25, Missing semicolon.\nroutes/home.js: line 124, col 25, Missing semicolon.\nroutes/home.js: line 129, col 38, Missing semicolon.\nroutes/home.js: line 130, col 69, Missing semicolon.\nroutes/home.js: line 131, col 20, Unnecessary semicolon.\nroutes/home.js: line 132, col 14, Missing semicolon.\nroutes/home.js: line 139, col 38, Missing semicolon.\nroutes/home.js: line 140, col 69, Missing semicolon.\nroutes/home.js: line 141, col 20, Unnecessary semicolon.\nroutes/home.js: line 143, col 15, Missing semicolon.\nroutes/home.js: line 150, col 38, Missing semicolon.\nroutes/home.js: line 152, col 69, Missing semicolon.\nroutes/home.js: line 153, col 20, Unnecessary semicolon.\nroutes/home.js: line 155, col 15, Missing semicolon.\nroutes/home.js: line 159, col 3, Missing semicolon.\nroutes/home.js: line 26, col 32, \'Snap\' is not defined.\nroutes/home.js: line 27, col 27, \'Snap\' is not defined.\nroutes/home.js: line 30, col 25, \'Snap\' is not defined.\nroutes/home.js: line 33, col 26, \'$\' is not defined.\nroutes/home.js: line 38, col 15, \'Snap\' is not defined.\nroutes/home.js: line 42, col 15, \'Snap\' is not defined.\nroutes/home.js: line 42, col 15, Too many errors. (26% scanned).\n\n52 errors'); 
+    ok(false, 'routes/home.js should pass jshint.\nroutes/home.js: line 15, col 11, Missing semicolon.\nroutes/home.js: line 23, col 33, Missing semicolon.\nroutes/home.js: line 28, col 28, Missing semicolon.\nroutes/home.js: line 29, col 27, Missing semicolon.\nroutes/home.js: line 36, col 17, Missing semicolon.\nroutes/home.js: line 41, col 21, Missing semicolon.\nroutes/home.js: line 45, col 21, Missing semicolon.\nroutes/home.js: line 50, col 39, Missing semicolon.\nroutes/home.js: line 51, col 17, Missing semicolon.\nroutes/home.js: line 56, col 17, Missing semicolon.\nroutes/home.js: line 60, col 48, Missing semicolon.\nroutes/home.js: line 63, col 41, Missing semicolon.\nroutes/home.js: line 65, col 17, Missing semicolon.\nroutes/home.js: line 68, col 60, Missing semicolon.\nroutes/home.js: line 70, col 17, Missing semicolon.\nroutes/home.js: line 73, col 60, Missing semicolon.\nroutes/home.js: line 75, col 17, Missing semicolon.\nroutes/home.js: line 78, col 60, Missing semicolon.\nroutes/home.js: line 80, col 17, Missing semicolon.\nroutes/home.js: line 83, col 60, Missing semicolon.\nroutes/home.js: line 85, col 17, Missing semicolon.\nroutes/home.js: line 88, col 36, Missing semicolon.\nroutes/home.js: line 89, col 36, Missing semicolon.\nroutes/home.js: line 92, col 24, Missing semicolon.\nroutes/home.js: line 97, col 32, Missing semicolon.\nroutes/home.js: line 101, col 32, Missing semicolon.\nroutes/home.js: line 109, col 32, Missing semicolon.\nroutes/home.js: line 113, col 32, Missing semicolon.\nroutes/home.js: line 116, col 26, Missing semicolon.\nroutes/home.js: line 122, col 36, Missing semicolon.\nroutes/home.js: line 123, col 57, Missing semicolon.\nroutes/home.js: line 128, col 25, Missing semicolon.\nroutes/home.js: line 134, col 25, Missing semicolon.\nroutes/home.js: line 139, col 38, Missing semicolon.\nroutes/home.js: line 140, col 69, Missing semicolon.\nroutes/home.js: line 141, col 20, Unnecessary semicolon.\nroutes/home.js: line 142, col 14, Missing semicolon.\nroutes/home.js: line 149, col 38, Missing semicolon.\nroutes/home.js: line 150, col 69, Missing semicolon.\nroutes/home.js: line 151, col 20, Unnecessary semicolon.\nroutes/home.js: line 153, col 15, Missing semicolon.\nroutes/home.js: line 160, col 38, Missing semicolon.\nroutes/home.js: line 162, col 69, Missing semicolon.\nroutes/home.js: line 163, col 20, Unnecessary semicolon.\nroutes/home.js: line 165, col 15, Missing semicolon.\nroutes/home.js: line 169, col 3, Missing semicolon.\nroutes/home.js: line 26, col 32, \'Snap\' is not defined.\nroutes/home.js: line 27, col 27, \'Snap\' is not defined.\nroutes/home.js: line 30, col 25, \'Snap\' is not defined.\nroutes/home.js: line 33, col 26, \'$\' is not defined.\nroutes/home.js: line 33, col 26, Too many errors. (19% scanned).\n\n52 errors'); 
   });
 
 });
@@ -1620,7 +1638,7 @@ define('lenovo/tests/routes/question.jshint', function () {
 
   module('JSHint - routes');
   test('routes/question.js should pass jshint', function() { 
-    ok(false, 'routes/question.js should pass jshint.\nroutes/question.js: line 15, col 11, Missing semicolon.\nroutes/question.js: line 23, col 33, Missing semicolon.\nroutes/question.js: line 30, col 17, Missing semicolon.\nroutes/question.js: line 31, col 60, Missing semicolon.\nroutes/question.js: line 33, col 42, Missing semicolon.\nroutes/question.js: line 34, col 53, Missing semicolon.\nroutes/question.js: line 39, col 48, Missing semicolon.\nroutes/question.js: line 43, col 47, Missing semicolon.\nroutes/question.js: line 48, col 27, Missing semicolon.\nroutes/question.js: line 49, col 22, Unnecessary semicolon.\nroutes/question.js: line 57, col 55, Missing semicolon.\nroutes/question.js: line 61, col 35, Missing semicolon.\nroutes/question.js: line 62, col 30, Unnecessary semicolon.\nroutes/question.js: line 73, col 31, Missing semicolon.\nroutes/question.js: line 76, col 22, Don\'t make functions within a loop.\nroutes/question.js: line 76, col 23, Missing semicolon.\nroutes/question.js: line 85, col 55, Missing semicolon.\nroutes/question.js: line 90, col 35, Missing semicolon.\nroutes/question.js: line 91, col 30, Unnecessary semicolon.\nroutes/question.js: line 103, col 31, Missing semicolon.\nroutes/question.js: line 106, col 22, Don\'t make functions within a loop.\nroutes/question.js: line 106, col 23, Missing semicolon.\nroutes/question.js: line 107, col 18, Unnecessary semicolon.\nroutes/question.js: line 113, col 55, Missing semicolon.\nroutes/question.js: line 115, col 3, Missing semicolon.\nroutes/question.js: line 26, col 26, \'$\' is not defined.\nroutes/question.js: line 31, col 13, \'$\' is not defined.\nroutes/question.js: line 32, col 31, \'$\' is not defined.\nroutes/question.js: line 33, col 25, \'$\' is not defined.\nroutes/question.js: line 39, col 31, \'$\' is not defined.\nroutes/question.js: line 40, col 33, \'$\' is not defined.\nroutes/question.js: line 43, col 36, \'$\' is not defined.\nroutes/question.js: line 45, col 25, \'$\' is not defined.\nroutes/question.js: line 52, col 37, \'$\' is not defined.\nroutes/question.js: line 57, col 44, \'$\' is not defined.\nroutes/question.js: line 58, col 33, \'$\' is not defined.\nroutes/question.js: line 66, col 29, \'$\' is not defined.\nroutes/question.js: line 80, col 37, \'$\' is not defined.\nroutes/question.js: line 85, col 44, \'$\' is not defined.\nroutes/question.js: line 87, col 33, \'$\' is not defined.\nroutes/question.js: line 96, col 29, \'$\' is not defined.\nroutes/question.js: line 113, col 9, \'$\' is not defined.\n\n42 errors'); 
+    ok(false, 'routes/question.js should pass jshint.\nroutes/question.js: line 15, col 11, Missing semicolon.\nroutes/question.js: line 23, col 33, Missing semicolon.\nroutes/question.js: line 30, col 17, Missing semicolon.\nroutes/question.js: line 32, col 42, Missing semicolon.\nroutes/question.js: line 33, col 53, Missing semicolon.\nroutes/question.js: line 38, col 48, Missing semicolon.\nroutes/question.js: line 42, col 47, Missing semicolon.\nroutes/question.js: line 47, col 27, Missing semicolon.\nroutes/question.js: line 48, col 22, Unnecessary semicolon.\nroutes/question.js: line 56, col 55, Missing semicolon.\nroutes/question.js: line 60, col 35, Missing semicolon.\nroutes/question.js: line 61, col 30, Unnecessary semicolon.\nroutes/question.js: line 72, col 31, Missing semicolon.\nroutes/question.js: line 75, col 22, Don\'t make functions within a loop.\nroutes/question.js: line 75, col 23, Missing semicolon.\nroutes/question.js: line 84, col 55, Missing semicolon.\nroutes/question.js: line 89, col 35, Missing semicolon.\nroutes/question.js: line 90, col 30, Unnecessary semicolon.\nroutes/question.js: line 102, col 31, Missing semicolon.\nroutes/question.js: line 105, col 22, Don\'t make functions within a loop.\nroutes/question.js: line 105, col 23, Missing semicolon.\nroutes/question.js: line 106, col 18, Unnecessary semicolon.\nroutes/question.js: line 112, col 55, Missing semicolon.\nroutes/question.js: line 114, col 3, Missing semicolon.\nroutes/question.js: line 26, col 26, \'$\' is not defined.\nroutes/question.js: line 31, col 31, \'$\' is not defined.\nroutes/question.js: line 32, col 25, \'$\' is not defined.\nroutes/question.js: line 38, col 31, \'$\' is not defined.\nroutes/question.js: line 39, col 33, \'$\' is not defined.\nroutes/question.js: line 42, col 36, \'$\' is not defined.\nroutes/question.js: line 44, col 25, \'$\' is not defined.\nroutes/question.js: line 51, col 37, \'$\' is not defined.\nroutes/question.js: line 56, col 44, \'$\' is not defined.\nroutes/question.js: line 57, col 33, \'$\' is not defined.\nroutes/question.js: line 65, col 29, \'$\' is not defined.\nroutes/question.js: line 79, col 37, \'$\' is not defined.\nroutes/question.js: line 84, col 44, \'$\' is not defined.\nroutes/question.js: line 86, col 33, \'$\' is not defined.\nroutes/question.js: line 95, col 29, \'$\' is not defined.\nroutes/question.js: line 112, col 9, \'$\' is not defined.\n\n40 errors'); 
   });
 
 });
@@ -1630,7 +1648,7 @@ define('lenovo/tests/routes/result.jshint', function () {
 
   module('JSHint - routes');
   test('routes/result.js should pass jshint', function() { 
-    ok(false, 'routes/result.js should pass jshint.\nroutes/result.js: line 15, col 11, Missing semicolon.\nroutes/result.js: line 23, col 35, Missing semicolon.\nroutes/result.js: line 33, col 61, Missing semicolon.\nroutes/result.js: line 37, col 17, Missing semicolon.\nroutes/result.js: line 43, col 51, Missing semicolon.\nroutes/result.js: line 48, col 55, Missing semicolon.\nroutes/result.js: line 49, col 47, Missing semicolon.\nroutes/result.js: line 51, col 3, Missing semicolon.\nroutes/result.js: line 26, col 13, \'$\' is not defined.\nroutes/result.js: line 32, col 26, \'$\' is not defined.\nroutes/result.js: line 43, col 15, \'$\' is not defined.\nroutes/result.js: line 48, col 9, \'$\' is not defined.\nroutes/result.js: line 49, col 11, \'$\' is not defined.\n\n13 errors'); 
+    ok(false, 'routes/result.js should pass jshint.\nroutes/result.js: line 15, col 11, Missing semicolon.\nroutes/result.js: line 23, col 35, Missing semicolon.\nroutes/result.js: line 35, col 15, Missing semicolon.\nroutes/result.js: line 41, col 21, Missing semicolon.\nroutes/result.js: line 44, col 61, Missing semicolon.\nroutes/result.js: line 48, col 17, Missing semicolon.\nroutes/result.js: line 54, col 51, Missing semicolon.\nroutes/result.js: line 59, col 55, Missing semicolon.\nroutes/result.js: line 60, col 47, Missing semicolon.\nroutes/result.js: line 62, col 3, Missing semicolon.\nroutes/result.js: line 26, col 13, \'$\' is not defined.\nroutes/result.js: line 32, col 26, \'$\' is not defined.\nroutes/result.js: line 36, col 18, \'$\' is not defined.\nroutes/result.js: line 38, col 19, \'$\' is not defined.\nroutes/result.js: line 43, col 26, \'$\' is not defined.\nroutes/result.js: line 54, col 15, \'$\' is not defined.\nroutes/result.js: line 59, col 9, \'$\' is not defined.\nroutes/result.js: line 60, col 11, \'$\' is not defined.\n\n18 errors'); 
   });
 
 });
@@ -1679,7 +1697,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.84094110"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.e25cd379"});
 }
 
 /* jshint ignore:end */

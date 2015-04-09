@@ -29,6 +29,17 @@ var home = Ember.Route.extend({
 			    counters: true,
 			    singleTitle: ''
 			});
+			var canvas = $('.canvas');
+			canvas.css({
+				'display':'none'
+			})
+	      	if($(window).width() < 600)
+	      	{
+	      		$('#floatCanvas').css({
+	      			'z-index':'-1',
+	      			'display':'none'
+	      		})
+	      	}
 	      	var tail = $('div.canvas.two');
 	      	var shot = document.getElementById('packshot')
 	      	tail

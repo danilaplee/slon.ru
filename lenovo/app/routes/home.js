@@ -34,6 +34,16 @@ var home = Ember.Route.extend({
 	      	tail.css({
 	      		'display':'block'
 	      	})
+	      	if($(window).width() < 600)
+	      	{
+	      		tail.css({
+	      			'display':'none'
+	      		})
+	      		$('#floatCanvas').css({
+	      			'z-index':'-1',
+	      			'display':'none'
+	      		})
+	      	}
 	      	//PRELOADING
 	      	Snap.load('images/new_3.svg', function(data)
 	      	{
