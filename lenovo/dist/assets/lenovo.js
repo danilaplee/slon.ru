@@ -666,6 +666,7 @@ define('lenovo/routes/result', ['exports', 'ember'], function (exports, Ember) {
 											"z-index": "-1",
 											display: "none"
 									});
+									$("body").css({ overflow: "scroll" });
 							}
 							var tail = $("div.canvas.two");
 							var shot = document.getElementById("packshot");
@@ -676,7 +677,6 @@ define('lenovo/routes/result', ['exports', 'ember'], function (exports, Ember) {
 									this.currentTime = 7;
 									this.pause();
 							}, false);
-							$("body").css({ overflow: "scroll" });
 					});
 			},
 			deactivate: function deactivate() {
@@ -1655,7 +1655,7 @@ define('lenovo/tests/routes/result.jshint', function () {
 
   module('JSHint - routes');
   test('routes/result.js should pass jshint', function() { 
-    ok(false, 'routes/result.js should pass jshint.\nroutes/result.js: line 15, col 11, Missing semicolon.\nroutes/result.js: line 23, col 35, Missing semicolon.\nroutes/result.js: line 36, col 15, Missing semicolon.\nroutes/result.js: line 41, col 21, Missing semicolon.\nroutes/result.js: line 45, col 21, Missing semicolon.\nroutes/result.js: line 47, col 24, \'tail\' is already defined.\nroutes/result.js: line 48, col 61, Missing semicolon.\nroutes/result.js: line 52, col 17, Missing semicolon.\nroutes/result.js: line 58, col 51, Missing semicolon.\nroutes/result.js: line 63, col 55, Missing semicolon.\nroutes/result.js: line 64, col 47, Missing semicolon.\nroutes/result.js: line 66, col 3, Missing semicolon.\nroutes/result.js: line 26, col 13, \'$\' is not defined.\nroutes/result.js: line 32, col 26, \'$\' is not defined.\nroutes/result.js: line 33, col 26, \'$\' is not defined.\nroutes/result.js: line 37, col 18, \'$\' is not defined.\nroutes/result.js: line 42, col 19, \'$\' is not defined.\nroutes/result.js: line 47, col 26, \'$\' is not defined.\nroutes/result.js: line 58, col 15, \'$\' is not defined.\nroutes/result.js: line 63, col 9, \'$\' is not defined.\nroutes/result.js: line 64, col 11, \'$\' is not defined.\n\n21 errors'); 
+    ok(false, 'routes/result.js should pass jshint.\nroutes/result.js: line 15, col 11, Missing semicolon.\nroutes/result.js: line 23, col 35, Missing semicolon.\nroutes/result.js: line 36, col 15, Missing semicolon.\nroutes/result.js: line 41, col 21, Missing semicolon.\nroutes/result.js: line 45, col 21, Missing semicolon.\nroutes/result.js: line 46, col 55, Missing semicolon.\nroutes/result.js: line 48, col 24, \'tail\' is already defined.\nroutes/result.js: line 49, col 61, Missing semicolon.\nroutes/result.js: line 53, col 17, Missing semicolon.\nroutes/result.js: line 63, col 55, Missing semicolon.\nroutes/result.js: line 64, col 47, Missing semicolon.\nroutes/result.js: line 66, col 3, Missing semicolon.\nroutes/result.js: line 26, col 13, \'$\' is not defined.\nroutes/result.js: line 32, col 26, \'$\' is not defined.\nroutes/result.js: line 33, col 26, \'$\' is not defined.\nroutes/result.js: line 37, col 18, \'$\' is not defined.\nroutes/result.js: line 42, col 19, \'$\' is not defined.\nroutes/result.js: line 46, col 19, \'$\' is not defined.\nroutes/result.js: line 48, col 26, \'$\' is not defined.\nroutes/result.js: line 63, col 9, \'$\' is not defined.\nroutes/result.js: line 64, col 11, \'$\' is not defined.\n\n21 errors'); 
   });
 
 });
@@ -1704,7 +1704,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.5caaaa1f"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.715f565d"});
 }
 
 /* jshint ignore:end */

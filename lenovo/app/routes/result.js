@@ -43,6 +43,7 @@ var home = Ember.Route.extend({
 	      			'z-index':'-1',
 	      			'display':'none'
 	      		})
+		      	$('body').css({'overflow':'scroll'})
 	      	}
 	      	var tail = $('div.canvas.two');
 	      	var shot = document.getElementById('packshot')
@@ -55,7 +56,6 @@ var home = Ember.Route.extend({
 			   this.currentTime = 7;
 			   this.pause();
 			}, false);
-	      	$('body').css({'overflow':'scroll'})
 		});
 	},
 	deactivate: function()

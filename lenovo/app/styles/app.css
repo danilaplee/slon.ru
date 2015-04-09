@@ -44,7 +44,7 @@ body, html
 }
 .hero-container .bg
 {
-	background: url('/images/bg.png');
+	background: url('../images/bg.png');
 	background-size: contain;
 	background-repeat: no-repeat;
 	position: absolute;
