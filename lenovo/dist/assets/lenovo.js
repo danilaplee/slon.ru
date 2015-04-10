@@ -845,7 +845,6 @@ define('lenovo/templates/home', ['exports'], function (exports) {
         dom.appendChild(el3, el4);
         var el4 = dom.createElement("div");
         dom.setAttribute(el4,"id","elastic");
-        dom.setAttribute(el4,"style","height:160px;position:relative;");
         var el5 = dom.createTextNode("\n			");
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
@@ -1701,7 +1700,7 @@ catch(err) {
 if (runningTests) {
   require("lenovo/tests/test-helper");
 } else {
-  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.903af351"});
+  require("lenovo/app")["default"].create({"name":"lenovo","version":"0.0.0.bb984646"});
 }
 
 /* jshint ignore:end */
