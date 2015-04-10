@@ -23,6 +23,7 @@ var home = Ember.Route.extend({
         home.set('model', model)
 	    Ember.run.schedule('afterRender', this, function () 
 	    {
+	    	$('.navbar.navbar-default.main-menu').css({'display':'block'})
 	      	var	elastic = Snap.select('#elastic');
 	      	var start = Snap.select('#start');
 	      	var start_off
