@@ -83,12 +83,13 @@ var home = Ember.Route.extend({
 	      		z[4] = pre.append(data).selectAll('path')
 	      		pre.clear();
 	      	})
-	      	$(window).mousemove(function( event ) 
+	      	$('#elastic').mousemove(function( event ) 
 	      	{
-				var y = event.pageY
-				var x = event.pageX
-				var halfwidth = $(window).width()*0.5;
-				var halfheight = $(window).height()*0.5;
+				var y = event.pageY - this.offsetLeft
+				var x = event.pageX - this.offsetTop
+				console.log(y,x);
+				var halfwidth = $(this).width()*0.5;
+				var halfheight = $(this).height()*0.5;
 				var pos
 				if(x > halfwidth)
 				{
@@ -123,13 +124,13 @@ var home = Ember.Route.extend({
 	      		var target = elastic.selectAll('path')
 	      		if(pos >= 3)
 	      		{
-	      			$('#elastic').css({
-	      				'bottom':'80px'
+	      			$('#elastic > svg').css({
+	      				'bottom':'40px'
 	      			})
 	      		}
 	      		else
 	      		{
-	      			$('#elastic').css({
+	      			$('#elastic > svg').css({
 	      				'bottom':'0'
 	      			})
 
@@ -137,7 +138,7 @@ var home = Ember.Route.extend({
 	      		for (var i = zone.length - 1; i >= 0; i--) 
 	      		{
 	      			var y = zone[i]
-		      		target[i].animate({'d':y}, 700, mina.easein())
+		      		target[i].animate({'d':y}, 100, mina.easein())
 	      		};
 		    }
 		    start.mouseover(function()
@@ -147,7 +148,7 @@ var home = Ember.Route.extend({
 	      		for (var i = zone.length - 1; i >= 0; i--) 
 	      		{
 	      			var y = zone[i]
-		      		target[i].animate({'d':y}, 700, mina.easein())
+		      		target[i].animate({'d':y}, 100, mina.easein())
 	      		};
 
 		    })
@@ -159,7 +160,7 @@ var home = Ember.Route.extend({
 	      		{
 	      			var y = zone[i]
 	      			console.log(y);
-		      		target[i].animate({'d':y}, 700, mina.easein())
+		      		target[i].animate({'d':y}, 300, mina.easein())
 	      		};
 		    	
 		    })

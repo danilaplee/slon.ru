@@ -62,6 +62,8 @@ body, html
 
 #elastic
 {
+	width:600px;
+	z-index: 2;
     -webkit-transition: all 0.7s ease-in;
 	-moz-transition: all 0.7s ease-in;
 	-o-transition: all 0.7s ease-in;
@@ -84,11 +86,15 @@ footer.start
 #elastic svg
 {
 	position:absolute;
-	bottom: -55px;
 	left: -160px;
-	height:200px;
-	width:500px;
-	overflow:visible
+	height:110%;
+	width:110%;
+	z-index: 1;
+	overflow:visible;
+    -webkit-transition: all 0.7s ease-in;
+	-moz-transition: all 0.7s ease-in;
+	-o-transition: all 0.7s ease-in;
+	transition: all 0.7s ease-in
 }
 .canvas,
 .canvas > canvas,
